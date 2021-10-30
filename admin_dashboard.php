@@ -6,6 +6,12 @@ function calculate_rows($table){
     $b = mysqli_query($GLOBALS["con"], $s);
     return mysqli_num_rows($b);
 }
+function sum_rows($qry){
+    $s = "SELECT SUM(beds) as available FROM rooms WHERE $qry";
+    $b = mysqli_query($GLOBALS["con"], $s);
+    $c = mysqli_fetch_array($b);
+    return $c["available"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +46,7 @@ require 'parts/head.php';
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Students</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo calculate_rows("master_registration_list"); ?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo calculate_rows("students"); ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
@@ -56,16 +62,16 @@ require 'parts/head.php';
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Teachers
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Occupied Beds
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo calculate_rows("instructors"); ?></div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo sum_rows("bed1=1 OR bed2=1 OR bed3=1 OR bed4=1"); ?></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
+                                            <i class="fas fa-bed fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -79,11 +85,11 @@ require 'parts/head.php';
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Courses</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo calculate_rows("courses"); ?></div>
+                                                Available Beds</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo sum_rows("bed1=0 OR bed2=0 OR bed3=0 OR bed4=0"); ?></div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-book-reader fa-2x text-gray-300"></i>
+                                            <i class="fas fa-bed fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

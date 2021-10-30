@@ -50,6 +50,7 @@ $GLOBALS["appAddress"] = "http://abcdatabase.online/";
     }
 
     function phpRunSingleQuery($sql){
+//        js_console_log($sql);
 //	     return mysqli_query($GLOBALS["con"], $sql) ? true : mysqli_error($GLOBALS["con"]);
 	     if(mysqli_query($GLOBALS["con"], $sql)){
 	         return true;
