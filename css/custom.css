@@ -1,0 +1,18 @@
+.bg_logo{
+    background: url(../img/login_bg.jpg) !important;
+}
+.appColor{
+    color: #384aa5 !important;
+}
+.bg-appColor{
+    background-color: #384aa5 !important;
+}
+#dropdown_a a{
+    margin-bottom: 4px;
+}
+.filter_heading{
+    margin: 10px;
+    color: black;
+    font-size: 22px;
+    font-weight: 600;
+}
