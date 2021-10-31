@@ -111,15 +111,15 @@
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse6" aria-expanded="true"
            aria-controls="collapse5">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Backup</span>
+            <i class="fas fa-fw fa-file-invoice"></i>
+            <span>Enter Payment</span>
         </a>
         <div id="collapse6" class="collapse" aria-labelledby="heading4"
              data-parent="#accordionSidebar">
             <div class="bg-gradient-light py-2 collapse-inner rounded">
-                <a class="collapse-item" href="backup_database.php">
-                    <i class="fas fa-fw fa-address-book"></i>
-                    <span>Database</span>
+                <a class="collapse-item" href="admin_enter_payment.php">
+                    <i class="fas fa-fw fa-dollar-sign"></i>
+                    <span>Payment Entry</span>
                 </a>
             </div>
         </div>
