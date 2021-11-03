@@ -65,13 +65,18 @@ require 'parts/head.php';
                                     $res = mysqli_query($con, $sql);
                                     if(mysqli_num_rows($res)){
                                         while($row = mysqli_fetch_array($res)){
-                                            $roomID = $row["roomID"];
-                                            $s = "SELECT * FROM rooms WHERE id=$roomID";
+                                            if(isset($row["roomID"])){
+                                                $roomID = $row["roomID"];
+                                                $s = "SELECT * FROM rooms WHERE id=$roomID";
 //                                            echo $s;
-                                            $s2 = mysqli_query($con, $s);
-                                            $s3 = mysqli_fetch_array($s2);
+                                                $s2 = mysqli_query($con, $s);
+                                                $s3 = mysqli_fetch_array($s2);
 //                                            print_r($s3);
-                                            $roomNum = $s3["room"];
+                                                $roomNum = $s3["room"];
+                                            }else{
+                                                $roomID = null;
+                                                $roomNum = null;
+                                            }
                                             ?>
                                             <tr>
                                                 <td><?php echo $row["id"]; ?></td>

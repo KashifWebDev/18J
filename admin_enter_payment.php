@@ -61,163 +61,58 @@ require 'parts/head.php';
                         <div class="card-body">
                             <form action="" method="POST" id="myForm">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="email">Payment Date</label>
-                                            <input type="date" name="date" class="form-control" placeholder="Registration Date" id="email" required>
-                                        </div>
-<!--                                        <div class="form-group">-->
-<!--                                            <label for="pwd">Teacher:</label>-->
-<!--                                            <input type="text" name="teacher" placeholder="Teacher Name" class="form-control" value="">-->
-<!--                                        </div>-->
-                                        <div class="form-group">
-                                            <label for="pwd">Student:</label>
-<!--                                            <input type="text" name="name" placeholder="Student/Customer Name" class="form-control" value="" required>-->
-                                            <select class="songs form-select form-control" name="teacher">
-                                                <?php
-                                                $s = "SELECT * FROM students";
-                                                $qry = mysqli_query($con, $s);
-                                                while($row = mysqli_fetch_array($qry)){
-                                                    ?>
-                                                    <option value="<?php echo $row["id"]; ?>"><?php echo $row["name"].' '.$row["surename"]; ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
+                                    <div class="col-md-6 mx-auto">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="email">Payment Date</label>
+                                                    <input type="date" name="paymentDate" class="form-control" placeholder="Registration Date" id="email" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="pwd">Student:</label>
+                                                    <!--                                            <input type="text" name="name" placeholder="Student/Customer Name" class="form-control" value="" required>-->
+                                                    <select class="songs form-select form-control" name="userID">
+                                                        <?php
+                                                        $s = "SELECT * FROM students";
+                                                        $qry = mysqli_query($con, $s);
+                                                        while($row = mysqli_fetch_array($qry)){
+                                                            ?>
+                                                            <option value="<?php echo $row["id"]; ?>"><?php echo $row["name"].' '.$row["surename"]; ?></option>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="pwd">Start Date</label>
-                                                    <input type="date" name="receipt" class="form-control" required>
+                                                    <input id="first" type="date" name="startDate" class="form-control" onchange="roomTypeFunc()" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="pwd">Start Date</label>
-                                                    <input type="date" name="receipt" class="form-control" required>
+                                                    <label for="pwd">End Date</label>
+                                                    <input id="second" type="date" name="endDate" class="form-control" onchange="roomTypeFunc()" required>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="pwd">Notes #:</label>
-                                            <input type="text" name="desc" class="form-control" placeholder="Service Description" id="pwd">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pwd">Payment Method:</label>
-                                            <span class="ml-2" id="payment_methods_list">
+                                        <div class="row">
+                                            <div class="col-md-12 mt-3">
+                                                <label for="" class="mr-3 font-weight-bold">Select Bed Type </label>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="cash1" value="Cash" name="pay" required>
-                                                    <label class="form-check-label" for="Registration">Cash</label>
+                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio1" onclick="roomTypeFunc()" value="Single Room">
+                                                    <label class="form-check-label" for="inlineRadio1">Single Room</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="cash2" value="Card" name="pay" required>
-                                                    <label class="form-check-label" for="Books">Card</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="cash3" value="EFT" name="pay" required>
-                                                    <label class="form-check-label" for="Translation">EFT</label>
-                                                </div>
-                                            </span>
-                                        </div>
-                                        <div class="row mb-3" id="payment_method">
-                                            <div class="col">
-                                                <input type="date" class="form-control" placeholder="Date" name="eft_date">
-                                            </div>
-                                            <div class="col">
-                                                <input type="text" class="form-control" placeholder="Reference of EFT" name="eft_reference">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="email" class="font-weight-bold">Select Services</label>
-                                        </div>
-                                        <div class="form-check form-check-inline" id="registration_check">
-                                            <input class="form-check-input userSelection" type="checkbox" id="" value="Registration fee" name="userSelection[]" onclick="totalAmount()">
-                                            <label class="form-check-label" for="Registration">Registration</label>
-                                        </div>
-                                        <div class="form-check form-check-inline" id="registration_check">
-                                            <input class="form-check-input userSelection" type="checkbox" id="RegistrationInputCheck" value="Monthly fee" name="userSelection[]" onclick="totalAmount()">
-                                            <label class="form-check-label" for="Registration">Monthly Fee</label>
-                                        </div>
-                                        <div class="form-check form-check-inline" id="book_check">
-                                            <input class="form-check-input userSelection" type="checkbox" id="BooksInput" value="Books" name="userSelection[]" onclick="totalAmount()">
-                                            <label class="form-check-label" for="Books">Books</label>
-                                        </div>
-                                        <div class="form-check form-check-inline" id="lang_check">
-                                            <input class="form-check-input userSelection" type="checkbox" id="TranslationInput" value="Translation" name="userSelection[]" onclick="totalAmount()">
-                                            <label class="form-check-label" for="Translation">Translation</label>
-                                        </div>
-                                        <div class="form-check form-check-inline" id="rewrite_check">
-                                            <input class="form-check-input userSelection" type="checkbox" id="ReWrite" value="Exam Re-write" name="userSelection[]" onclick="totalAmount()">
-                                            <label class="form-check-label" for="ReWrite">Exam Re-write</label>
-                                        </div>
-                                        <div class="form-group mt-2" id="mnthBox">
-                                            <label for="sel1">Select Month:</label>
-                                            <select class="form-control" name="month" onchange="totalAmount()">
-                                                <option value="">-- SELECT --</option>
-                                                <option value="January">January</option>
-                                                <option value="February">February</option>
-                                                <option value="March">March</option>
-                                                <option value="April">April</option>
-                                                <option value="May">May</option>
-                                                <option value="June">June</option>
-                                                <option value="July">July</option>
-                                                <option value="August">August</option>
-                                                <option value="September">September</option>
-                                                <option value="October">October</option>
-                                                <option value="November">November</option>
-                                                <option value="December">December</option>
-                                            </select>
-                                        </div>
-                                        <div  id="bookBox">
-                                            <div class="form-group mt-2">
-                                                <label for="sel1">Select Course:</label>
-                                                <select class="form-control" name="course" id="bookChange" onchange="totalAmount()">
-                                                    <option value="">-- SELECT --</option>
-                                                    <option value="Foundation 1">Foundation 1</option>
-                                                    <option value="Foundation 2">Foundation 2</option>
-                                                    <option value="Intermediate 1">Intermediate 1</option>
-                                                    <option value="Intermediate 2">Intermediate 2</option>
-                                                    <option value="Basic 1">Basic 1</option>
-                                                    <option value="Basic 2">Basic 2</option>
-                                                    <option value="Advance">Advance</option>
-                                                    <option value="Reader">English Reader</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div id="langBox" class=" mt-2">
-                                            <div class="form-group">
-                                                <label for="pwd">Customer Name:</label>
-                                                <input type="text" name="c_name" placeholder="StudentCustomer Name" class="form-control" value="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="pwd">Customer Email</label>
-                                                <input type="email" name="c_email" class="form-control" placeholder="Customer@email.com" id="pwd">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="sel1">Select Language:</label>
-                                                <select class="form-control" name="lang" id="langSelect">
-                                                    <option value="">-- SELECT --</option>
-                                                    <option value="French">French</option>
-                                                    <option value="Portuguese">Portuguese</option>
-                                                </select>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <input type="number" class="form-control" placeholder="No. Of Pages"
-                                                           name="numOfPages" id="pagesCount">
+                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio2" onclick="roomTypeFunc()" value="Double Room">
+                                                    <label class="form-check-label" for="inlineRadio2">Double Room</label>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group mt-5">
-                                            <label for="pwd">Balance (<b>If Any</b>):</label>
-                                            <input type="number" min="0" name="balance" class="form-control" placeholder="Enter balance, IF ANY" id="pwd" value="0">
-                                        </div>
-                                        <div class="form-group mt-5">
-                                            <label for="pwd">Amount Paid:</label>
-                                            <input type="number" min="0" name="amount_paid" class="form-control" placeholder="Amount Received" id="pwd" value="0">
                                         </div>
                                     </div>
                                 </div>
@@ -228,13 +123,15 @@ require 'parts/head.php';
                                 </div>
                                 <br>
                                 <div class="col-12">
-                                    <div class="col-md-10 mx-auto">
+                                    <div class="col-md-6 mx-auto">
                                         <button class="btn btn-primary bg-appColor w-100" type="submit" name="add_payment">
-                                            <span class="fas fa-save"></span> Save
+                                            <span class="fas fa-money-bill-alt"></span> Add a Payment
                                         </button>
                                     </div>
                                 </div>
                                 <input type="hidden" name="totalAmountToPay" id="totalAmountToPay">
+                                <input type="hidden" name="roomType" id="roomType">
+                                <input type="hidden" name="days" id="days">
                             </form>
                         </div>
                     </div>
@@ -242,48 +139,30 @@ require 'parts/head.php';
                     if(isset($_POST["add_payment"])){
 //                        print_r($_POST); exit(); die();
                         require 'parts/db.php';
-                        $date = $_POST["date"];
-                        $teacher = $_POST["teacher"] ?? '';
-                        $name = $_POST["name"];
-                        $receipt = $_POST["receipt"];
-                        $c_email = $_POST["c_email"] ?? '';
-                        $desc = $_POST["desc"] ?? '';
-                        $pay = $_POST["pay"];
-                        $c_name = $_POST["c_name"];
-//                        $eft_date = isset($_POST["eft_date"]) ?? null;
-                        $eft_date = $_POST["eft_date"]=="" ? "0000-00-00" : $_POST["eft_date"];
-                        $eft_reference = $_POST["eft_reference"] ?? null;
-                        $userSelection = implode("|",$_POST["userSelection"]);
-                        $month = $_POST["month"] ?? null;
-                        $bookBox = $_POST["course"] ?? null;
-                        $langBox = $_POST["lang"] ?? null;
-                        $numOfPages = !empty($_POST["numOfPages"]) ? $_POST["numOfPages"] : 0;
-                        $balance = !empty($_POST["balance"]) ? $_POST["balance"] : 0;
-                        $amount = 0;
-                        $amount_paid = $_POST["amount_paid"];
+                        $paymentDate = $_POST["paymentDate"];
+                        $userID = $_POST["userID"];
+                        $startDate = $_POST["startDate"];
+                        $endDate = $_POST["endDate"];
+                        $roomType = $_POST["roomType"];
+                        $totalAmountToPay = $_POST["totalAmountToPay"];
+                        $roomType = $_POST["roomType"];
+                        $days = $_POST["days"];
 
-                        $s="SELECT * FROM master_registration_list WHERE student_name='$name'";
+                        $s="SELECT * FROM invoice WHERE student_name='$name'";
                         $s1 = mysqli_query($con, $s);
                         if(mysqli_num_rows($s1)){
                             $row = mysqli_fetch_array($s1);
                             $email = $row["email"];
                         }
 
-
-//                        echo $amount; exit(); die();
-
-
                         date_default_timezone_set('Africa/Johannesburg');
                         $timestamp =  date('Y-m-d H:i:s', time());
 
-                        $sql = "INSERT INTO payments (Customer, Invoice_Date, Terms_of_Payment, eft_date, eft_reference, ABC_Receipt_book, ProductService_Description, c_name, c_email,
-                                Amount, Course, Teacher, Tranlations_no_of_pages, mnth, lang, userSelection, email, balance, date_time)
-                                VALUES ('$name', '$date', '$pay', '$eft_date', '$eft_reference', '$receipt', '$desc', '$c_name', '$c_email', $amount_paid, '$bookBox', '$teacher', $numOfPages,
-                                        '$month', '$langBox', '$userSelection', '$email', $balance, '$timestamp')";
+                        $sql = "INSERT INTO invoice (userID, paymentDate, startDate, endDate, roomType, totalAmount, totalDays, date_time)
+                                VALUES ($userID, '$paymentDate', '$startDate', '$endDate', '$roomType', '$totalAmountToPay', '$days', '$timestamp')";
 
 //                        echo $sql; exit(); die();
 
-                        require 'parts/db.php';
                         if(mysqli_query($con, $sql)){
                             $last_id = mysqli_insert_id($con);
 //                            echo "DONE ID: ".$last_id;
@@ -366,146 +245,27 @@ require 'parts/head.php';
 
 
     <script>
-        $("#bookBox").hide();
-        $("#mnthBox").hide();
-        $("#langBox").hide();
-        $("#payment_method").hide();
-        $(function(){
-            $('#payment_methods_list').click(function() {
-                if(
-                    $("#cash3").is(':checked')
-                ){
-                    $("#payment_method").show();
-                    // console.log("in");
-                }
-                else{
-                    console.log("out");
-                    $("#payment_method").hide();
-                }
-            });
-            $('#RegistrationInputCheck').click(function() {
-                if($("#RegistrationInputCheck").is(':checked')){
-                    $("#mnthBox").show();
-                }
-                else{
-                    console.log("out");
-                    $("#mnthBox").hide();
-                }
-            });
-            $('#rewrite_check').click(function() {
-                if($("#ReWrite").is(':checked')){
-                    $("#bookBox").show();
-                }
-                else{
-                    $("#bookBox").hide();
-                }
-            });
-            $('#BooksInput').click(function() {
-                if($("#BooksInput").is(':checked')){
-                    $("#bookBox").show();
-                }
-                else{
-                    $("#bookBox").hide();
-                }
-            });
-            $('#TranslationInput').click(function() {
-                if($("#TranslationInput").is(':checked')){
-                    $("#langBox").show();
-                }
-                else{
-                    $("#langBox").hide();
-                }
-            });
-        });
+        // $(function(){
+        //
+        //     $('#roomTypeSelection').click(function() {
+        //     });
+        // });
 
-    </script>
+        function roomTypeFunc() {
+            var roomType = $("input[type='radio'].roomTypeSelection:checked").val();
+            var days =   Math.floor((Date.parse(second.value) - Date.parse(first.value)) / 86400000);
+            var amount = 0;
+            if(roomType==="Single Room") amount = 166.6666666666667;
+            if(roomType==="Double Room") amount = 216.6666666666667;
+            var totalBill = parseInt(amount*days);
+            console.log(totalBill);
+            $("#charges").text(totalBill);
 
-    <script>
-        var amount = 0;
-        var selection;
-        var cboxes = document.getElementsByName('userSelection[]');
-        var lang = $('#langSelect').find(":selected").text();
-        var pagesCount = parseInt($("#pagesCount").val());
-        var booksChanged = false;
-        var monthlyFeesChanged = false;
-        var registrationFeesChanged = false;
-        var translationChanged = false;
-        var reWriteChanged = false;
-        function totalAmount(){
-            var len = cboxes.length;
-            for (var i=0; i<len; i++) {
-                // if(cboxes[i].checked) cboxes[i].value;
-                // console.log(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
-                // var selection = $('input[name=userSelection]:checked', '#myForm').val();
-                selection = cboxes[i].value;
-                if(selection === "Registration fee" && cboxes[i].checked && registrationFeesChanged===false){
-                    registrationFeesChanged = true;
-                    amount = amount + 1600;
-                    console.log(amount + selection);
-                }
-                if(selection === "Monthly fee" && cboxes[i].checked && monthlyFeesChanged===false){
-                    monthlyFeesChanged = true;
-                    amount = amount + 2500;
-                    console.log(amount + selection);
-                }
-                if(selection === "Books" && cboxes[i].checked){
-                    var bookValue = $('#bookChange').find(":selected").text();
-                    console.log(bookValue+" -- "+booksChanged);
-                    if(bookValue==="English Reader" && booksChanged===false){
-                        booksChanged = true;
-                        amount = amount + 30;
-                    }
-                    if(bookValue!=="English Reader" && bookValue !=="-- SELECT --" && booksChanged===false){
-                        booksChanged = true;
-                        amount = amount + 600;
-                    }
-                    // if(bookValue ==="-- SELECT --") isChanged = false;
-                    console.log("Books change   "+booksChanged);
-                    $("#charges").text(amount);
-                    console.log(amount + selection);
-                }
-                if(selection === "Translation" && cboxes[i].checked){
-                    pagesCount = parseInt($("#pagesCount").val());
-                    lang = $('#langSelect').find(":selected").text();
-                    console.log("HERE IN TRANSLATION");
-                    console.log(pagesCount);
-                    lang = $('#langSelect').find(":selected").text();
-                    pagesCount = parseInt($("#pagesCount").val());
-                    console.log("pages: "+pagesCount+" Lang: "+lang);
-                    if(Number.isFinite(pagesCount) && translationChanged===false){
-                        if(lang==="French"){
-                            amount  = amount + (150 * pagesCount);
-                        }else{
-                            amount = amount + (200 * pagesCount);
-                        }
-                        console.log(amount + selection);
-                        // $("#charges").text(amount);
-                    }
-                }
-                if(selection === "Exam Re-write" && cboxes[i].checked && reWriteChanged==false){
-                    reWriteChanged = true;
-                    amount = amount + 300;
-                    console.log(amount + selection);
-                }
-            }
-
-            $("#charges").text(amount);
+            document.getElementById("totalAmountToPay").value = totalBill;
+            document.getElementById("roomType").value = roomType;
+            document.getElementById("days").value = days;
         }
-        $("#langSelect").change(function (){
-            totalAmount();
-        });
-        $("#pagesCount").change(function (){
-            if(translationChanged===false && Number.isFinite(pagesCount)){
-                if(lang==="French"){
-                    amount  = amount + (150 * pagesCount);
-                }else{
-                    amount = amount + (200 * pagesCount);
-                }
-                translationChanged = true;
-            }
-            $("#charges").text(amount);
-            totalAmount();
-        });
+
     </script>
 </body>
 

@@ -112,7 +112,7 @@
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse6" aria-expanded="true"
            aria-controls="collapse5">
             <i class="fas fa-fw fa-file-invoice"></i>
-            <span>Enter Payment</span>
+            <span>Payments</span>
         </a>
         <div id="collapse6" class="collapse" aria-labelledby="heading4"
              data-parent="#accordionSidebar">
@@ -120,6 +120,10 @@
                 <a class="collapse-item" href="admin_enter_payment.php">
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Payment Entry</span>
+                </a>
+                <a class="collapse-item" href="admin_all_invoices.php">
+                    <i class="fas fa-fw fa-list"></i>
+                    <span>All Invoices</span>
                 </a>
             </div>
         </div>
