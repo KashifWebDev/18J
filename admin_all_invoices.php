@@ -2,12 +2,25 @@
 require 'parts/app.php';
 if(isset($_GET["mail"])){
     $id = $_GET["id"];
-    $path = "https://www.18jorissen.co.za/abc/admin_print_invoice.php?id=$id";
 
+    $appAddress = $GLOBALS["appAddress"];
+    $path = "$appAddress/admin_print_invoice.php?id=$id";
 
-    $to = $_GET["email"];
-    $subject = "ABC International - Invoice";
-    $txt = "Please <a href='$path'>CLICK HERE</a> to get invoice.";
+    $subject = "18 Jorissen - Invoice";
+
+    $sql = "SELECT * FROM students WHERE id = $id";
+    $res = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($res);
+    $to = $row["email"];
+    $name = $row["name"];
+
+    $txt = "Dear $name,<br>";
+    $txt .= "Please click on the following link to get your invoice.
+      <br><br>";
+    $txt .= "<br><a href='$path' style='text-decoration: none;background: #202a5b;color: white;padding: 5px 10px;border-radius: 10px;font-size: 20px;'>Get your Invoice</a><br><br><br>";
+    $txt .= "Should you need any help or support, please do not hesitate to reach out.<br><br>";
+    $txt .= "Kind Regards,<br>";
+    $txt .= "18 Jorissen Admin Team";
 
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -45,15 +58,6 @@ require 'parts/head.php';
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <?php
-                    if(isset($_GET["success"])){
-                    ?>
-                    <div class="card mb-4 py-3 border-left-success">
-                        <div class="card-body text-success">
-                            <strong>Success! </strong> Student Linked Successfully!
-                        </div>
-                    </div>
-                    <?php } ?>
                     <?php
                     if(isset($_GET["mailSent"])){
                     ?>
@@ -127,9 +131,9 @@ require 'parts/head.php';
                                                             <a target="_blank" href="admin_print_invoice.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">
                                                                 <span class="text">Print</span>
                                                             </a>
-<!--                                                            <a href="admin_all_invoices.php?mail=1&id=--><?php //echo $row["id"]; ?><!--&email=--><?php //echo $row["email"]; ?><!--" target="_blank" class="btn btn-info">-->
-<!--                                                                <span class="text">Email</span>-->
-<!--                                                            </a>-->
+                                                            <a href="admin_all_invoices.php?mail=1&id=<?php echo $s2["id"]; ?>"  class="btn btn-info">
+                                                                <span class="text">Email</span>
+                                                            </a>
 <!--                                                            <a href="admin_edit_invoice.php?&id=--><?php //echo $row["Database_Invoice_No"]; ?><!--" target="_blank" class="btn btn-success">-->
 <!--                                                                <span class="text">Edit</span>-->
 <!--                                                            </a>-->

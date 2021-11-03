@@ -4,7 +4,7 @@ session_start();
 require 'db.php';
 //checkIfUserLoggedIn();
 
-$GLOBALS["appAddress"] = "http://abcdatabase.online/";
+$GLOBALS["appAddress"] = "http://localhost/18J/";
 
 //error_reporting(0);
 

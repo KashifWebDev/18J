@@ -46,10 +46,25 @@
                 <div class="col-12">
                     <table class="table table-striped text-center">
                         <tbody>
-
                             <tr class="w-100">
                                 <td class="w-50">Name</td>
                                 <td class="w-50"><?php echo $s2["name"].' '.$s2["surename"]; ?></td>
+                            </tr>
+                            <tr class="w-100">
+                                <td class="w-50">Email</td>
+                                <td class="w-50"><?php echo $s2["email"]; ?></td>
+                            </tr>
+                            <tr class="w-100">
+                                <td class="w-50">Contact #</td>
+                                <td class="w-50"><?php echo $s2["mobile"]; ?></td>
+                            </tr>
+                            <tr class="w-100">
+                                <td class="w-50">University (Reg #)</td>
+                                <td class="w-50"><?php echo $s2["uniName"].' ('.$s2["UniRegNum"].')'; ?></td>
+                            </tr>
+                            <tr class="w-100">
+                                <td class="w-50">Room #</td>
+                                <td class="w-50"><?php echo $s2["roomID"]; ?></td>
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">Start Date</td>
@@ -60,7 +75,7 @@
                                 <td class="w-50"><?php echo $row["endDate"]; ?></td>
                             </tr>
                             <tr class="w-100">
-                                <td class="w-50">Total Days</td>
+                                <td class="w-50">Period (Days)</td>
                                 <td class="w-50"><?php echo $row["totalDays"]; ?></td>
                             </tr>
                             <tr class="w-100">
