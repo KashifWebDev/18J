@@ -1,7 +1,7 @@
 <?php
 
-$con = mysqli_connect("localhost","root","","project_18j");
-//$con = mysqli_connect("localhost","abcdaevx_abc","3}t{Zt?x.Y3)","abcdaevx_abcDatabase");
+//$con = mysqli_connect("localhost","root","","project_18j");
+$con = mysqli_connect("localhost","j18jocnn_18joris","CPvvGapgy)Oy","j18jocnn_18jor");
 
 // Check connection
 if (mysqli_connect_errno()) {
