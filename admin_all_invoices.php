@@ -131,7 +131,7 @@ require 'parts/head.php';
                                                             <a target="_blank" href="admin_print_invoice.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">
                                                                 <span class="text">Print</span>
                                                             </a>
-                                                            <a href="admin_all_invoices.php?mail=1&id=<?php echo $s2["id"]; ?>"  class="btn btn-info">
+                                                            <a href="admin_all_invoices.php?mail=1&id=<?php echo $row["id"]; ?>"  class="btn btn-info">
                                                                 <span class="text">Email</span>
                                                             </a>
 <!--                                                            <a href="admin_edit_invoice.php?&id=--><?php //echo $row["Database_Invoice_No"]; ?><!--" target="_blank" class="btn btn-success">-->
