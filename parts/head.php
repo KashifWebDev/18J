@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="img/logo.png" />
 
 
-    <title><?php echo $title; ?> | ABC International</title>
+    <title><?php echo $title; ?> | 18 Jorissen</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
