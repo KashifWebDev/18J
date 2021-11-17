@@ -103,8 +103,8 @@ require 'parts/head.php';
                                                 <td><?php echo $row["uniName"]; ?></td>
                                                 <td>
                                                     <?php if(!isset($row["roomID"])){ ?>
-                                                        <button class="btn btn-success" data-toggle="modal" data-target="#AssignRoomModal_<?php echo $rand; ?>">
-                                                            Assign Room
+                                                        <button class="btn btn-secondary" data-toggle="modal" data-target="#AssignRoomModal_<?php echo $rand; ?>">
+                                                            Reserve Room
                                                         </button>
                                                     <?php }else{ ?>
                                                         <button class="btn btn-primary" data-toggle="modal" data-target="#shiftRoomModal_<?php echo $rand; ?>">
@@ -157,7 +157,7 @@ require 'parts/head.php';
                                                                     <div class="col-12">
                                                                         <button type="submit" name="changeRoom" class="btn-primary w-100 btn">
                                                                             <i class="fas fa-plus"></i>
-                                                                            Assign Now
+                                                                            Reserve Now
                                                                         </button>
                                                                         <?php
                                                                         if(isset($_POST["changeRoom"])){
@@ -171,7 +171,7 @@ require 'parts/head.php';
                                                                             if($bed ==3 ) $new_bedCol = "bed3";
                                                                             if($bed ==4 ) $new_bedCol = "bed4";
 
-                                                                            phpRunSingleQuery("UPDATE rooms SET $new_bedCol=1 WHERE id=$room");
+                                                                            phpRunSingleQuery("UPDATE rooms SET $new_bedCol=69 WHERE id=$room");
                                                                             phpRunSingleQuery("UPDATE students SET roomID=$room, bedID=$bed WHERE id=$student_id");
                                                                             js_redirect("admin_shift_room.php?assign=1");
                                                                         }
