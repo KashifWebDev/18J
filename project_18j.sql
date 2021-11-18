@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2021 at 08:52 AM
+-- Generation Time: Nov 18, 2021 at 12:40 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -82,10 +82,10 @@ CREATE TABLE `rooms` (
   `room` varchar(10) NOT NULL,
   `beds` int(10) NOT NULL,
   `keyNumber` varchar(100) NOT NULL,
-  `bed1` tinyint(1) NOT NULL DEFAULT 0,
-  `bed2` tinyint(1) NOT NULL DEFAULT 0,
-  `bed3` tinyint(1) NOT NULL DEFAULT 0,
-  `bed4` tinyint(1) NOT NULL DEFAULT 0
+  `bed1` int(10) NOT NULL DEFAULT 0,
+  `bed2` int(10) NOT NULL DEFAULT 0,
+  `bed3` int(10) NOT NULL DEFAULT 0,
+  `bed4` int(10) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `floor`, `room`, `beds`, `keyNumber`, `bed1`, `bed2`, `bed3`, `bed4`) VALUES
-(1, 'A', 'A1', 2, 'M31H', 1, 0, 0, 0),
+(1, 'A', 'A1', 2, 'M31H', 0, 0, 0, 0),
 (2, 'A', 'A2', 2, 'M30H', 0, 0, 0, 0),
 (3, 'A', 'A3', 1, 'M30H', 0, 0, 0, 0),
 (4, 'A', 'A4', 1, 'M28H', 0, 0, 0, 0),
@@ -103,8 +103,8 @@ INSERT INTO `rooms` (`id`, `floor`, `room`, `beds`, `keyNumber`, `bed1`, `bed2`,
 (8, 'A', 'A8', 2, 'M31H', 0, 0, 0, 0),
 (9, 'A', 'A9', 2, 'M30H', 0, 0, 0, 0),
 (10, 'A', 'A10', 2, 'M28H', 0, 0, 0, 0),
-(11, 'A', 'A11', 2, 'M10H', 0, 0, 0, 0),
-(12, 'A', 'A12', 2, 'M21H', 0, 1, 0, 0),
+(11, 'A', 'A11', 2, 'M10H', 69, 0, 0, 0),
+(12, 'A', 'A12', 2, 'M21H', 0, 0, 0, 0),
 (13, 'A', 'A13', 1, 'M28H', 0, 0, 0, 0),
 (14, 'A', 'FR1', 2, 'M14H', 0, 0, 0, 0),
 (15, 'A', 'FR2', 2, 'M22H', 0, 0, 0, 0),
@@ -116,7 +116,7 @@ INSERT INTO `rooms` (`id`, `floor`, `room`, `beds`, `keyNumber`, `bed1`, `bed2`,
 (21, 'BA', 'BA2', 4, 'M21H', 0, 0, 0, 0),
 (22, 'B', 'B14', 2, 'M27H', 0, 0, 0, 0),
 (23, 'B', 'B15', 2, 'M21H', 0, 0, 0, 0),
-(24, 'B', 'B16', 2, 'M13H', 0, 1, 0, 0),
+(24, 'B', 'B16', 2, 'M13H', 0, 0, 0, 0),
 (25, 'B', 'B17', 2, 'M13H', 0, 0, 0, 0),
 (26, 'B', 'B18', 2, 'M14H', 0, 0, 0, 0),
 (27, 'B', 'B19', 2, 'M24H', 0, 0, 0, 0),
@@ -134,7 +134,7 @@ INSERT INTO `rooms` (`id`, `floor`, `room`, `beds`, `keyNumber`, `bed1`, `bed2`,
 (39, 'B', 'B31', 1, 'M27H', 0, 0, 0, 0),
 (40, 'C', 'C32', 2, 'M21H', 0, 0, 0, 0),
 (41, 'C', 'C33', 2, 'M21H', 0, 0, 0, 0),
-(42, 'C', 'C34', 1, 'M12H', 1, 0, 0, 0),
+(42, 'C', 'C34', 1, 'M12H', 0, 0, 0, 0),
 (43, 'C', 'C35', 2, 'M24H', 0, 0, 0, 0),
 (44, 'C', 'C36', 2, 'M9H', 0, 0, 0, 0),
 (45, 'C', 'C37', 2, 'M25H', 0, 0, 0, 0),
@@ -149,7 +149,7 @@ INSERT INTO `rooms` (`id`, `floor`, `room`, `beds`, `keyNumber`, `bed1`, `bed2`,
 (54, 'C', 'C46', 2, 'M10H', 0, 0, 0, 0),
 (55, 'C', 'C47', 2, 'Y11', 0, 0, 0, 0),
 (56, 'C', 'C48', 2, 'Y12', 0, 0, 0, 0),
-(57, 'C', 'C49', 1, 'M25H', 0, 0, 0, 0),
+(57, 'C', 'C49', 1, 'M25H', 69, 0, 0, 0),
 (58, 'D', 'D1', 4, 'M30H', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -187,12 +187,12 @@ INSERT INTO `students` (`id`, `name`, `surename`, `email`, `mobile`, `roomID`, `
 (2, 'cfvdfgdfg', 'ueryte', 'admi12@a34in.com', '3563534', 20, 4, '232434', '633485img5.jpg', 'adfasdf', '2342434234', 'Sponsored', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 06:32:47'),
 (3, 'asdf', 'asdf', 'asdf@yhjgf', '323424', 58, 1, '1234234', '18743img4.jpg', 'adfasdf', '2342434234', 'Private', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 06:33:51'),
 (4, 'test', 'test', 'sdfasdf@fsdgdf2435', '323424', 8, 1, '232434', 'img4.jpg302120', 'adfasdf', '2342434234', 'Sponsored', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 06:36:06'),
-(5, 'final', 'BOy', 'kad@LASDFJ', '90u0', 6, 2, '232434', '978141img4.jpg', 'adfasdf', '2342434234', 'Sponsored', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 06:51:45'),
+(5, 'final', 'BOy', 'kad@LASDFJ', '90u0', NULL, NULL, '232434', '978141img4.jpg', 'adfasdf', '2342434234', 'Sponsored', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-11-17 12:05:41'),
 (6, 'Fawad', 'Khan', 'fawad@khan', '03428484848', 1, 1, '232434', '964331img4.jpg', 'adfasdf', '2342434234', 'Private', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 12:13:28'),
 (176, 'Amanda', 'Xaba', 'NomkosiAxaba01@gmail.com', '07855252265', 12, 2, '303170543084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:27:34'),
 (177, 'Zuziwe Mbalenhle', 'Thwala', 'thwala.zuzi@gmail.com', '0832559135', NULL, NULL, '9908080400083', NULL, 'Wits', '2342434234', 'Private', 'Solomon Thwala', NULL, NULL, NULL, '2021-11-03 06:20:29'),
 (178, 'Katlego', 'Mfekane', 'msmfekane@gmail.com', '0714321620', NULL, NULL, '11040197086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(179, 'Jorenthia', 'De Bruin', '2307263@students.wits.ac.za', '0648851674', NULL, NULL, '107020489087', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
+(179, 'Jorenthia', 'De Bruin', '2307263@students.wits.ac.za', '0648851674', 57, 1, '107020489087', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-17 11:40:12'),
 (180, 'Keamogetse Malebogo', 'Selabe', 'keamogetsemonchusi@gmail.com', '07668750651', NULL, NULL, '110090580082', NULL, 'Wits', '2342434234', 'Private', 'Nthabiseng Selabe', NULL, NULL, NULL, '2021-11-03 06:20:29'),
 (181, 'Shamira Rose', 'Mudenda', '2279182@students.wits.ac.za', '0834410495', NULL, NULL, '4090214083', NULL, 'Wits', '2342434234', 'Private', 'Ethel Alimwi Mudenda', NULL, NULL, NULL, '2021-11-03 06:20:29'),
 (182, 'Nompumelelo Mbali', 'Tshabalala', 'mpumimbali59@gmail.com', '0815225906', NULL, NULL, '6080462085', NULL, 'Wits', '2342434234', 'Private', 'Christina Deele Tshabalala', NULL, NULL, NULL, '2021-11-03 06:20:29'),
