@@ -65,51 +65,91 @@ require 'parts/head.php';
                                     $res = mysqli_query($con, $sql);
                                     if(mysqli_num_rows($res)){
                                         while($row = mysqli_fetch_array($res)){
+                                            $rand = rand();
+
+
+                                            $roomID = $row["id"];
+                                            $s1 = "SELECT * FROM students WHERE roomID=$roomID";
+                                            $r1 = mysqli_query($con, $s1);
+                                            if(mysqli_num_rows($r1)){
+                                                $ro1 = mysqli_fetch_array($r1);
+                                                $studentName = $ro1["name"];
+                                            }
                                             ?>
                                             <tr>
-                                                <td><?php echo $row["id"]; ?></td>
+                                                <td><?php echo $roomID; ?></td>
                                                 <td><?php echo $row["floor"]; ?></td>
                                                 <td><?php echo $row["room"]; ?></td>
                                                 <td><?php echo $row["beds"]; ?></td>
                                                 <td><?php echo $row["keyNumber"]; ?></td>
                                                 <td>
-                                                    <?php if($row["bed1"] && $row["beds"]>=1){ ?>
-                                                        <span class="bg-danger text-white px-2 py-1" style="border-radius: 10px;">Booked</span>
-                                                    <?php }elseif(!$row["bed1"] && $row["beds"]>=1){ ?>
+                                                    <?php if($row["bed1"]==1 && $row["beds"]>=1){ ?>
+                                                        <span  data-toggle="tooltip_booked<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                                               class="bg-danger text-white px-2 py-1" style="border-radius: 10px;">Booked</span>
+                                                    <?php }elseif($row["bed1"]==0 && $row["beds"]>=1){ ?>
                                                         <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Available</span>
+                                                    <?php }elseif($row["bed1"]==69 && $row["beds"]>=1){ ?>
+                                                        <span data-toggle="tooltip<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                                              class="bg-secondary text-white px-2 py-1" style="border-radius: 10px;">
+                                                            Reserved
+                                                        </span>
                                                     <?php }else{ ?>
                                                         <span class="text-center">--</span>
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if($row["bed2"] && $row["beds"]>=2){ ?>
-                                                        <span class="bg-danger text-white px-2 py-1" style="border-radius: 10px;">Booked</span>
-                                                    <?php }elseif(!$row["bed2"] && $row["beds"]>=2){ ?>
+                                                    <?php if($row["bed2"]==1 && $row["beds"]>=1){ ?>
+                                                        <span  data-toggle="tooltip_booked<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                                               class="bg-danger text-white px-2 py-1" style="border-radius: 10px;">Booked</span>
+                                                    <?php }elseif($row["bed2"]==0 && $row["beds"]>=1){ ?>
                                                         <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Available</span>
+                                                    <?php }elseif($row["bed2"]==69 && $row["beds"]>=1){ ?>
+                                                        <span data-toggle="tooltip<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                                              class="bg-secondary text-white px-2 py-1" style="border-radius: 10px;">
+                                                            Reserved
+                                                        </span>
                                                     <?php }else{ ?>
                                                         <span class="text-center">--</span>
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if($row["bed3"] && $row["beds"]>=3){ ?>
-                                                        <span class="bg-danger text-white px-2 py-1" style="border-radius: 10px;">Booked</span>
-                                                    <?php }elseif(!$row["bed3"] && $row["beds"]>=3){ ?>
+                                                    <?php if($row["bed3"]==1 && $row["beds"]>=1){ ?>
+                                                        <span  data-toggle="tooltip_booked<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                                               class="bg-danger text-white px-2 py-1" style="border-radius: 10px;">Booked</span>
+                                                    <?php }elseif($row["bed3"]==0 && $row["beds"]>=1){ ?>
                                                         <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Available</span>
+                                                    <?php }elseif($row["bed3"]==69 && $row["beds"]>=1){ ?>
+                                                        <span data-toggle="tooltip<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                                              class="bg-secondary text-white px-2 py-1" style="border-radius: 10px;">
+                                                            Reserved
+                                                        </span>
                                                     <?php }else{ ?>
                                                         <span class="text-center">--</span>
                                                     <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if($row["bed4"] && $row["beds"]>=4){ ?>
-                                                        <span class="bg-danger text-white px-2 py-1" style="border-radius: 10px;">Booked</span>
-                                                    <?php }elseif(!$row["bed4"] && $row["beds"]>=4){ ?>
+                                                    <?php if($row["bed4"]==1 && $row["beds"]>=1){ ?>
+                                                        <span  data-toggle="tooltip_booked<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                                               class="bg-danger text-white px-2 py-1" style="border-radius: 10px;">Booked</span>
+                                                    <?php }elseif($row["bed4"]==0 && $row["beds"]>=1){ ?>
                                                         <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Available</span>
+                                                    <?php }elseif($row["bed4"]==69 && $row["beds"]>=1){ ?>
+                                                        <span data-toggle="tooltip<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                                              class="bg-secondary text-white px-2 py-1" style="border-radius: 10px;">
+                                                            Reserved
+                                                        </span>
                                                     <?php }else{ ?>
                                                         <span class="text-center">--</span>
                                                     <?php } ?>
                                                 </td>
                                             </tr>
-                                    <?php
+                                            <script>
+                                                $(document).ready(function(){
+                                                    $('[data-toggle="tooltip<?php echo $rand; ?>"]').tooltip();
+                                                    $('[data-toggle="tooltip_booked<?php echo $rand; ?>"]').tooltip();
+                                                });
+                                            </script>
+                                            <?php
                                         }
                                     }
                                     ?>

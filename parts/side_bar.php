@@ -71,6 +71,10 @@
                     <i class="fas fa-fw fa-check"></i>
                     <span>Available</span>
                 </a>
+                <a class="collapse-item" href="admin_rooms_reserved.php">
+                    <i class="fas fa-fw fa-exclamation-circle"></i>
+                    <span>Reserved</span>
+                </a>
             </div>
         </div>
     </li>
@@ -96,8 +100,8 @@
                     <span>Registered student</span>
                 </a>
                 <a class="collapse-item" href="admin_shift_room.php">
-                    <i class="fas fa-fw fa-exchange-alt"></i>
-                    <span>Shift Room</span>
+                    <i class="fas fa-fw fa-hospital"></i>
+                    <span>Rooms Management</span>
                 </a>
             </div>
         </div>
@@ -106,7 +110,7 @@
 
 
 
-    <!-- backup -->
+    <!-- Payments -->
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse6" aria-expanded="true"
@@ -124,6 +128,36 @@
                 <a class="collapse-item" href="admin_all_invoices.php">
                     <i class="fas fa-fw fa-list"></i>
                     <span>All Invoices</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+
+
+
+    <!-- Emails -->
+    <hr class="sidebar-divider">
+    <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse7" aria-expanded="true"
+           aria-controls="collapse5">
+            <i class="fas fa-fw fa-envelope"></i>
+            <span>Email</span>
+        </a>
+        <div id="collapse7" class="collapse" aria-labelledby="heading4"
+             data-parent="#accordionSidebar">
+            <div class="bg-gradient-light py-2 collapse-inner rounded">
+                <a class="collapse-item" href="admin_email_interested.php">
+                    <i class="fas fa-fw fa-at"></i>
+                    <span>Interested Students</span>
+                </a>
+                <a class="collapse-item" href="admin_enter_payment.php">
+                    <i class="fas fa-fw fa-at"></i>
+                    <span>Reserved Students</span>
+                </a>
+                <a class="collapse-item" href="admin_all_invoices.php">
+                    <i class="fas fa-fw fa-at"></i>
+                    <span>Booked Students</span>
                 </a>
             </div>
         </div>
