@@ -68,7 +68,7 @@ if(isset($_POST["save_quote"])){
             Communal kitchens are spaced throughout the residence where everyone is welcome to share their daily experiences, support one another, relax and have fun. Bathrooms and kitchens are always spotlessly clean.<br>
             Students can explore shopping malls, local markets and enjoy the nightlife all within 1km radius and still have the peace of mind living in a secure 24/7 fingerprint-access residence.<br>
             Let us make your new home away from home a memorable experience.<br>
-            <b><a href='https://www.18jorissen.co.za/app/getQuotation.php'>Click here to find your quotation.</a></b><br><br>
+            <b><a href='https://www.18jorissen.co.za/app/getQuotation.php?id=$last_id'>Click here to find your quotation.</a></b><br><br>
             ";
 
     $body .= "Kind Regards,<br>";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2021 at 12:40 PM
+-- Generation Time: Nov 26, 2021 at 08:32 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -69,6 +69,31 @@ CREATE TABLE `invoice` (
 
 INSERT INTO `invoice` (`id`, `userID`, `paymentDate`, `startDate`, `endDate`, `roomType`, `totalAmount`, `totalDays`, `date_time`) VALUES
 (1, 4, '2021-11-03', '2021-11-03', '2021-12-03', 'Single Room', 5000, 30, '2021-11-03 04:30:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quotations`
+--
+
+CREATE TABLE `quotations` (
+  `id` int(11) NOT NULL,
+  `userID` int(10) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `registration` tinyint(1) NOT NULL,
+  `deposit` tinyint(1) NOT NULL,
+  `roomType` varchar(100) NOT NULL,
+  `date_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `quotations`
+--
+
+INSERT INTO `quotations` (`id`, `userID`, `start_date`, `end_date`, `registration`, `deposit`, `roomType`, `date_time`) VALUES
+(4, 5, '2021-01-01', '2021-11-01', 0, 1, '', '2021-11-26 03:53:44'),
+(5, 5, '2021-01-01', '2021-10-01', 1, 0, 'Double', '2021-11-26 07:27:51');
 
 -- --------------------------------------------------------
 
@@ -160,215 +185,134 @@ INSERT INTO `rooms` (`id`, `floor`, `room`, `beds`, `keyNumber`, `bed1`, `bed2`,
 
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `surename` varchar(200) DEFAULT NULL,
-  `email` varchar(200) DEFAULT NULL,
-  `mobile` varchar(200) DEFAULT NULL,
-  `roomID` int(10) DEFAULT NULL,
-  `bedID` int(10) DEFAULT NULL,
-  `IDnum` varchar(200) DEFAULT NULL,
-  `linkToLease` varchar(1000) DEFAULT NULL,
-  `uniName` varchar(500) DEFAULT NULL,
-  `UniRegNum` varchar(300) DEFAULT NULL,
-  `privateSponsored` varchar(200) DEFAULT NULL,
-  `sponsorName` varchar(500) DEFAULT NULL,
-  `address` text DEFAULT NULL,
-  `guardian1` varchar(300) DEFAULT NULL,
-  `guardian2` varchar(300) DEFAULT NULL,
-  `date_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `name` varchar(100) DEFAULT NULL,
+  `surename` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `mobile` varchar(100) DEFAULT NULL,
+  `roomID` int(11) DEFAULT 6969,
+  `bedID` int(11) DEFAULT 6969,
+  `IDnum` varchar(100) DEFAULT NULL,
+  `linkToLease` varchar(100) DEFAULT NULL,
+  `uniName` varchar(100) DEFAULT NULL,
+  `UniRegNum` varchar(100) DEFAULT NULL,
+  `privateSponsored` varchar(100) DEFAULT NULL,
+  `sponsorName` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `guardian1` varchar(100) DEFAULT NULL,
+  `guardian2` varchar(100) DEFAULT NULL,
+  `start_mnth` date DEFAULT NULL,
+  `end_mnth` date DEFAULT NULL,
+  `comments` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `name`, `surename`, `email`, `mobile`, `roomID`, `bedID`, `IDnum`, `linkToLease`, `uniName`, `UniRegNum`, `privateSponsored`, `sponsorName`, `address`, `guardian1`, `guardian2`, `date_time`) VALUES
-(1, 'test', 'test', 'sdfasdf@fsdgdf', '323424', 1, 1, '232434', '855827img4.jpg', 'adfasdf', '2342434234', 'Private', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 11:58:49'),
-(2, 'cfvdfgdfg', 'ueryte', 'admi12@a34in.com', '3563534', 20, 4, '232434', '633485img5.jpg', 'adfasdf', '2342434234', 'Sponsored', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 06:32:47'),
-(3, 'asdf', 'asdf', 'asdf@yhjgf', '323424', 58, 1, '1234234', '18743img4.jpg', 'adfasdf', '2342434234', 'Private', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 06:33:51'),
-(4, 'test', 'test', 'sdfasdf@fsdgdf2435', '323424', 8, 1, '232434', 'img4.jpg302120', 'adfasdf', '2342434234', 'Sponsored', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 06:36:06'),
-(5, 'final', 'BOy', 'kad@LASDFJ', '90u0', NULL, NULL, '232434', '978141img4.jpg', 'adfasdf', '2342434234', 'Sponsored', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-11-17 12:05:41'),
-(6, 'Fawad', 'Khan', 'fawad@khan', '03428484848', 1, 1, '232434', '964331img4.jpg', 'adfasdf', '2342434234', 'Private', 'asdfsadf', 'xafgsdfsdf', '232355e', '67678', '2021-10-30 12:13:28'),
-(176, 'Amanda', 'Xaba', 'NomkosiAxaba01@gmail.com', '07855252265', 12, 2, '303170543084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:27:34'),
-(177, 'Zuziwe Mbalenhle', 'Thwala', 'thwala.zuzi@gmail.com', '0832559135', NULL, NULL, '9908080400083', NULL, 'Wits', '2342434234', 'Private', 'Solomon Thwala', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(178, 'Katlego', 'Mfekane', 'msmfekane@gmail.com', '0714321620', NULL, NULL, '11040197086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(179, 'Jorenthia', 'De Bruin', '2307263@students.wits.ac.za', '0648851674', 57, 1, '107020489087', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-17 11:40:12'),
-(180, 'Keamogetse Malebogo', 'Selabe', 'keamogetsemonchusi@gmail.com', '07668750651', NULL, NULL, '110090580082', NULL, 'Wits', '2342434234', 'Private', 'Nthabiseng Selabe', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(181, 'Shamira Rose', 'Mudenda', '2279182@students.wits.ac.za', '0834410495', NULL, NULL, '4090214083', NULL, 'Wits', '2342434234', 'Private', 'Ethel Alimwi Mudenda', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(182, 'Nompumelelo Mbali', 'Tshabalala', 'mpumimbali59@gmail.com', '0815225906', NULL, NULL, '6080462085', NULL, 'Wits', '2342434234', 'Private', 'Christina Deele Tshabalala', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(183, 'Prudence Katlego', 'Molefe', '2323447@students.wits.ac.za', '0647879497', NULL, NULL, '111050103089', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(184, 'Ntebogeng Dennis', 'Mashishi', 'ntebogengmashishi@gmail.com', '0680535787', NULL, NULL, '209050455085', NULL, 'Wits', '2342434234', 'Sponsored', 'Sibanye Sillwaters', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(185, 'Lebogang', 'Dube', 'princessdube400@gmail.com', '0768608496', NULL, NULL, '9806280421083', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(186, 'Nomthandazo Karabo', 'Ratsoma', 'sylvia.mahlangu77@gmail.com', '0725181907', NULL, NULL, '9703280420084', NULL, 'Wits', '2342434234', 'Sponsored', 'CSIR', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(187, 'Mashudu Prudence', 'Rambau', 'mashuduprudence@gmail.com', '0828149314', NULL, NULL, '210020867086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(188, 'Thato', 'Mokaleng', 'thatomokaleng00@gmail.com', '0656120850', NULL, NULL, '108030662085', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(189, 'Mosa Fortunate', 'Rammutla', '1846691@students.wits.ac.za', '0646169556', NULL, NULL, '6010763081', NULL, 'Wits', '2342434234', 'Private', 'Constance Thaloko Rammtla', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(190, 'Thamsanqa', 'Sereo', 'sereothuleka@gmail.com', '0723862145', NULL, NULL, '204300937081', NULL, 'Wits', '2342434234', 'Sponsored', 'Impala Platinum', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(191, 'Kgomotso', 'Masemola', '1686628@students.wits.ac.za', '0659673517', NULL, NULL, '9902161009287', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(192, 'Thandokazi', 'Nibe', 'thandokazinibe@gmail.com', '0631077910', NULL, NULL, '1251287080', NULL, 'Damelin', NULL, 'Private', 'Nokuzola Nibe', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(193, 'Naledi', 'Nkonyane', '1912042@students.wits.ac.za', '0680816603', NULL, NULL, '9910020297082', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(194, 'Tendai', 'Mabunda', 'tendaimabunda09@gmail.com', '0796822689', NULL, NULL, '1120311091088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(195, 'Neo', 'Koitheng', 'neocherrolpule@gmail.com', '0835013739', NULL, NULL, '8300406082', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(196, 'Ntando Virginia', 'Masango', '2457324@students.wits.ac.za', '0652757570', NULL, NULL, '208160313085', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(197, 'Lebu', 'Qina', 'qinalebu20@gmail.com', '0818969540', NULL, NULL, '108081000086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(198, 'Oratile', 'Gaobodiwe', 'oratilegao22@gmail.com', '0714938372', NULL, NULL, '102220390086', NULL, 'Wits', '2342434234', 'Private', 'Mpho Gaobodiwe', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(199, 'Kealeboga', 'Molete', 'keamolete65@gmail.com', '0662931368', NULL, NULL, '206180185087', NULL, 'Wits', '2342434234', 'Private', 'Kaibe Molete', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(200, 'Siwaphiwe', 'Julumeje', '2454634@studentw.wits.ac.za', '0639427721', NULL, NULL, '307300936084', NULL, 'Wits', '2342434234', 'Private', 'Ncediwe Julumeje', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(201, 'Serati', 'Sekuba', 'seratilove52@gmail.com', '0636509749', NULL, NULL, '3042800490847', NULL, 'Wits', '2342434234', 'Sponsored', 'KSB SA', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(202, 'Tauheeda', 'Jhatam', 'tjhatam27@gmail.com', '0670807326', NULL, NULL, '11270524082', NULL, 'Wits', '2342434234', 'Private', 'Muhammed Uslum Jhatam', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(203, 'Hitekani', 'Mzimba', '2134902@students.wits.ac.za', '0780722520', NULL, NULL, '101090924081', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(204, 'Yolanda', 'Ndlovu', 'yolandaangel61@gmail.com', '0826715423', NULL, NULL, '7280516084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(205, 'Anathi', 'Manxiwa', 'anniemanxiwa061@gmail.com', '0621539321', NULL, NULL, '7010149081', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(206, 'Londiwe', 'Ntombela', '2305442@students.wits.ac.za', '0672522770', NULL, NULL, '111270579084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(207, 'Lutho Mihlali', 'Surayi', '2438566@students.wits.ac.za', '0680380520/ 0762424724', NULL, NULL, '211091067085', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(208, 'Loveness Nohle', 'Gumede', 'gumedeloveness1@gmail.com', '0652196606', NULL, NULL, '205280528089', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(209, 'Naledi Nicole', 'Chikane', 'nicolened239@gmail.com', '0744808781', NULL, NULL, '111031129088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(210, 'Phumla Hope Eve', 'Lukhele', 'hopemasina9@gmail.com', '0762116472', NULL, NULL, '26200537085', NULL, 'Wits', '2342434234', 'Private', 'Khethabahle Hilda Nthenjane', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(211, 'Kamohelo', 'Mogoloa', 'mogoloamk@gmail.com', '0782982047', NULL, NULL, '5220150089', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(212, 'Khanyo', 'Ndlwana', 'khanyomuntuza@gmail.com', '0787243702', NULL, NULL, '20901419080', NULL, 'Wits', '2342434234', 'Private', 'Nomathemba Ndlwana', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(213, 'Lethabo Charlotte', 'Rantho', 'rantholethabo@gmail.com', '0782275733', NULL, NULL, '311100737080', NULL, 'Wits', '2342434234', 'Private', 'Nkopodi Johnny Rantho', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(214, 'Request', 'Shivambu', 'shivamburequest@gmail.com', '0766122428', NULL, NULL, '303210862080', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(215, 'Takalani', 'Mukwevho', 'mukwevhotaki03@gmail.com', '0608416257', NULL, NULL, '303201187083', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(216, 'Nonhlanhla', 'Wotshe', 'philippa@xis.co.za', '0655271879', NULL, NULL, '303311106080', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(217, 'Boikokobetso', 'Motloli', 'boikokobetso111@gmail.com', '0671837107', NULL, NULL, '9809211185082', NULL, 'Wits', '2342434234', 'Private', 'Nophuthi Motloli', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(218, 'Tsaku', 'Nkosi', 'tsakuannah22@gmail.com', '0767423446', NULL, NULL, '9801291254086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(219, 'Ayanda', 'Moeketsi', 'moketsiayanda26@gmail.com', '0629509831', NULL, NULL, '9912260151086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(220, 'Phetheo', 'Rammbuda', '1611650@students.wits.ac.za', '0608312132', NULL, NULL, '9905250856086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(221, 'Zanobuhle', 'Nkosi', 'nkosizanobuhle@gmail.com', '0662276814', NULL, NULL, '306040740087', NULL, 'Wits', '2342434234', 'Sponsored', 'Duduzile Makhathini', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(222, 'Nondumiso', 'Mudanalwo', '2156035@students.wits.ac.za', '0815357242', NULL, NULL, '102020213083', NULL, 'Wits', '2342434234', 'Private', 'Nondumiso Mudanalwo', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(223, 'Minenhle', 'Ngcobo', 'nkulengcobosi@gmail.com', '0849786577', NULL, NULL, '303290459088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:20:29'),
-(224, 'Amanda', 'Xaba', 'NomkosiAxaba01@gmail.com', '07855252265', NULL, NULL, '0303170543084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(225, 'Zuziwe Mbalenhle', 'Thwala', 'thwala.zuzi@gmail.com', '0832559135', NULL, NULL, '9908080400083', NULL, 'Wits', '2342434234', 'Private', 'Solomon Thwala', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(226, 'Katlego', 'Mfekane', 'msmfekane@gmail.com', '0714321620', NULL, NULL, '011040197086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(227, 'Jorenthia', 'De Bruin', '2307263@students.wits.ac.za', '0648851674', NULL, NULL, '0107020489087', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(228, 'Keamogetse Malebogo', 'Selabe', 'keamogetsemonchusi@gmail.com', '07668750651', NULL, NULL, '0110090580082', NULL, 'Wits', '2342434234', 'Private', 'Nthabiseng Selabe', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(229, 'Shamira Rose', 'Mudenda', '2279182@students.wits.ac.za', '0834410495', NULL, NULL, '0004090214083', NULL, 'Wits', '2342434234', 'Private', 'Ethel Alimwi Mudenda', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(230, 'Babette', 'Ntuli', 'babettentuli@gmail.com', '0676825339', NULL, NULL, '08-2072402G-03', NULL, 'Wits', '2342434234', 'Private', 'Nitiel Ntuli', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(231, 'Nompumelelo Mbali', 'Tshabalala', 'mpumimbali59@gmail.com', '0815225906', NULL, NULL, '0006080462085', NULL, 'Wits', '2342434234', 'Private', 'Christina Deele Tshabalala', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(232, 'Triphin', 'Mudzvengi', '2327022@students.wits.ac.za', '0726563206', NULL, NULL, 'MUSZWE39220110', NULL, 'Wits', '2342434234', 'Private', 'Polate Mudzvengi', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(233, 'Prudence Katlego', 'Molefe', '2323447@students.wits.ac.za', '0647879497', NULL, NULL, '0111050103089', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(234, 'Ntebogeng Dennis', 'Mashishi', 'ntebogengmashishi@gmail.com', '0680535787', NULL, NULL, '0209050455085', NULL, 'Wits', '2342434234', 'Sponsored', 'Sibanye Sillwaters', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(235, 'Lebogang', 'Dube', 'princessdube400@gmail.com', '0768608496', NULL, NULL, '9806280421083', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(236, 'Nomthandazo Karabo', 'Ratsoma', 'sylvia.mahlangu77@gmail.com', '0725181907', NULL, NULL, '9703280420084', NULL, 'Wits', '2342434234', 'Sponsored', 'CSIR', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(237, 'Mashudu Prudence', 'Rambau', 'mashuduprudence@gmail.com', '0828149314', NULL, NULL, '0210020867086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(238, 'Thato', 'Mokaleng', 'thatomokaleng00@gmail.com', '0656120850', NULL, NULL, '0108030662085', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(239, 'Mosa Fortunate', 'Rammutla', '1846691@students.wits.ac.za', '0646169556', NULL, NULL, '0006010763081', NULL, 'Wits', '2342434234', 'Private', 'Constance Thaloko Rammtla', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(240, 'Thamsanqa', 'Sereo', 'sereothuleka@gmail.com', '0723862145', NULL, NULL, '0204300937081', NULL, 'Wits', '2342434234', 'Sponsored', 'Impala Platinum', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(241, 'Onkabetse', 'Motlhaping', 'onkabetsebmotlhaping@gmail.com', '0765540364', NULL, NULL, '\'0208070682082', NULL, 'Wits', '2342434234', 'Private', 'Patrick Motlhaping', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(242, 'Kgomotso', 'Masemola', '1686628@students.wits.ac.za', '0659673517', NULL, NULL, '9902161009287', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(243, 'Thandokazi', 'Nibe', 'thandokazinibe@gmail.com', '0631077910', NULL, NULL, '0001251287080', NULL, 'Damelin', NULL, 'Private', 'Nokuzola Nibe', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(244, 'Naledi', 'Nkonyane', '1912042@students.wits.ac.za', '0680816603', NULL, NULL, '9910020297082', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(245, 'Tendai', 'Mabunda', 'tendaimabunda09@gmail.com', '0796822689', NULL, NULL, '01120311091088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(246, 'Neo', 'Koitheng', 'neocherrolpule@gmail.com', '0835013739', NULL, NULL, '0008300406082', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(247, 'Ntando Virginia', 'Masango', '2457324@students.wits.ac.za', '0652757570', NULL, NULL, '0208160313085', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(248, 'Lebu', 'Qina', 'qinalebu20@gmail.com', '0818969540', NULL, NULL, '0108081000086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(249, 'Oratile', 'Gaobodiwe', 'oratilegao22@gmail.com', '0714938372', NULL, NULL, '0102220390086', NULL, 'Wits', '2342434234', 'Private', 'Mpho Gaobodiwe', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(250, 'Kealeboga', 'Molete', 'keamolete65@gmail.com', '0662931368', NULL, NULL, '0206180185087', NULL, 'Wits', '2342434234', 'Private', 'Kaibe Molete', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(251, 'Siwaphiwe', 'Julumeje', '2454634@studentw.wits.ac.za', '0639427721', NULL, NULL, '0307300936084', NULL, 'Wits', '2342434234', 'Private', 'Ncediwe Julumeje', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(252, 'Serati', 'Sekuba', 'seratilove52@gmail.com', '0636509749', NULL, NULL, '03042800490847', NULL, 'Wits', '2342434234', 'Sponsored', 'KSB SA', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(253, 'Tauheeda', 'Jhatam', 'tjhatam27@gmail.com', '0670807326', NULL, NULL, '00011270524082', NULL, 'Wits', '2342434234', 'Private', 'Muhammed Uslum Jhatam', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(254, 'Hitekani', 'Mzimba', '2134902@students.wits.ac.za', '0780722520', NULL, NULL, '0101090924081', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(255, 'Yolanda', 'Ndlovu', 'yolandaangel61@gmail.com', '0826715423', NULL, NULL, '0007280516084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(256, 'Anathi', 'Manxiwa', 'anniemanxiwa061@gmail.com', '0621539321', NULL, NULL, '0007010149081', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(257, 'Londiwe', 'Ntombela', '2305442@students.wits.ac.za', '0672522770', NULL, NULL, '0111270579084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(258, 'Lutho Mihlali', 'Surayi', '2438566@students.wits.ac.za', '0680380520/ 0762424724', NULL, NULL, '0211091067085', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(259, 'Loveness Nohle', 'Gumede', 'gumedeloveness1@gmail.com', '0652196606', NULL, NULL, '0205280528089', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(260, 'Naledi Nicole', 'Chikane', 'nicolened239@gmail.com', '0744808781', NULL, NULL, '0111031129088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(261, 'Phumla Hope Eve', 'Lukhele', 'hopemasina9@gmail.com', '0762116472', NULL, NULL, '00026200537085', NULL, 'Wits', '2342434234', 'Private', 'Khethabahle Hilda Nthenjane', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(262, 'Kamohelo', 'Mogoloa', 'mogoloamk@gmail.com', '0782982047', NULL, NULL, '0005220150089', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(263, 'Khanyo', 'Ndlwana', 'khanyomuntuza@gmail.com', '0787243702', NULL, NULL, '020901419080', NULL, 'Wits', '2342434234', 'Private', 'Nomathemba Ndlwana', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(264, 'Lethabo Charlotte', 'Rantho', 'rantholethabo@gmail.com', '0782275733', NULL, NULL, '0311100737080', NULL, 'Wits', '2342434234', 'Private', 'Nkopodi Johnny Rantho', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(265, 'Request', 'Shivambu', 'shivamburequest@gmail.com', '0766122428', NULL, NULL, '0303210862080', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(266, 'Takalani', 'Mukwevho', 'mukwevhotaki03@gmail.com', '0608416257', NULL, NULL, '0303201187083', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(267, 'Nonhlanhla', 'Wotshe', 'philippa@xis.co.za', '0655271879', NULL, NULL, '0303311106080', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(268, 'Boikokobetso', 'Motloli', 'boikokobetso111@gmail.com', '0671837107', NULL, NULL, '9809211185082', NULL, 'Wits', '2342434234', 'Private', 'Nophuthi Motloli', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(269, 'Tsaku', 'Nkosi', 'tsakuannah22@gmail.com', '0767423446', NULL, NULL, '9801291254086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(270, 'Ayanda', 'Moeketsi', 'moketsiayanda26@gmail.com', '0629509831', NULL, NULL, '9912260151086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(271, 'Phetheo', 'Rammbuda', '1611650@students.wits.ac.za', '0608312132', NULL, NULL, '9905250856086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(272, 'Zanobuhle', 'Nkosi', 'nkosizanobuhle@gmail.com', '0662276814', NULL, NULL, '0306040740087', NULL, 'Wits', '2342434234', 'Sponsored', 'Duduzile Makhathini', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(273, 'Nondumiso', 'Mudanalwo', '2156035@students.wits.ac.za', '0815357242', NULL, NULL, '0102020213083', NULL, 'Wits', '2342434234', 'Private', 'Nondumiso Mudanalwo', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(274, 'Minenhle', 'Ngcobo', 'nkulengcobosi@gmail.com', '0849786577', NULL, NULL, '0303290459088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(275, 'Palesa', 'Mahlambi', 'pmahlambi24@gmail.com', '0646873263', NULL, NULL, '0101240493086', NULL, 'Wits', '2342434234', 'Private', 'Kedibone Merriam Mahlambi', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(276, 'Siduduziwe Mpho', 'Motaung', 'mphom31.sm@gmail.com', '0725601248', NULL, NULL, '0007310093088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(277, 'Basetsana', 'Ntshalintshali', '2426662@students.wits.ac.za', '0678917137', NULL, NULL, NULL, NULL, 'Wits', '2342434234', 'Sponsored', 'Gauteng Province', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(278, 'Nomthandazo', 'Mdakane', 'jennifermdakane@gmail.com', '0780868605', NULL, NULL, NULL, NULL, 'Wits', '2342434234', 'Spomsored', 'Gauteng Province', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(279, 'Fumani Sarah', 'Mashingo', 'mfumanisarah@gmail.com', '071 073 2430', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Lebogang Mashingo', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(280, 'Cindi', 'Nolanthando', 'cindinolithando@gmail.com', '068 075 5883', NULL, NULL, NULL, NULL, 'Wits', '2342434234', 'Sponsored', 'Gauteng Province', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(281, 'Kannelo', 'Ltlhakanyane', 'kanilit3@gmail.com', '065 880 8954', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Mpho Seatle', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(282, 'Vhutsila Lusa', 'Tshianane', 'vhutsila.l@gmail.com', '082 866 6726', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Mr Tshianane', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(283, 'Nokubonga', 'Majozi', 'nokomajozi@gmail.com', '081 399 0119', NULL, NULL, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(284, 'Mpho', 'Mauteng', 'mphom31@gmail.com', '072 560 1248', NULL, NULL, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(285, 'KJ', 'Mokwatlo', NULL, '076 428 0516', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Mr Mokwatlo', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(286, 'Zizo', 'Maqekeni', 'lebohang@tomorrow.org.za', '082 739 8040', NULL, NULL, NULL, NULL, NULL, NULL, 'Sponsored', 'Tomorrow Trust', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(287, 'Nolisindiso', 'Matroshe', 'nm.matroshe@gmail.com', '073 990 0447', NULL, NULL, NULL, NULL, NULL, NULL, 'Sponsored', 'Tomorrow Trust', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(288, 'Basetsana', 'Rabodila', 'basetsana.rabodile@gmail.com', '072 183 1996', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Basetsana Rabodila', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(289, 'Onacchau', 'Makgato', 'onnicahmakgato@gmail.com', '078 643 1026', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Onnicah Makgato', NULL, NULL, NULL, '2021-11-03 06:21:03'),
-(290, 'Amanda', 'Xaba', 'NomkosiAxaba01@gmail.com', '07855252265', NULL, NULL, '0303170543084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(291, 'Zuziwe Mbalenhle', 'Thwala', 'thwala.zuzi@gmail.com', '0832559135', NULL, NULL, '9908080400083', NULL, 'Wits', '2342434234', 'Private', 'Solomon Thwala', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(292, 'Katlego', 'Mfekane', 'msmfekane@gmail.com', '0714321620', NULL, NULL, '011040197086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(293, 'Jorenthia', 'De Bruin', '2307263@students.wits.ac.za', '0648851674', NULL, NULL, '0107020489087', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(294, 'Keamogetse Malebogo', 'Selabe', 'keamogetsemonchusi@gmail.com', '07668750651', NULL, NULL, '0110090580082', NULL, 'Wits', '2342434234', 'Private', 'Nthabiseng Selabe', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(295, 'Shamira Rose', 'Mudenda', '2279182@students.wits.ac.za', '0834410495', NULL, NULL, '0004090214083', NULL, 'Wits', '2342434234', 'Private', 'Ethel Alimwi Mudenda', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(296, 'Babette', 'Ntuli', 'babettentuli@gmail.com', '0676825339', NULL, NULL, '08-2072402G-03', NULL, 'Wits', '2342434234', 'Private', 'Nitiel Ntuli', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(297, 'Nompumelelo Mbali', 'Tshabalala', 'mpumimbali59@gmail.com', '0815225906', NULL, NULL, '0006080462085', NULL, 'Wits', '2342434234', 'Private', 'Christina Deele Tshabalala', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(298, 'Triphin', 'Mudzvengi', '2327022@students.wits.ac.za', '0726563206', NULL, NULL, 'MUSZWE39220110', NULL, 'Wits', '2342434234', 'Private', 'Polate Mudzvengi', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(299, 'Prudence Katlego', 'Molefe', '2323447@students.wits.ac.za', '0647879497', NULL, NULL, '0111050103089', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(300, 'Ntebogeng Dennis', 'Mashishi', 'ntebogengmashishi@gmail.com', '0680535787', NULL, NULL, '0209050455085', NULL, 'Wits', '2342434234', 'Sponsored', 'Sibanye Sillwaters', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(301, 'Lebogang', 'Dube', 'princessdube400@gmail.com', '0768608496', NULL, NULL, '9806280421083', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(302, 'Nomthandazo Karabo', 'Ratsoma', 'sylvia.mahlangu77@gmail.com', '0725181907', NULL, NULL, '9703280420084', NULL, 'Wits', '2342434234', 'Sponsored', 'CSIR', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(303, 'Mashudu Prudence', 'Rambau', 'mashuduprudence@gmail.com', '0828149314', NULL, NULL, '0210020867086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(304, 'Thato', 'Mokaleng', 'thatomokaleng00@gmail.com', '0656120850', NULL, NULL, '0108030662085', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(305, 'Mosa Fortunate', 'Rammutla', '1846691@students.wits.ac.za', '0646169556', NULL, NULL, '0006010763081', NULL, 'Wits', '2342434234', 'Private', 'Constance Thaloko Rammtla', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(306, 'Thamsanqa', 'Sereo', 'sereothuleka@gmail.com', '0723862145', NULL, NULL, '0204300937081', NULL, 'Wits', '2342434234', 'Sponsored', 'Impala Platinum', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(307, 'Onkabetse', 'Motlhaping', 'onkabetsebmotlhaping@gmail.com', '0765540364', NULL, NULL, '\'0208070682082', NULL, 'Wits', '2342434234', 'Private', 'Patrick Motlhaping', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(308, 'Kgomotso', 'Masemola', '1686628@students.wits.ac.za', '0659673517', NULL, NULL, '9902161009287', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(309, 'Thandokazi', 'Nibe', 'thandokazinibe@gmail.com', '0631077910', NULL, NULL, '0001251287080', NULL, 'Damelin', NULL, 'Private', 'Nokuzola Nibe', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(310, 'Naledi', 'Nkonyane', '1912042@students.wits.ac.za', '0680816603', NULL, NULL, '9910020297082', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(311, 'Tendai', 'Mabunda', 'tendaimabunda09@gmail.com', '0796822689', NULL, NULL, '01120311091088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(312, 'Neo', 'Koitheng', 'neocherrolpule@gmail.com', '0835013739', NULL, NULL, '0008300406082', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(313, 'Ntando Virginia', 'Masango', '2457324@students.wits.ac.za', '0652757570', NULL, NULL, '0208160313085', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(314, 'Lebu', 'Qina', 'qinalebu20@gmail.com', '0818969540', NULL, NULL, '0108081000086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(315, 'Oratile', 'Gaobodiwe', 'oratilegao22@gmail.com', '0714938372', NULL, NULL, '0102220390086', NULL, 'Wits', '2342434234', 'Private', 'Mpho Gaobodiwe', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(316, 'Kealeboga', 'Molete', 'keamolete65@gmail.com', '0662931368', NULL, NULL, '0206180185087', NULL, 'Wits', '2342434234', 'Private', 'Kaibe Molete', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(317, 'Siwaphiwe', 'Julumeje', '2454634@studentw.wits.ac.za', '0639427721', NULL, NULL, '0307300936084', NULL, 'Wits', '2342434234', 'Private', 'Ncediwe Julumeje', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(318, 'Serati', 'Sekuba', 'seratilove52@gmail.com', '0636509749', NULL, NULL, '03042800490847', NULL, 'Wits', '2342434234', 'Sponsored', 'KSB SA', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(319, 'Tauheeda', 'Jhatam', 'tjhatam27@gmail.com', '0670807326', NULL, NULL, '00011270524082', NULL, 'Wits', '2342434234', 'Private', 'Muhammed Uslum Jhatam', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(320, 'Hitekani', 'Mzimba', '2134902@students.wits.ac.za', '0780722520', NULL, NULL, '0101090924081', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(321, 'Yolanda', 'Ndlovu', 'yolandaangel61@gmail.com', '0826715423', NULL, NULL, '0007280516084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(322, 'Anathi', 'Manxiwa', 'anniemanxiwa061@gmail.com', '0621539321', NULL, NULL, '0007010149081', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(323, 'Londiwe', 'Ntombela', '2305442@students.wits.ac.za', '0672522770', NULL, NULL, '0111270579084', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(324, 'Lutho Mihlali', 'Surayi', '2438566@students.wits.ac.za', '0680380520/ 0762424724', NULL, NULL, '0211091067085', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(325, 'Loveness Nohle', 'Gumede', 'gumedeloveness1@gmail.com', '0652196606', NULL, NULL, '0205280528089', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(326, 'Naledi Nicole', 'Chikane', 'nicolened239@gmail.com', '0744808781', NULL, NULL, '0111031129088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(327, 'Phumla Hope Eve', 'Lukhele', 'hopemasina9@gmail.com', '0762116472', NULL, NULL, '00026200537085', NULL, 'Wits', '2342434234', 'Private', 'Khethabahle Hilda Nthenjane', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(328, 'Kamohelo', 'Mogoloa', 'mogoloamk@gmail.com', '0782982047', NULL, NULL, '0005220150089', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(329, 'Khanyo', 'Ndlwana', 'khanyomuntuza@gmail.com', '0787243702', NULL, NULL, '020901419080', NULL, 'Wits', '2342434234', 'Private', 'Nomathemba Ndlwana', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(330, 'Lethabo Charlotte', 'Rantho', 'rantholethabo@gmail.com', '0782275733', NULL, NULL, '0311100737080', NULL, 'Wits', '2342434234', 'Private', 'Nkopodi Johnny Rantho', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(331, 'Request', 'Shivambu', 'shivamburequest@gmail.com', '0766122428', NULL, NULL, '0303210862080', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:23'),
-(332, 'Takalani', 'Mukwevho', 'mukwevhotaki03@gmail.com', '0608416257', NULL, NULL, '0303201187083', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(333, 'Nonhlanhla', 'Wotshe', 'philippa@xis.co.za', '0655271879', NULL, NULL, '0303311106080', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(334, 'Boikokobetso', 'Motloli', 'boikokobetso111@gmail.com', '0671837107', NULL, NULL, '9809211185082', NULL, 'Wits', '2342434234', 'Private', 'Nophuthi Motloli', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(335, 'Tsaku', 'Nkosi', 'tsakuannah22@gmail.com', '0767423446', NULL, NULL, '9801291254086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(336, 'Ayanda', 'Moeketsi', 'moketsiayanda26@gmail.com', '0629509831', NULL, NULL, '9912260151086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(337, 'Phetheo', 'Rammbuda', '1611650@students.wits.ac.za', '0608312132', NULL, NULL, '9905250856086', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(338, 'Zanobuhle', 'Nkosi', 'nkosizanobuhle@gmail.com', '0662276814', NULL, NULL, '0306040740087', NULL, 'Wits', '2342434234', 'Sponsored', 'Duduzile Makhathini', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(339, 'Nondumiso', 'Mudanalwo', '2156035@students.wits.ac.za', '0815357242', NULL, NULL, '0102020213083', NULL, 'Wits', '2342434234', 'Private', 'Nondumiso Mudanalwo', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(340, 'Minenhle', 'Ngcobo', 'nkulengcobosi@gmail.com', '0849786577', NULL, NULL, '0303290459088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(341, 'Palesa', 'Mahlambi', 'pmahlambi24@gmail.com', '0646873263', NULL, NULL, '0101240493086', NULL, 'Wits', '2342434234', 'Private', 'Kedibone Merriam Mahlambi', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(342, 'Siduduziwe Mpho', 'Motaung', 'mphom31.sm@gmail.com', '0725601248', NULL, NULL, '0007310093088', NULL, 'Wits', '2342434234', 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(343, 'Basetsana', 'Ntshalintshali', '2426662@students.wits.ac.za', '0678917137', NULL, NULL, NULL, NULL, 'Wits', '2342434234', 'Sponsored', 'Gauteng Province', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(344, 'Nomthandazo', 'Mdakane', 'jennifermdakane@gmail.com', '0780868605', NULL, NULL, NULL, NULL, 'Wits', '2342434234', 'Spomsored', 'Gauteng Province', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(345, 'Fumani Sarah', 'Mashingo', 'mfumanisarah@gmail.com', '071 073 2430', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Lebogang Mashingo', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(346, 'Cindi', 'Nolanthando', 'cindinolithando@gmail.com', '068 075 5883', NULL, NULL, NULL, NULL, 'Wits', '2342434234', 'Sponsored', 'Gauteng Province', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(347, 'Kannelo', 'Ltlhakanyane', 'kanilit3@gmail.com', '065 880 8954', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Mpho Seatle', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(348, 'Vhutsila Lusa', 'Tshianane', 'vhutsila.l@gmail.com', '082 866 6726', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Mr Tshianane', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(349, 'Nokubonga', 'Majozi', 'nokomajozi@gmail.com', '081 399 0119', NULL, NULL, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(350, 'Mpho', 'Mauteng', 'mphom31@gmail.com', '072 560 1248', NULL, NULL, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(351, 'KJ', 'Mokwatlo', NULL, '076 428 0516', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Mr Mokwatlo', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(352, 'Zizo', 'Maqekeni', 'lebohang@tomorrow.org.za', '082 739 8040', NULL, NULL, NULL, NULL, NULL, NULL, 'Sponsored', 'Tomorrow Trust', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(353, 'Nolisindiso', 'Matroshe', 'nm.matroshe@gmail.com', '073 990 0447', NULL, NULL, NULL, NULL, NULL, NULL, 'Sponsored', 'Tomorrow Trust', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(354, 'Basetsana', 'Rabodila', 'basetsana.rabodile@gmail.com', '072 183 1996', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Basetsana Rabodila', NULL, NULL, NULL, '2021-11-03 06:21:24'),
-(355, 'Onacchau', 'Makgato', 'onnicahmakgato@gmail.com', '078 643 1026', NULL, NULL, NULL, NULL, NULL, NULL, 'Private', 'Onnicah Makgato', NULL, NULL, NULL, '2021-11-03 06:21:24');
+INSERT INTO `students` (`id`, `name`, `surename`, `email`, `mobile`, `roomID`, `bedID`, `IDnum`, `linkToLease`, `uniName`, `UniRegNum`, `privateSponsored`, `sponsorName`, `address`, `guardian1`, `guardian2`, `start_mnth`, `end_mnth`, `comments`) VALUES
+(1, 'Bonolo', 'Magobo', 'angelbonolomagobo@gmail.com', '071 214 91 99', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'INTERESTED'),
+(2, 'Boitumelo', 'Foke', 'tumib1450@gmail.com', '076 073 0834', 6969, 6969, NULL, NULL, NULL, NULL, 'BURSAR', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'INTERESTED'),
+(3, 'Nomzamo', 'Matwa', 'zamomatwa95@gmail.com', '083 355 4299', 6969, 6969, NULL, NULL, NULL, NULL, 'SELF FUNDED', 'SELF FUNDED', NULL, NULL, NULL, NULL, NULL, 'No longer interested'),
+(4, 'Mosa', 'Maluleka', 'mosalucymaluleke@gamil.com', '079 261 9852', 6969, 6969, NULL, NULL, NULL, NULL, 'BURSAR', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'No longer interested'),
+(5, 'Martha Tshehla', 'Chakuchicki', NULL, 'O725336687', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'NSFAS does not approve her application'),
+(6, 'Samantha', NULL, 'stchakuchichi@gmail.com', 'O782355003', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Currently not in the country'),
+(7, 'Njabulo', 'Malilo', 'prettynjabulo9@gmail.com', 'O664504506', 6969, 6969, NULL, NULL, NULL, NULL, 'BURSAR', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'INTERESTED , WILL CONFIRM VIEWING'),
+(8, 'Naledi', 'Palagangwe', 'palagangwenaledi04@gmail.com', 'O682088138', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp Left a sms, Call dropped ,sent whatsapp'),
+(9, 'Yamborghini', NULL, 'yammiesndlovu@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'email sent out 23.11.2021'),
+(10, 'Ntha', NULL, 'lorrainen084@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'incorrect email'),
+(11, 'Matlou', 'Ramafemo', 'matloulee60@gmail.com', 'O725532627', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Busy with exams, will confirm viewing date, Left a whatsapp .'),
+(12, 'Angel', NULL, 'nonhlanhlamdima63@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'email sent out 23.11.2021'),
+(13, 'Rethabile', NULL, 'michellepeta20@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'email sent out 23.11.2021'),
+(14, 'Mahlatse', 'Rathelele', 'rathelelemahlatse22@gmail.com', 'O826972566', 6969, 6969, NULL, NULL, NULL, NULL, 'BURSAR', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(15, 'Fikile', 'Khosa', 'cleanafikile@gmail.com,', 'O836116008', 6969, 6969, NULL, NULL, NULL, NULL, 'BURSAR', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'No longer interested'),
+(16, 'Palesa', 'Mhlambi', '2139385@students.wits.ac.za', 'O646873263', 6969, 6969, NULL, NULL, NULL, NULL, 'PRIVATE', NULL, NULL, NULL, NULL, NULL, NULL, 'Moved in,Just messaged her to confirm room number,have no record, response was received'),
+(17, 'Remember', 'Gadzwana', 'godzanaremember@gmail.com', 'O769259400', 6969, 6969, NULL, NULL, NULL, NULL, 'BURSAR', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Number does not exist'),
+(18, 'Tshepiso', 'Ndlovu', NULL, 'O788752789', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp , Wrong Number Please do not contact again.'),
+(19, 'Fezile', 'Gasa', 'fezygasa744@gmal.com', 'O764168836', 6969, 6969, NULL, NULL, NULL, NULL, 'BURSAR', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp, Responded will let me know when she will come view .'),
+(20, 'Pearl', 'Mashumu', 'bohlalepearl80@gmail.com', 'O6489702221', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(21, 'Puseletso', 'Chauke', 'ronelpuseletso255@gmail.com', 'O673337095', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'interested.'),
+(22, 'Cindy', 'Mdaka', NULL, 'O719666237', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ASKED TO BE CALLED AROUND 8 PM .'),
+(23, 'Thando', 'Mutambanesango', 'rhandomurambanwsango93@gmail.com', 'O671214878', 6969, 6969, NULL, NULL, NULL, NULL, 'PRIVATE', NULL, NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(24, 'Dikeledi', 'Mokgadi', 'mokgadi@gmail.com', 'O612145238', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Interested'),
+(25, 'Amanda', 'Zulu', 'amandaxolilezulu@gmail.com', 'O729528745', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(26, 'Thina', 'George', 'thinageorge3@gmail.com', 'O633137121', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'End of November, still to confirm date and time for viewing'),
+(27, NULL, NULL, 'andngellahmmalebala10@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(28, 'Zanokuhle', NULL, NULL, 'O635847524', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Wrong number'),
+(29, 'Hephzibah', NULL, NULL, 'O712353467', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'still to confirm date and time for viewing'),
+(30, 'Thembelihe', NULL, 'lihlethembelihle593@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 'Michelle', 'Peta', 'michellepeta20@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(32, 'Zamantshali', 'Mtshali', 'Zamantshalimtshali17@gmail.com', 'O638811000', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(33, 'Petunia', NULL, 'petuniamphephu1@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(34, 'Ntombi', NULL, 'kayise.ntisana@gmail.com', 'O626055767', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Interested , will set up day for viewing'),
+(35, 'Jaqueline', NULL, NULL, 'O799329722', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(36, 'Dineo', NULL, NULL, 'O712208411', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Was busy with her exams , will call back'),
+(37, 'Theo', NULL, NULL, 'O729785189', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'left a sms'),
+(38, 'Thando', NULL, NULL, 'O611708939', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(39, 'Mokete', NULL, NULL, 'O814396132', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(40, 'Ntando', NULL, NULL, 'O614608288', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(41, 'Marie Diane', NULL, 'claudebutoyi1@gmail.com', '0744419091', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sent an email'),
+(42, 'Alice', 'Khumalo', 'alicenonhlanhlakhumalo@gmail.com', '067 173 3732', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'reschedule'),
+(43, 'Lehlohonolo', NULL, NULL, '063 630 4876', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(44, 'Precious', NULL, 'cmuzlibertyprecious@gmail.com', '0714097218', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(45, 'Dikeledi', NULL, 'bopapedikeledi6@gmail.com', '0672148988', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(46, 'Makhosazana', 'Nkosi', 'nkosimakhosazana1612@gmail.com', 'O731691305', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, NULL),
+(47, 'Abigail', NULL, 'abigailmapula465@gmail.com', 'O722430141', 6969, 6969, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Currently in Limpopo, can only view in Jan'),
+(48, 'Semoky Alton', 'Sekharume', 'semoky@gmail.com', 'O718429841', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(49, 'Esther Fulufhelani', 'Ramaite', 'estherramaite@gmail.com', 'O786908264', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Accommodation too expensive'),
+(50, 'Hope', 'Bosch', 'losangelbosch10@gmail.com', 'O618450776', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(51, 'Thato', 'Sekharume', 'sekharumedieketseng34@gmail.com', 'O79 578 7787', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(52, 'Lungile', 'Zulu', 'zuluomphile17@gmail.com', '0677023819', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(53, 'Bahle', 'Madikane', '2201966@students.wits.ac.za', '078 825 2100', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(54, 'Mpilonhle', 'Shelembe', NULL, 'O740507570', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(55, 'McKay', 'Zoey', 'Salomelo21lamola@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(56, 'Nthateng', 'Lenkoane', NULL, 'O789899703', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(57, 'Basetsana', 'Muki', 'Mukibasetsana3@gmail.com', 'O635837144', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(58, 'Amanda', 'Habasisa', 'habasisa503@gmail.com', 'O787866078', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Sent a SMS'),
+(59, 'Maseroka Rocky', 'Chuene', 'Marinkierocky14@gmail.com', 'O790363068', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(60, 'Xolelwa Slindile', 'Buthelezi', 'xolelwaslindile093@gmail.com', 'O673518734', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'email sent out 23.11.2021'),
+(61, 'Nondumiso', 'Mnguni', 'nokubonganmnguni@gmail.com', '0732810268', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Supposedly moving in on the 06/11/21'),
+(62, 'Doris', 'Hlangwane', 'leahdulce7@gmail.com', 'O722704959', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Sent a whatsapp'),
+(63, 'Esihle', 'Madikane', 'emadikane23@gmail.com', 'O719090294', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(64, 'Sonto', 'Mbongww', 'sontombongwa0012@gmail.com', 'O669113852', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(65, 'Zuziwe Mboza', NULL, 'zuziwemboza@gmail.com', 'O610209347', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(66, 'Cocco', 'Pingwani', 'coccoingwani@gmail.com', 'O842921840', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'No answer sent whatsapp'),
+(67, 'Asandamawelase', 'Mazibuko', 'asandasasa80@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'sent email out 23.11.2021'),
+(68, 'Andiswa', 'Zungu', 'chiyndiswa@gmail.com', 'O712171040', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(69, 'Buhle', NULL, 'nobantuntshiliza@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'sent email out 23.11.2021'),
+(70, 'Tshepang Faith', 'Malapela', 'minahlepota53@gmail.com', 'O663597079', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'can not come to view, requested pictures instead, Please let me know if this was done?'),
+(71, 'Thandolwethu', 'Bhonda', '2398594@students.com', 'O814403979', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(72, 'Khonjuangenhlahla', 'Ndabandaba', '1437277@students.wits.ac.za', 'O739976753', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'She will set up an appointment to view.. Will follow up'),
+(73, 'Kagiso', 'Mashishi', 'kagisomashishi47@gmail.com', 'O799931907', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'it\'s a GUY'),
+(74, 'Mokete', 'Mangweta', 'theodeciamangweta@gmail.com', 'O814396132', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Still busy with her exams , will make a booking to view after she finish wrote her exams'),
+(75, 'Mbali', 'Khumalo', 'mbalikhumalo049@gmail.com', 'O789995106', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(76, 'Lindile', NULL, 'lepaga1999@gmail.com', 'O673764665', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'send sms'),
+(77, 'Nthabiseng', NULL, 'ranyanejessica6@gmail.com', 'O723247925', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Phone is off , left a sms'),
+(78, 'Miranda', 'Nxele', 'nxelemiranda@gmail.com', 'O737812044', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(79, 'Mpho shylok', 'Mogudi', 'Shylokmpho@gmail.com', 'O673048651', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'sent sms , awaiting response via Whatsapp'),
+(80, 'Lindiwe', 'Magdu', '218062979@student.uj.ac.za', 'O678148334', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(81, 'Lineo Vitaling', 'Lekhotse', '221035888@student.uj.ac.za', 'O710305409', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'VIEWED'),
+(82, 'Gilda khuthadzo', 'Nemadzadza', 'gildakhuthadzo@gmail.com', 'O632897881', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Emailed , for her phone was off to confirm on tomorrow'),
+(83, 'Asia Kgahliso', 'Tshetshengwa', 'asiakgahliso@gmail.com', 'O76 519 6898', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(84, 'Getrude', 'Siema', 'getrudesiema13@gmail.com', 'O715495081', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Cannot view for in different Province, will access website for lease .'),
+(85, 'Liyema', NULL, 'ntselelidz@gmail.com', 'O734732860', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(86, 'Sange', 'Mhluzi', 'sangemhluzi2002@gmail.com', 'O664614165', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Will make make a booking to view , wits student'),
+(87, 'Idah', 'Sepeng', 'idahsepeng81@gmail.com', 'O810996638/O630618203', 6969, 6969, NULL, NULL, NULL, 'South West College', 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Requested a quote, Quote sent'),
+(88, 'Kuhle  Sibahle', 'Dlamini', 'kuhlesibahle89@gmail.com', 'O637626230', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'WAITING ON RESPONSE, phone is off 23.11.2021'),
+(89, 'Keamogetse', 'Selabe', 'keamogetsemocuusi@gmail.com', 'O768750651', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(90, 'Shamira', 'Mudenda', '2279182@students.wits.ac.za', 'O834410495', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(91, 'Rambau', 'Mashudu', 'mashuduprudence@gmail.com', 'O828149314', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(92, 'Thamsanq', 'Sereo', NULL, 'O723862145', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'Impala Platinum', NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(93, 'Tendai', 'Mabuda', 'tendaimabunda09@gmail.com', 'O796822689', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(94, 'Serati', 'Sebuka', 'seratiloves2@gmail.com', 'O636509749', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'KSB SA', NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(95, 'Tauheeda', 'Jhatam', 'tjhatam27@gmail.com', 'O670807326', 6969, 6969, NULL, NULL, NULL, NULL, 'Self Funded', 'Self Funded', NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(96, 'Anathi', 'Manxiwa', 'anniemanxiwa061@gmail.com', 'O621539321', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(97, 'Loveness Nohle', 'Gumede', 'gumedeloveness1@gmail.com', 'O652196606', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(98, 'Khanyo', 'Ndlwana', 'khanyomuthuza@gmail.com', 'O787243702', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(99, 'Request', 'Shivambu', 'shivamburequest2gmail.com', 'O766122428', 6969, 6969, NULL, NULL, NULL, NULL, 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, '2022 Return Student'),
+(100, 'khensane Martha', 'Ringane', 'vidyanorings@gmail.com', 'O656392477', 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, 'Phone on voicemail'),
+(101, 'Ayanda', 'Ndlovu', 'yandyndlovuo00@gmail.com', 'O641542876', 6969, 6969, NULL, NULL, NULL, 'UJ', 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Walk in - Viewed and saw show room, premises and  issued lease agreement'),
+(102, 'Siphokazi', 'Mtintsilana', 'siphokazi0351@gmail.com', 'O826552573', 6969, 6969, NULL, NULL, NULL, 'UJ', 'Sponsored', 'NSFAS', NULL, NULL, NULL, NULL, NULL, 'Walk in - Viewed and saw show room, premises and  issued lease agreement'),
+(103, 'Dimakatso', 'Kgwedi', 'cassandradimakatso3@gmail.com', NULL, 6969, 6969, NULL, NULL, NULL, NULL, 'Private', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -387,6 +331,12 @@ ALTER TABLE `invoice`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `quotations`
+--
+ALTER TABLE `quotations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -396,7 +346,8 @@ ALTER TABLE `rooms`
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -415,6 +366,12 @@ ALTER TABLE `invoice`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `quotations`
+--
+ALTER TABLE `quotations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -424,7 +381,7 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
