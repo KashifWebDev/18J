@@ -99,10 +99,10 @@ require 'parts/head.php';
                                                 <td><?php echo $row["id"]; ?></td>
                                                 <td><?php echo $row["name"].' '.$row["surename"]; ?></td>
                                                 <td><?php echo $roomNum; ?></td>
-                                                <td><?php echo $row["bedID"]; ?></td>
+                                                <td><?php echo $row["bedID"]==6969 ? null : $row["bedID"]; ?></td>
                                                 <td><?php echo $row["uniName"]; ?></td>
                                                 <td>
-                                                    <?php if(!isset($row["roomID"])){ ?>
+                                                    <?php if($row["roomID"]==6969){ ?>
                                                         <button class="btn btn-secondary" data-toggle="modal" data-target="#AssignRoomModal_<?php echo $rand; ?>">
                                                             Reserve Room
                                                         </button>

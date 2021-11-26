@@ -151,17 +151,42 @@
                     <i class="fas fa-fw fa-at"></i>
                     <span>Interested Students</span>
                 </a>
-                <a class="collapse-item" href="admin_enter_payment.php">
+                <a class="collapse-item" href="admin_email_reserved.php">
                     <i class="fas fa-fw fa-at"></i>
                     <span>Reserved Students</span>
                 </a>
-                <a class="collapse-item" href="admin_all_invoices.php">
+                <a class="collapse-item" href="admin_email_booked.php">
                     <i class="fas fa-fw fa-at"></i>
                     <span>Booked Students</span>
                 </a>
             </div>
         </div>
     </li>
+
+
+    <!-- Reports -->
+    <hr class="sidebar-divider">
+    <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapse8" aria-expanded="true"
+           aria-controls="collapse4">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Reports</span>
+        </a>
+        <div id="collapse8" class="collapse" aria-labelledby="heading4"
+             data-parent="#accordionSidebar">
+            <div class="bg-gradient-light py-2 collapse-inner rounded">
+                <a class="collapse-item" href="admin_reports_paid.php">
+                    <i class="fas fa-fw fa-address-book"></i>
+                    <span>Paid Report</span>
+                </a>
+                <a class="collapse-item" href="admin_reports_unpaid.php">
+                    <i class="fas fa-fw fa-address-book"></i>
+                    <span>Unpaid Report</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
 
 
     <!-- Divider -->

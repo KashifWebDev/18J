@@ -67,6 +67,7 @@ require 'parts/head.php';
                                             $roomID = $row["id"];
                                             $s1 = "SELECT * FROM students WHERE roomID=$roomID";
                                             $r1 = mysqli_query($con, $s1);
+                                            $studentName="";
                                             if(mysqli_num_rows($r1)){
                                                 $ro1 = mysqli_fetch_array($r1);
                                                 $studentName = $ro1["name"];
