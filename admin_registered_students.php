@@ -3,12 +3,26 @@ require 'parts/app.php';
 
 if(isset($_POST["set_lease"])){
     $startMonth = $_POST["startMonth"]."-01";
-//    print_r($_POST); exit(); die();
+    $endMonth = $_POST["endMonth"]."-01";
+    $userID = $_POST["userID"];
 
     require_once "parts/db.php";
-    $s = "UPDATE students SET start_mnth='$startMonth' WHERE id=1";
+    $s = "UPDATE students SET start_mnth='$startMonth', end_mnth='$endMonth' WHERE id=$userID";
     if(mysqli_query($con, $s)){
         js_alert("Lease updated");
+        js_redirect("admin_registered_students.php");
+    }
+}
+
+if(isset($_POST["payables"])){
+    $registration = isset($_POST["registration"]) ? 1 : 0;
+    $rental = isset($_POST["rental"]) ? 1 : 0;
+    $userID = $_POST["userID"];
+
+    require_once "parts/db.php";
+    $s = "UPDATE students SET registrationCharges=$registration, depositCharges=$rental WHERE id=$userID";
+    if(mysqli_query($con, $s)){
+        js_alert("Charges updated");
         js_redirect("admin_registered_students.php");
     }
 }
@@ -125,18 +139,20 @@ require 'parts/head.php';
                                                         </div>
                                                         <div class="modal-body">
                                                             <form action="admin_registered_students.php" method="post">
+                                                                <input type="hidden" value="<?php echo $row["id"]; ?>" name="userID">
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">Start Month</label>
                                                                     <input type="month" class="form-control" name="startMonth">
                                                                 </div>
+                                                                <div class="form-group">
                                                                     <label for="exampleInputEmail1">End Month</label>
-                                                                    <input type="month" class="form-control">
+                                                                    <input type="month" class="form-control" name="endMonth">
                                                                 </div>
                                                                 <div class="d-flex justify-content-around my-3">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                     <button type="submit" class="btn btn-primary" name="set_lease">Save changes</button>
                                                                 </div>
-                                                            </form
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -146,17 +162,33 @@ require 'parts/head.php';
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Extra Payable</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            ...
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                            <form action="admin_registered_students.php" method="post">
+                                                                <input type="hidden" value="<?php echo $row["id"]; ?>" name="userID">
+                                                                <div class="row">
+                                                                    <div class="col-md-12 mt-3">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="checkbox" name="registration" id="a_<?php echo $rand; ?>" value="1" <?php echo $row["registrationCharges"]==1 ? "checked": ""; ?>>
+                                                                            <label class="form-check-label" for="a_<?php echo $rand; ?>">Registration Charges</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12 mt-3">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <input class="form-check-input" type="checkbox" name="rental" id="b_<?php echo $rand; ?>" value="1" <?php echo $row["depositCharges"]==1 ? "checked": ""; ?>>
+                                                                            <label class="form-check-label" for="b_<?php echo $rand; ?>">Rental Charges</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-content-around my-3">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary" name="payables">Save changes</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>

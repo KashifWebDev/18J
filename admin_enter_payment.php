@@ -91,13 +91,13 @@ require 'parts/head.php';
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="pwd">Start Date</label>
-                                                    <input id="first" type="date" name="startDate" class="form-control" onchange="roomTypeFunc()" required>
+                                                    <input id="first" type="month" name="startDate" class="form-control" onchange="roomTypeFunc()" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="pwd">End Date</label>
-                                                    <input id="second" type="date" name="endDate" class="form-control" onchange="roomTypeFunc()" required>
+                                                    <input id="second" type="month" name="endDate" class="form-control" onchange="roomTypeFunc()" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -111,6 +111,10 @@ require 'parts/head.php';
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio2" onclick="roomTypeFunc()" value="Double Room">
                                                     <label class="form-check-label" for="inlineRadio2">Double Room</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio3" onclick="roomTypeFunc()" value="Triple Room">
+                                                    <label class="form-check-label" for="inlineRadio3">Triple Room</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -141,8 +145,8 @@ require 'parts/head.php';
                         require 'parts/db.php';
                         $paymentDate = $_POST["paymentDate"];
                         $userID = $_POST["userID"];
-                        $startDate = $_POST["startDate"];
-                        $endDate = $_POST["endDate"];
+                        $startDate = $_POST["startDate"].'-01';
+                        $endDate = $_POST["endDate"].'-01';
                         $roomType = $_POST["roomType"];
                         $totalAmountToPay = $_POST["totalAmountToPay"];
                         $roomType = $_POST["roomType"];
@@ -165,7 +169,22 @@ require 'parts/head.php';
 
                         if(mysqli_query($con, $sql)){
                             $last_id = mysqli_insert_id($con);
-//                            echo "DONE ID: ".$last_id;
+
+                            $s = "SELECT * FROM students WHERE id=$userID";
+                            $r = mysqli_query($con, $s);
+                            $row = mysqli_fetch_array($r);
+                            $roomID = $row["roomID"];
+                            $bed = $row["bedID"];
+
+                            $new_bedCol = "";
+                            if($bed ==1 ) $new_bedCol = "bed1";
+                            if($bed ==2 ) $new_bedCol = "bed2";
+                            if($bed ==3 ) $new_bedCol = "bed3";
+                            if($bed ==4 ) $new_bedCol = "bed4";
+
+                            $s = "UPDATE rooms SET $new_bedCol = 1 WHERE id=$roomID";
+                            mysqli_query($con, $s);
+
                             js_redirect("admin_enter_payment.php?success=1&last_id=$last_id");
                         }else{
                             echo mysqli_error($con); exit(); die();
@@ -245,19 +264,27 @@ require 'parts/head.php';
 
 
     <script>
-        // $(function(){
-        //
-        //     $('#roomTypeSelection').click(function() {
-        //     });
-        // });
+
+        const monthsBtwnDates = (startDate, endDate) => {
+            console.log(startDate);
+            console.log(endDate);
+            startDate = new Date(startDate);
+            endDate = new Date(endDate);
+            var output = Math.max((endDate.getFullYear() - startDate.getFullYear()) * 12 + endDate.getMonth() - startDate.getMonth(), 0);
+            // console.log("In FUnct: "+output);
+            output +=1;
+            return output;
+        };
 
         function roomTypeFunc() {
             var roomType = $("input[type='radio'].roomTypeSelection:checked").val();
-            var days =   Math.floor((Date.parse(second.value) - Date.parse(first.value)) / 86400000);
             var amount = 0;
-            if(roomType==="Single Room") amount = 200;
-            if(roomType==="Double Room") amount = 149.3333333333;
-            var totalBill = parseInt(amount*days);
+            var months = monthsBtwnDates(first.value+"-01",second.value+"-01");
+            console.log("Mnths: "+months);
+            if(roomType==="Single Room") amount = 6000;
+            if(roomType==="Double Room") amount = 4480;
+            if(roomType==="Triple Room") amount = 4000;
+            var totalBill = parseInt(amount*months);
             console.log(totalBill);
             $("#charges").text(totalBill);
 

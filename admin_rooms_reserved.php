@@ -65,6 +65,16 @@ require 'parts/head.php';
                                     $res = mysqli_query($con, $sql);
                                     if(mysqli_num_rows($res)){
                                         while($row = mysqli_fetch_array($res)){
+                                            $rand = rand();
+
+                                            $roomID = $row["id"];
+                                            $s1 = "SELECT * FROM students WHERE roomID=$roomID";
+                                            $r1 = mysqli_query($con, $s1);
+                                            $studentName = "";
+                                            if(mysqli_num_rows($r1)){
+                                                $ro1 = mysqli_fetch_array($r1);
+                                                $studentName = $ro1["name"];
+                                            }
                                             ?>
                                             <tr>
                                                 <td><?php echo $row["id"]; ?></td>
@@ -74,7 +84,8 @@ require 'parts/head.php';
                                                 <td><?php echo $row["keyNumber"]; ?></td>
                                                 <td>
                                                     <?php if($row["bed1"]==69 && $row["beds"]){ ?>
-                                                        <span class="bg-secondary text-white px-2 py-1" style="border-radius: 10px;">Reserved</span>
+                                                        <span  data-toggle="tooltip_booked<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                                               class="bg-secondary text-white px-2 py-1" style="border-radius: 10px;">Reserved</span>
                                                     <?php }else{ ?>
                                                         <span class="text-center">--</span>
                                                     <?php } ?>
@@ -101,6 +112,12 @@ require 'parts/head.php';
                                                     <?php } ?>
                                                 </td>
                                             </tr>
+                                            <script>
+                                                $(document).ready(function(){
+                                                    $('[data-toggle="tooltip<?php echo $rand; ?>"]').tooltip();
+                                                    $('[data-toggle="tooltip_booked<?php echo $rand; ?>"]').tooltip();
+                                                });
+                                            </script>
                                     <?php
                                         }
                                     }

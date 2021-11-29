@@ -71,6 +71,7 @@ require 'parts/head.php';
                                             $roomID = $row["id"];
                                             $s1 = "SELECT * FROM students WHERE roomID=$roomID";
                                             $r1 = mysqli_query($con, $s1);
+                                            $studentName = "";
                                             if(mysqli_num_rows($r1)){
                                                 $ro1 = mysqli_fetch_array($r1);
                                                 $studentName = $ro1["name"];
@@ -104,7 +105,7 @@ require 'parts/head.php';
                                                     <?php }elseif($row["bed2"]==0 && $row["beds"]>=1){ ?>
                                                         <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Available</span>
                                                     <?php }elseif($row["bed2"]==69 && $row["beds"]>=1){ ?>
-                                                        <span data-toggle="tooltip<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
+                                          sssssssssssssssssssssssssssssssssssssss              <span data-toggle="tooltip<?php echo $rand; ?>" title="<?php echo $studentName; ?>"
                                                               class="bg-secondary text-white px-2 py-1" style="border-radius: 10px;">
                                                             Reserved
                                                         </span>

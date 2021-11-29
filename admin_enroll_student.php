@@ -66,39 +66,39 @@ require 'parts/head.php';
                                             <label for="pwd">Mobile Number:</label>
                                             <input type="text" name="mob" class="form-control" required>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleFormControlSelect1" class="mr-3">Select Room</label>
-                                            <select class="songs form-select w-100" name="roomID">
-                                                <?php
-                                                $s = "SELECT * FROM rooms WHERE bed1=0 OR bed2=0 OR bed3=0 OR bed4=0";
-                                                $qry = mysqli_query($con, $s);
-                                                while($row = mysqli_fetch_array($qry)){
-                                                    ?>
-                                                    <option value="<?php echo $row["id"]; ?>">Floor: <?php echo $row["floor"]; ?> | Room#: <?php echo $row["room"]; ?> </option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleFormControlSelect1" class="mr-3">Select Bed</label>
-                                            <div class="form-check form-check-inline" id="registration_check">
-                                                <input class="form-check-input" type="radio" id="bed1" value="1" name="bed">
-                                                <label class="form-check-label" for="bed1">Bed 1</label>
-                                            </div>
-                                            <div class="form-check form-check-inline" id="registration_check">
-                                                <input class="form-check-input" type="radio" id="bed2" value="2" name="bed">
-                                                <label class="form-check-label" for="bed2">Bed 2</label>
-                                            </div>
-                                            <div class="form-check form-check-inline" id="registration_check">
-                                                <input class="form-check-input" type="radio" id="bed3" value="3" name="bed">
-                                                <label class="form-check-label" for="bed3">Bed 3</label>
-                                            </div>
-                                            <div class="form-check form-check-inline" id="registration_check">
-                                                <input class="form-check-input" type="radio" id="bed4" value="4" name="bed">
-                                                <label class="form-check-label" for="bed4">Bed 4</label>
-                                            </div>
-                                        </div>
+<!--                                        <div class="form-group">-->
+<!--                                            <label for="exampleFormControlSelect1" class="mr-3">Select Room</label>-->
+<!--                                            <select class="songs form-select w-100" name="roomID">-->
+<!--                                                --><?php
+//                                                $s = "SELECT * FROM rooms WHERE bed1=0 OR bed2=0 OR bed3=0 OR bed4=0";
+//                                                $qry = mysqli_query($con, $s);
+//                                                while($row = mysqli_fetch_array($qry)){
+//                                                    ?>
+<!--                                                    <option value="--><?php //echo $row["id"]; ?><!--">Floor: --><?php //echo $row["floor"]; ?><!-- | Room#: --><?php //echo $row["room"]; ?><!-- </option>-->
+<!--                                                    --><?php
+//                                                }
+//                                                ?>
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label for="exampleFormControlSelect1" class="mr-3">Select Bed</label>-->
+<!--                                            <div class="form-check form-check-inline" id="registration_check">-->
+<!--                                                <input class="form-check-input" type="radio" id="bed1" value="1" name="bed">-->
+<!--                                                <label class="form-check-label" for="bed1">Bed 1</label>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-check form-check-inline" id="registration_check">-->
+<!--                                                <input class="form-check-input" type="radio" id="bed2" value="2" name="bed">-->
+<!--                                                <label class="form-check-label" for="bed2">Bed 2</label>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-check form-check-inline" id="registration_check">-->
+<!--                                                <input class="form-check-input" type="radio" id="bed3" value="3" name="bed">-->
+<!--                                                <label class="form-check-label" for="bed3">Bed 3</label>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-check form-check-inline" id="registration_check">-->
+<!--                                                <input class="form-check-input" type="radio" id="bed4" value="4" name="bed">-->
+<!--                                                <label class="form-check-label" for="bed4">Bed 4</label>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Link to lease agreement</span>
@@ -112,12 +112,12 @@ require 'parts/head.php';
                                             <label for="email">ID Number</label>
                                             <input type="text" name="idNumber" class="form-control" required>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="email">University Name</label>
                                             <input type="text" class="form-control" name="uniName" required>
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="email">University Registration Number</label>
                                             <input type="text" class="form-control" name="uniRegistrationNum" required>
@@ -166,8 +166,8 @@ require 'parts/head.php';
                         $surname = $_POST["surname"];
                         $email = $_POST["email"];
                         $mob = $_POST["mob"];
-                        $roomID = $_POST["roomID"];
-                        $bed = $_POST["bed"];
+//                        $roomID = $_POST["roomID"];
+//                        $bed = $_POST["bed"];
                         $idNumber = $_POST["idNumber"];
                         $uniName = $_POST["uniName"];
                         $uniRegistrationNum = $_POST["uniRegistrationNum"];
@@ -176,6 +176,7 @@ require 'parts/head.php';
                         $address = $_POST["address"];
                         $contact1 = $_POST["contact1"];
                         $contact2 = $_POST["contact2"];
+                        $pic = "";
 
 
                         if (!empty($_FILES["image"]["name"])) {
@@ -201,17 +202,10 @@ require 'parts/head.php';
                             }
                         }
                         $pic = strtolower($pic);
-                        $sql = "INSERT INTO students (name, surename, email, mobile, roomID, bedID, IDnum,
+                        $sql = "INSERT INTO students (name, surename, email, mobile, IDnum,
                                       linkToLease, uniName, UniRegNum, privateSponsored, sponsorName, address, guardian1, guardian2) VALUES 
-                                ('$name', '$surname', '$email', '$mob', $roomID, $bed, '$idNumber', '$pic', '$uniName',
+                                ('$name', '$surname', '$email', '$mob', '$idNumber', '$pic', '$uniName',
                                  '$uniRegistrationNum', '$privateSponsored', '$sponsorName', '$address', '$contact1', '$contact2')";
-
-                        $bedCol = "";
-                        if($bed ==1 ) $bedCol = "bed1";
-                        if($bed ==2 ) $bedCol = "bed2";
-                        if($bed ==3 ) $bedCol = "bed3";
-                        if($bed ==4 ) $bedCol = "bed4";
-                        phpRunSingleQuery("UPDATE rooms SET $bedCol=1 WHERE id=$roomID");
 
 
                         if(phpRunSingleQuery($sql)){
@@ -230,7 +224,7 @@ require 'parts/head.php';
             <?php require 'parts/footer.php'; ?>
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Content Wrapper -->+
 
     </div>
     <!-- End of Page Wrapper -->
