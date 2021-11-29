@@ -158,7 +158,7 @@ require 'parts/head.php';
                         $sql = "INSERT INTO invoice (userID, paymentDate, startDate, endDate, roomType, totalAmount, totalDays, date_time)
                                 VALUES ($userID, '$paymentDate', '$startDate', '$endDate', '$roomType', '$totalAmountToPay', '$days', '$timestamp')";
 
-                        echo $sql; exit(); die();
+//                        echo $sql; exit(); die();
 
                         if(mysqli_query($con, $sql)){
                             $last_id = mysqli_insert_id($con);
@@ -284,7 +284,7 @@ require 'parts/head.php';
 
             document.getElementById("totalAmountToPay").value = totalBill;
             document.getElementById("roomType").value = roomType;
-            document.getElementById("days").value = days;
+            document.getElementById("days").value = months;
         }
 
     </script>

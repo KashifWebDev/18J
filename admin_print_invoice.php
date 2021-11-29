@@ -75,7 +75,7 @@
                                 <td class="w-50"><?php echo $row["endDate"]; ?></td>
                             </tr>
                             <tr class="w-100">
-                                <td class="w-50">Period (Days)</td>
+                                <td class="w-50">Period (Months)</td>
                                 <td class="w-50"><?php echo $row["totalDays"]; ?></td>
                             </tr>
                             <tr class="w-100">
