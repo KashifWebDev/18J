@@ -152,13 +152,6 @@ require 'parts/head.php';
                         $roomType = $_POST["roomType"];
                         $days = $_POST["days"];
 
-                        $s="SELECT * FROM invoice WHERE student_name='$name'";
-                        $s1 = mysqli_query($con, $s);
-                        if(mysqli_num_rows($s1)){
-                            $row = mysqli_fetch_array($s1);
-                            $email = $row["email"];
-                        }
-
                         date_default_timezone_set('Africa/Johannesburg');
                         $timestamp =  date('Y-m-d H:i:s', time());
 
@@ -183,6 +176,7 @@ require 'parts/head.php';
                             if($bed ==4 ) $new_bedCol = "bed4";
 
                             $s = "UPDATE rooms SET $new_bedCol = 1 WHERE id=$roomID";
+//                            echo $s; exit(); die();
                             mysqli_query($con, $s);
 
                             js_redirect("admin_enter_payment.php?success=1&last_id=$last_id");
