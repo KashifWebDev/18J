@@ -146,6 +146,7 @@ require 'parts/head.php';
                                         <th>Mobile</th>
                                         <th>ID#</th>
                                         <th>University</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -156,6 +157,7 @@ require 'parts/head.php';
                                         <th>Mobile</th>
                                         <th>ID#</th>
                                         <th>University</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                     </tfoot>
@@ -164,15 +166,34 @@ require 'parts/head.php';
                                     if(mysqli_num_rows($res)){
                                         while($row = mysqli_fetch_array($res)){
                                             $rand = rand();
+
+                                            $sent = false;
+                                            $uid = $row["id"];
+                                            $s = "SELECT * FROM quotations WHERE userID=$uid";
+//                                            echo $s;
+                                            $r = mysqli_query($con, $s);
+                                            if(mysqli_num_rows($r)){
+                                                $ro = mysqli_fetch_array($r);
+                                                $sent = true;
+                                            }
                                             ?>
                                             <tr>
-                                                <td><?php echo $row["id"]; ?></td>
+                                                <td><?php echo $uid; ?></td>
                                                 <td><?php echo $row["name"].' '.$row["surename"]; ?></td>
                                                 <td><?php echo $row["mobile"]; ?></td>
                                                 <td><?php echo $row["IDnum"]; ?></td>
                                                 <td><?php echo $row["uniName"]; ?></td>
-                                                <td><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#quote_<?php echo $rand; ?>">
-                                                        Quotation</button>
+                                                <td>
+                                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#quote_<?php echo $rand; ?>">
+                                                        Quotation
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <?php if($sent){ ?>
+                                                    <a href="getQuotation.php?id=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
+                                                        <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Sent</span>
+                                                    </a>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                             <!-- Modal for quotation -->
