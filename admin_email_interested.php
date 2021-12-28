@@ -276,7 +276,7 @@ require 'parts/head.php';
                                                         Quotation
                                                     </button>
                                                     <?php if($sent){ ?>
-                                                        <a href="#getQuotation.php?id=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
+                                                        <a target="_blank" href="getQuotation.php?id=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
                                                             <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Sent</span>
                                                         </a>
                                                     <?php } ?>
