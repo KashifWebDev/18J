@@ -33,7 +33,86 @@ if(isset($_GET["email"])){
     }
     js_redirect("admin_email_interested.php?success=1");
 }
+if(isset($_GET["IntroEmailAll"])){
+    $subject = "18 Jorissen Accommodation";
+    $txt = "You have arrived! Don’t look any further for student accommodation! <br>
+Welcome to 18 Jorissen Street Student Residence – your home away from home in Braamfontein! <br>
+Save time and money as our campus is a 2-minute walk from the University of Witwatersrand and located on Jorissen Street and opposite the famous Wits Senate House.<br>
+We provide an ideal choice for female only students who want to enjoy student life to the fullest but prefer not to be part of a traditional residence structure. <br>
+Our sunny and spacious accommodation has been hosting students since 2016 and is proudly accredited as a Wits Private Housing Provider as well as Nsfas approved. <br>
+There is single or double fully furnished luxurious rooms which provide quality hotel branded, Sealy mattresses for extra support and comfort with modern blinds for extra privacy. <br>
+We cater for the fashion-conscious student who needs that extra cupboard space to pack and hang their clothes. <br>
+A laundry is available with washing and drying machines as well as the option to hand wash with open washing lines for drying. There is 2 free washing loads per month.<br>
+A quiet library with uncapped Wi-Fi encourages students to have a dedicated space to study, complete assignments and prepare for exams.<br>
+We boast a huge open courtyard for students to relax and get fresh air, keep active and stay in shape.<br>
+Communal kitchens are spaced throughout the residence where everyone is welcome to share their daily experiences, support one another, relax and have fun. Bathrooms and kitchens are always spotlessly clean. We have an open courtyard with a garden where you can relax.<br>
+Students can explore shopping malls, local markets and enjoy the nightlife all within 1km radius and still have the peace of mind living in a secure 24/7 fingerprint-access residence.<br>
+Let us make your new home away from home a memorable experience.<br><br>
+<a href=https://www.18jorissen.co.za/contact-us/'>Click here to send a request for a quotation.</a></b><br><br>
+            ";
+    $txt .= "Kind Regards,<br>";
+    $txt .= "18 Jorissen Street Admin Team";
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion();
 
+    while($row = mysqli_fetch_array($res)){
+        $to = $row["email"];
+        mail($to,$subject,$txt,$headers);
+    }
+    js_redirect("admin_email_interested.php?introduction_sent=1");
+}
+if(isset($_POST["view_quote"])){
+    $uid = $_POST["uid"];
+    $roomType = $_POST["roomType"];
+    $start = $_POST["start"].'-01';
+    $end = $_POST["end"].'-01';
+    $registration = isset($_POST["registration"]) ? 1 : 0;
+    $deposit = isset($_POST["deposit"]) ? 1 : 0;
+
+
+    js_redirect("viewQuotation.php?uid=$uid&roomType=$roomType&start=$start&end=$end&registration=$registration&deposit=$deposit");
+}
+if(isset($_GET["intro_email"])){
+    $uid = $_GET["intro_email"];
+
+
+    date_default_timezone_set('Africa/Johannesburg');
+    $timestamp = date('Y-m-d H:i:s', time());
+
+
+    $body = "";
+    $body .= "
+You have arrived! Don’t look any further for student accommodation! <br>
+Welcome to 18 Jorissen Street Student Residence – your home away from home in Braamfontein! <br>
+Save time and money as our campus is a 2-minute walk from the University of Witwatersrand and located on Jorissen Street and opposite the famous Wits Senate House.<br>
+We provide an ideal choice for female only students who want to enjoy student life to the fullest but prefer not to be part of a traditional residence structure. <br>
+Our sunny and spacious accommodation has been hosting students since 2016 and is proudly accredited as a Wits Private Housing Provider as well as Nsfas approved. <br>
+There is single or double fully furnished luxurious rooms which provide quality hotel branded, Sealy mattresses for extra support and comfort with modern blinds for extra privacy. <br>
+We cater for the fashion-conscious student who needs that extra cupboard space to pack and hang their clothes. <br>
+A laundry is available with washing and drying machines as well as the option to hand wash with open washing lines for drying. There is 2 free washing loads per month.<br>
+A quiet library with uncapped Wi-Fi encourages students to have a dedicated space to study, complete assignments and prepare for exams.<br>
+We boast a huge open courtyard for students to relax and get fresh air, keep active and stay in shape.<br>
+Communal kitchens are spaced throughout the residence where everyone is welcome to share their daily experiences, support one another, relax and have fun. Bathrooms and kitchens are always spotlessly clean. We have an open courtyard with a garden where you can relax.<br>
+Students can explore shopping malls, local markets and enjoy the nightlife all within 1km radius and still have the peace of mind living in a secure 24/7 fingerprint-access residence.<br>
+Let us make your new home away from home a memorable experience.<br><br>
+<a href=https://www.18jorissen.co.za/contact-us/'>Click here to send a request for a quotation.</a></b><br><br>
+            ";
+
+    $body .= "Kind Regards,<br>";
+    $body .= "18 Jorissen Street Admin Team";
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion();
+
+    $sql = "SELECT * FROM students WHERE id=$uid";
+    $sql1 = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($sql1);
+
+    mail($row["email"],"Don’t look any further for student accommodation!",$body,$headers);
+
+    js_redirect("admin_email_interested.php?introduction_sent=1");
+}
 if(isset($_POST["save_quote"])){
     $uid = $_POST["uid"];
     $roomType = $_POST["roomType"];
@@ -48,7 +127,6 @@ if(isset($_POST["save_quote"])){
 
     $s = "INSERT INTO quotations (userID, start_date, end_date, registration, deposit, roomType, date_time) VALUES
         ($uid, '$start', '$end', $registration, $deposit, '$roomType', '$timestamp')";
-    echo $s;
     $qry = mysqli_query($con, $s);
     if(!$qry){
         echo mysqli_error($con); exit(); die();
@@ -119,6 +197,15 @@ require 'parts/head.php';
                         </div>
                         <?php
                     }
+                    if(isset($_GET["introduction_sent"]) && $_GET["introduction_sent"]){
+                        ?>
+                        <div class="card mb-4 py-3 border-left-success">
+                            <div class="card-body text-success">
+                                <strong>Success! </strong> Introduction Email was sent to the interested students!
+                            </div>
+                        </div>
+                        <?php
+                    }
                     if(isset($_GET["quotation"]) && $_GET["quotation"]){
                         ?>
                         <div class="card mb-4 py-3 border-left-success">
@@ -132,6 +219,7 @@ require 'parts/head.php';
 
                     <!-- Page Heading -->
                     <a href="admin_email_interested.php?email=1" class="btn btn-primary ml-4 mb-2">Email to all</a>
+                    <a href="admin_email_interested.php?email=1" class="btn btn-primary ml-4 mb-2">Introduction Email to all</a>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Interested Students</h6>
@@ -187,13 +275,16 @@ require 'parts/head.php';
                                                     <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#quote_<?php echo $rand; ?>">
                                                         Quotation
                                                     </button>
+                                                    <?php if($sent){ ?>
+                                                        <a href="#getQuotation.php?id=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
+                                                            <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Sent</span>
+                                                        </a>
+                                                    <?php } ?>
                                                 </td>
                                                 <td>
-                                                    <?php if($sent){ ?>
-                                                    <a href="#getQuotation.php?id=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
-                                                        <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Sent</span>
+                                                    <a class="btn btn-info" href="admin_email_interested.php?intro_email=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
+                                                        Introduction email
                                                     </a>
-                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                             <!-- Modal for quotation -->
@@ -241,6 +332,7 @@ require 'parts/head.php';
                                                                 </div>
                                                                 <div class="d-flex justify-content-around mt-4 mb-2">
                                                                     <button type="submit" class="btn btn-primary" name="save_quote">Send</button>
+                                                                    <button type="submit" class="btn btn-success" name="view_quote">View</button>
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </form>
