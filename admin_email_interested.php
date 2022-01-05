@@ -163,6 +163,48 @@ if(isset($_POST["save_quote"])){
 
     js_redirect("admin_email_interested.php?quotation=1");
 }
+if(isset($_GET["la_mail"])){
+    $uid = $_GET["la_mail"];
+
+    $body = "";
+    $body .= "<a href='https://www.18jorissen.co.za/18J/files/LeaseAgreement.pdf'>Click here</a> to get the LEASE AGREEMENT<br>
+            ";
+
+    $body .= "Kind Regards,<br>";
+    $body .= "18 Jorissen Street Admin Team";
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion();
+
+    $sql = "SELECT * FROM students WHERE id=$uid";
+    $sql1 = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($sql1);
+
+    mail($row["email"],"Lease Agreement for 18 Jorissen Street Student Residence",$body,$headers);
+
+    js_redirect("admin_email_interested.php?quotation=1");
+}
+if(isset($_GET["rp_mail"])){
+    $uid = $_GET["rp_mail"];
+
+    $body = "";
+    $body .= "<a href='https://www.18jorissen.co.za/18J/files/Registration_process.docx'>Click here</a> to get the Registration process<br>
+            ";
+
+    $body .= "Kind Regards,<br>";
+    $body .= "18 Jorissen Street Admin Team";
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion();
+
+    $sql = "SELECT * FROM students WHERE id=$uid";
+    $sql1 = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($sql1);
+
+    mail($row["email"],"Lease Agreement for 18 Jorissen Street Student Residence",$body,$headers);
+
+    js_redirect("admin_email_interested.php?quotation=1");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -284,6 +326,12 @@ require 'parts/head.php';
                                                 <td>
                                                     <a class="btn btn-info" href="admin_email_interested.php?intro_email=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
                                                         Introduction email
+                                                    </a>
+                                                    <a class="btn btn-primary" href="admin_email_interested.php?la_mail=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
+                                                        Lease Agr
+                                                    </a>
+                                                    <a class="btn btn-secondary" href="admin_email_interested.php?rp_mail=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
+                                                        Reg Process
                                                     </a>
                                                 </td>
                                             </tr>
