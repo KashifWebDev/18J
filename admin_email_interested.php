@@ -5,7 +5,7 @@ $res = mysqli_query($con, $sql);
 if(isset($_GET["email"])){
     $subject = "18 Jorissen Accommodation";
     $txt = "Dear Student<br>
-            Welcome to 18 Jorissen Street Student Residence – your home away from home in Braamfontein! You have arrived! Don’t look any further for student accommodation!<br><br>
+            Welcome to 18 Jorissen Street Student Residence your home away from home in Braamfontein! You have arrived! Do nott look any further for student accommodation!<br><br>
             
             •	We are a 2-minute walk from the University of Witwatersrand<br>
             •	Opposite the famous Wits Senate House.<br>
@@ -35,8 +35,10 @@ if(isset($_GET["email"])){
 }
 if(isset($_GET["IntroEmailAll"])){
     $subject = "18 Jorissen Accommodation";
-    $txt = "You have arrived! Don’t look any further for student accommodation! <br>
-Welcome to 18 Jorissen Street Student Residence – your home away from home in Braamfontein! <br>
+
+    $txt = "Dear student,<br>";
+    $txt = "You have arrived! Do not look any further for student accommodation! <br>
+Welcome to 18 Jorissen Street Student Residence your home away from home in Braamfontein! <br>
 Save time and money as our campus is a 2-minute walk from the University of Witwatersrand and located on Jorissen Street and opposite the famous Wits Senate House.<br>
 We provide an ideal choice for female only students who want to enjoy student life to the fullest but prefer not to be part of a traditional residence structure. <br>
 Our sunny and spacious accommodation has been hosting students since 2016 and is proudly accredited as a Wits Private Housing Provider as well as Nsfas approved. <br>
@@ -76,15 +78,20 @@ if(isset($_POST["view_quote"])){
 if(isset($_GET["intro_email"])){
     $uid = $_GET["intro_email"];
 
+    $sql = "SELECT * FROM students WHERE id=$uid";
+    $sql1 = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($sql1);
+    $stdntName = $row["name"];
 
     date_default_timezone_set('Africa/Johannesburg');
     $timestamp = date('Y-m-d H:i:s', time());
 
 
-    $body = "";
+
+    $body = "Dear $stdntName,<br>";
     $body .= "
-You have arrived! Don’t look any further for student accommodation! <br>
-Welcome to 18 Jorissen Street Student Residence – your home away from home in Braamfontein! <br>
+You have arrived! Do not look any further for student accommodation! <br>
+Welcome to 18 Jorissen Street Student Residence your home away from home in Braamfontein! <br>
 Save time and money as our campus is a 2-minute walk from the University of Witwatersrand and located on Jorissen Street and opposite the famous Wits Senate House.<br>
 We provide an ideal choice for female only students who want to enjoy student life to the fullest but prefer not to be part of a traditional residence structure. <br>
 Our sunny and spacious accommodation has been hosting students since 2016 and is proudly accredited as a Wits Private Housing Provider as well as Nsfas approved. <br>
@@ -96,7 +103,6 @@ We boast a huge open courtyard for students to relax and get fresh air, keep act
 Communal kitchens are spaced throughout the residence where everyone is welcome to share their daily experiences, support one another, relax and have fun. Bathrooms and kitchens are always spotlessly clean. We have an open courtyard with a garden where you can relax.<br>
 Students can explore shopping malls, local markets and enjoy the nightlife all within 1km radius and still have the peace of mind living in a secure 24/7 fingerprint-access residence.<br>
 Let us make your new home away from home a memorable experience.<br><br>
-<a href=https://www.18jorissen.co.za/contact-us/'>Click here to send a request for a quotation.</a></b><br><br>
             ";
 
     $body .= "Kind Regards,<br>";
@@ -122,6 +128,11 @@ if(isset($_POST["save_quote"])){
     $deposit = isset($_POST["deposit"]) ? 1 : 0;
 
 
+    $sql = "SELECT * FROM students WHERE id=$uid";
+    $sql1 = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($sql1);
+    $stdntName = $row["name"];
+
     date_default_timezone_set('Africa/Johannesburg');
     $timestamp = date('Y-m-d H:i:s', time());
 
@@ -132,9 +143,9 @@ if(isset($_POST["save_quote"])){
         echo mysqli_error($con); exit(); die();
     }
     $last_id = mysqli_insert_id($con);
-    $body = "";
-    $body .= "You have arrived! Don’t look any further for student accommodation! <br>
-            Welcome to 18 Jorissen Street Student Residence – your home away from home in Braamfontein! <br>
+    $body = "Dear $stdntName,<br>";
+    $body .= "You have arrived! Do not look any further for student accommodation! <br>
+            Welcome to 18 Jorissen Street Student Residence your home away from home in Braamfontein! <br>
             Save time and money as our campus is a 2-minute walk from the University of Witwatersrand and located on Jorissen Street and opposite the famous Wits Senate House.<br>
             We provide an ideal choice for female only students who want to enjoy student life to the fullest but prefer not to be part of a traditional residence structure. <br>
             Our sunny and spacious accommodation has been hosting students since 2016 and is proudly accredited as a Wits Private Housing Provider as well as Nsfas approved. <br>
@@ -166,12 +177,6 @@ if(isset($_POST["save_quote"])){
 if(isset($_GET["la_mail"])){
     $uid = $_GET["la_mail"];
 
-    $body = "";
-    $body .= "<a href='https://www.18jorissen.co.za/18J/files/LeaseAgreement.pdf'>Click here</a> to get the LEASE AGREEMENT<br>
-            ";
-
-    $body .= "Kind Regards,<br>";
-    $body .= "18 Jorissen Street Admin Team";
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
@@ -179,6 +184,12 @@ if(isset($_GET["la_mail"])){
     $sql = "SELECT * FROM students WHERE id=$uid";
     $sql1 = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($sql1);
+    $stdntName = $row["name"];
+
+    $body = "Dear $stdntName,<br>";
+    $body .= "Please <a href='https://www.18jorissen.co.za/18J/files/LeaseAgreement.pdf'>Click here</a> to get the LEASE AGREEMENT<br>";
+    $body .= "Kind Regards,<br>";
+    $body .= "18 Jorissen Street Admin Team";
 
     mail($row["email"],"Lease Agreement for 18 Jorissen Street Student Residence",$body,$headers);
 
@@ -187,19 +198,19 @@ if(isset($_GET["la_mail"])){
 if(isset($_GET["rp_mail"])){
     $uid = $_GET["rp_mail"];
 
-    $body = "";
-    $body .= "<a href='https://www.18jorissen.co.za/18J/files/Registration_process.docx'>Click here</a> to get the Registration process<br>
-            ";
 
+    $sql = "SELECT * FROM students WHERE id=$uid";
+    $sql1 = mysqli_query($con, $sql);
+    $row = mysqli_fetch_array($sql1);
+    $stdntName = $row["name"];
+
+    $body = "Dear $stdntName,<br>";
+    $body .= "Please <a href='https://www.18jorissen.co.za/18J/files/Registration_process.docx'>Click here</a> to get the Registration process<br>";
     $body .= "Kind Regards,<br>";
     $body .= "18 Jorissen Street Admin Team";
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
-
-    $sql = "SELECT * FROM students WHERE id=$uid";
-    $sql1 = mysqli_query($con, $sql);
-    $row = mysqli_fetch_array($sql1);
 
     mail($row["email"],"Lease Agreement for 18 Jorissen Street Student Residence",$body,$headers);
 
@@ -306,6 +317,9 @@ require 'parts/head.php';
                                                 $ro = mysqli_fetch_array($r);
                                                 $sent = true;
                                             }
+                                            $s = "SELECT * FROM students WHERE id=$uid";
+                                            $r = mysqli_query($con, $s);
+                                            $stdnRow = mysqli_fetch_array($r);
                                             ?>
                                             <tr>
                                                 <td><?php echo $uid; ?></td>
@@ -317,21 +331,29 @@ require 'parts/head.php';
                                                     <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#quote_<?php echo $rand; ?>">
                                                         Quotation
                                                     </button>
-                                                    <?php if($sent){ ?>
-                                                        <a target="_blank" href="getQuotation.php?id=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
-                                                            <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">Sent</span>
+                                                    <?php
+                                                    $sss = "SELECT * FROM quotations WHERE userID=$uid";
+                                                    $sres = mysqli_query($con, $sss);
+                                                    if(mysqli_num_rows($sres)){
+                                                        while($roo = mysqli_fetch_array($sres)){
+                                                        ?>
+                                                        <a class="mr-1" target="_blank" href="getQuotation.php?id=<?php echo $roo["id"]; ?>" style="text-decoration: none;">
+                                                            <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">
+                                                                <i class="fas fa-file-invoice"></i>
+                                                            </span>
                                                         </a>
-                                                    <?php } ?>
+                                                    <?php }
+                                                    } ?>
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-info" href="admin_email_interested.php?intro_email=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
-                                                        Introduction email
+                                                        Introduction email<?php if($stdnRow["intro_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
                                                     </a>
                                                     <a class="btn btn-primary" href="admin_email_interested.php?la_mail=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
-                                                        Lease Agr
+                                                        Lease Agr<?php if($stdnRow["la_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
                                                     </a>
                                                     <a class="btn btn-secondary" href="admin_email_interested.php?rp_mail=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
-                                                        Reg Process
+                                                        Reg Process<?php if($stdnRow["rp_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
                                                     </a>
                                                 </td>
                                             </tr>
