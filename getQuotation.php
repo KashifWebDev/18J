@@ -27,7 +27,7 @@ if($row["roomType"]=="Triple") $charges = 4000;
 if($row["registration"]) $RegCharges = 500;
 if($row["deposit"]) $DepositCharges = 2000;
 
-$s = "SELECT * FROM students WHERE id = $id";
+$s = "SELECT * FROM students WHERE id = $uid";
 $qry = mysqli_query($con, $s);
 $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
 ?>
