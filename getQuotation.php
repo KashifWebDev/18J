@@ -71,12 +71,27 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
             color: #e9ebf2;
             padding-left: 10px;
         }
+        .name_heading{
+            font-size: 20px;
+            background-color: #374f8b;
+            width: 349px;
+            color: #e9ebf2;
+            padding-left: 9px;
+        }
+        .name_value{
+            color: black;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
 <div class="container-fluid">
     <img src="img/quot/1.png" alt="" id="quotationPic1">
     <p><?php echo $row["id"]; ?></p>
+    <div style="margin-bottom: 10px;">
+        <h1 class="name_heading">Name</h1>
+        <span class="name_value"><?php echo $student["name"].' '.$student["surename"]; ?></span>
+    </div>
     <img src="img/quot/2.png" alt="" id="quotationPic2">
     <p><?php echo date("d M, Y - H:i:s", strtotime($row["date_time"])); ?></p>
     <img src="img/quot/3.png" alt="" id="quotationPic3">
