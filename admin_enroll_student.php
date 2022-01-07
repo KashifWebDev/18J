@@ -52,7 +52,7 @@ require 'parts/head.php';
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="email">Name</label>
-                                            <input type="text" name="name" class="form-control"  id="email" required>
+                                            <input type="text" name="name" class="form-control"  id="email" >
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Surname:</label>
@@ -60,11 +60,11 @@ require 'parts/head.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Email Address:</label>
-                                            <input type="email" name="email" class="form-control" id="pwd" required>
+                                            <input type="email" name="email" class="form-control" id="pwd" >
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Mobile Number:</label>
-                                            <input type="text" name="mob" class="form-control" required>
+                                            <input type="text" name="mob" class="form-control" >
                                         </div>
 <!--                                        <div class="form-group">-->
 <!--                                            <label for="exampleFormControlSelect1" class="mr-3">Select Room</label>-->
@@ -110,21 +110,21 @@ require 'parts/head.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="email">ID Number</label>
-                                            <input type="text" name="idNumber" class="form-control" required>
+                                            <input type="text" name="idNumber" class="form-control" >
                                         </div>
                                         <div class="form-group">
                                             <label for="email">University Name</label>
-                                            <input type="text" class="form-control" name="uniName" required>
+                                            <input type="text" class="form-control" name="uniName" >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="email">University Registration Number</label>
-                                            <input type="text" class="form-control" name="uniRegistrationNum" required>
+                                            <input type="text" class="form-control" name="uniRegistrationNum" >
                                         </div>
                                         <div class="form-group mt-2">
                                             <label for="sel1">Private/Sponsored:</label>
-                                            <select class="form-control" name="privateSponsored" required>
+                                            <select class="form-control" name="privateSponsored" >
                                                 <option value="">-- SELECT --</option>
                                                 <option value="Private">Private</option>
                                                 <option value="Sponsored">Sponsored</option>
@@ -136,7 +136,7 @@ require 'parts/head.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Home Address:</label>
-                                            <input type="text" name="address" class="form-control" required>
+                                            <input type="text" name="address" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Guardian Emergency contact#1:</label>
