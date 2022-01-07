@@ -50,7 +50,6 @@ We boast a huge open courtyard for students to relax and get fresh air, keep act
 Communal kitchens are spaced throughout the residence where everyone is welcome to share their daily experiences, support one another, relax and have fun. Bathrooms and kitchens are always spotlessly clean. We have an open courtyard with a garden where you can relax.<br>
 Students can explore shopping malls, local markets and enjoy the nightlife all within 1km radius and still have the peace of mind living in a secure 24/7 fingerprint-access residence.<br>
 Let us make your new home away from home a memorable experience.<br><br>
-<a href=https://www.18jorissen.co.za/contact-us/'>Click here to send a request for a quotation.</a></b><br><br>
             ";
     $txt .= "Kind Regards,<br>";
     $txt .= "18 Jorissen Street Admin Team";
@@ -117,6 +116,9 @@ Let us make your new home away from home a memorable experience.<br><br>
 
     mail($row["email"],"Don’t look any further for student accommodation!",$body,$headers);
 
+
+    $sql = "UPDATE students SET intro_email=1 WHERE id=$uid";
+    mysqli_query($con, $sql);
     js_redirect("admin_email_interested.php?introduction_sent=1");
 }
 if(isset($_POST["save_quote"])){
@@ -157,7 +159,6 @@ if(isset($_POST["save_quote"])){
             Communal kitchens are spaced throughout the residence where everyone is welcome to share their daily experiences, support one another, relax and have fun. Bathrooms and kitchens are always spotlessly clean.<br>
             Students can explore shopping malls, local markets and enjoy the nightlife all within 1km radius and still have the peace of mind living in a secure 24/7 fingerprint-access residence.<br>
             Let us make your new home away from home a memorable experience.<br>
-            <b><a href='https://www.18jorissen.co.za/app/getQuotation.php?id=$last_id'>Click here to find your quotation.</a></b><br><br>
             ";
 
     $body .= "Kind Regards,<br>";
@@ -193,6 +194,8 @@ if(isset($_GET["la_mail"])){
 
     mail($row["email"],"Lease Agreement for 18 Jorissen Street Student Residence",$body,$headers);
 
+    $sql = "UPDATE students SET la_email=1 WHERE id=$uid";
+    mysqli_query($con, $sql);
     js_redirect("admin_email_interested.php?quotation=1");
 }
 if(isset($_GET["rp_mail"])){
@@ -214,6 +217,8 @@ if(isset($_GET["rp_mail"])){
 
     mail($row["email"],"Lease Agreement for 18 Jorissen Street Student Residence",$body,$headers);
 
+    $sql = "UPDATE students SET rp_email=1 WHERE id=$uid";
+    mysqli_query($con, $sql);
     js_redirect("admin_email_interested.php?quotation=1");
 }
 ?>
