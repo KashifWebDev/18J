@@ -120,6 +120,9 @@ require 'parts/head.php';
                                                             <a class="btn btn-primary" data-toggle="modal" data-target="#lease_<?php echo $rand; ?>">
                                                                 <span class="text">Lease Time</span>
                                                             </a>
+                                                            <a class="btn btn-success" href="admin_edit_student.php?id=<?php echo $row["id"]; ?>">
+                                                                <span class="text">Edit</span>
+                                                            </a>
                                                             <a class="btn btn-info" data-toggle="modal" data-target="#registrationCharges_<?php echo $rand; ?>">
                                                                 <span class="text">Registration Charges</span>
                                                             </a>

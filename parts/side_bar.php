@@ -95,10 +95,6 @@
                     <i class="fas fa-fw fa-plus"></i>
                     <span>Enroll a student</span>
                 </a>
-                <a class="collapse-item" href="../admin_edit_student.php">
-                    <i class="fas fa-fw fa-plus"></i>
-                    <span>Edit student</span>
-                </a>
                 <a class="collapse-item" href="admin_registered_students.php">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Registered student</span>
