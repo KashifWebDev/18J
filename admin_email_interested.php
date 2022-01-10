@@ -92,7 +92,7 @@ if(isset($_GET["intro_email"])){
 
     $body = "Dear $stdntName,<br>";
     $body .= "
-            Please find the intro <a href='https://18jorissen.co.za/app/files/intro.pdf'>HERE</a>
+            Please find the intro <a href='https://18jorissen.co.za/app/files/intro.pdf'>HERE</a><br>
             <a href='https://www.18jorissen.co.za/app/enroll_student.php'>Get yourself Registered Now</a><br><br>
             ";
 
