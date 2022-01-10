@@ -83,7 +83,7 @@ if(isset($_GET["intro_email"])){
     $stdntName = $row["name"];
     $stdntemail = $row["email"];
 
-    print_r($row);exit();die();
+//    print_r($row);exit();die();
 
     date_default_timezone_set('Africa/Johannesburg');
     $timestamp = date('Y-m-d H:i:s', time());
