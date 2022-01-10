@@ -102,7 +102,7 @@ if(isset($_GET["intro_email"])){
     $sql = "SELECT * FROM students WHERE id=$uid";
     $sql1 = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($sql1);
-    echo $row["email"];exit();die();
+//    echo $row["email"];exit();die();
 
     mail($row["email"],"Don’t look any further for student accommodation!",$body,$headers);
 
