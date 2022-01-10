@@ -341,14 +341,14 @@ require 'parts/head.php';
                                                     } ?>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-info" href="admin_email_interested.php?intro_email=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
-                                                        Introduction email<?php if($stdnRow["intro_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
+                                                    <a class="btn btn-info" href="admin_email_interested.php?intro_email=<?php echo $row["id"]; ?>" style="text-decoration: none;">
+                                                        Introduction email<?php if($row["intro_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
                                                     </a>
-                                                    <a class="btn btn-primary" href="admin_email_interested.php?la_mail=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
-                                                        Lease Agr<?php if($stdnRow["la_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
+                                                    <a class="btn btn-primary" href="admin_email_interested.php?la_mail=<?php echo $row["id"]; ?>" style="text-decoration: none;">
+                                                        Lease Agr<?php if($row["la_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
                                                     </a>
-                                                    <a class="btn btn-secondary" href="admin_email_interested.php?rp_mail=<?php echo $ro["id"]; ?>" style="text-decoration: none;">
-                                                        Reg Process<?php if($stdnRow["rp_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
+                                                    <a class="btn btn-secondary" href="admin_email_interested.php?rp_mail=<?php echo $row["id"]; ?>" style="text-decoration: none;">
+                                                        Reg Process<?php if($row["rp_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
                                                     </a>
                                                 </td>
                                             </tr>
