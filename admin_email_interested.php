@@ -81,6 +81,9 @@ if(isset($_GET["intro_email"])){
     $sql1 = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($sql1);
     $stdntName = $row["name"];
+    $stdntemail = $row["email"];
+
+    print_r($row);exit();die();
 
     date_default_timezone_set('Africa/Johannesburg');
     $timestamp = date('Y-m-d H:i:s', time());
@@ -99,12 +102,8 @@ if(isset($_GET["intro_email"])){
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
-    $sql = "SELECT * FROM students WHERE id=$uid";
-    $sql1 = mysqli_query($con, $sql);
-    $row = mysqli_fetch_array($sql1);
-    echo $row["email"];exit();die();
 
-    mail($row["email"],"Don’t look any further for student accommodation!",$body,$headers);
+    mail($stdntemail,"Don’t look any further for student accommodation!",$body,$headers);
 
 
     $sql = "UPDATE students SET intro_email=1 WHERE id=$uid";
