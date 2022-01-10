@@ -135,8 +135,8 @@ if(isset($_POST["save_quote"])){
     }
     $last_id = mysqli_insert_id($con);
     $body = "Dear $stdntName,<br>";
-    $body .= "<b>You have arrived!Don’t look any further for Student Accommodation!</b><br><br>
-Welcome to 18 Jorissen Street Student Residence – your home away from home in
+    $body .= "<b>You have arrived!Do not look any further for Student Accommodation!</b><br><br>
+Welcome to 18 Jorissen Street Student Residence  your home away from home in
 Braamfontein!<br>
 Save me and money as our campus is a 2-minute walk from the University of
 Witwatersrand and located on Jorissen Street and opposite the famous Wits Senate
