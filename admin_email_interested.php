@@ -103,7 +103,7 @@ if(isset($_GET["intro_email"])){
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
 
-    mail($stdntemail,"Don’t look any further for student accommodation!",$body,$headers);
+    mail($stdntemail,"Do not look any further for student accommodation!",$body,$headers);
 
 
     $sql = "UPDATE students SET intro_email=1 WHERE id=$uid";
