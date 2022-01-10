@@ -135,19 +135,35 @@ if(isset($_POST["save_quote"])){
     }
     $last_id = mysqli_insert_id($con);
     $body = "Dear $stdntName,<br>";
-    $body .= "You have arrived! Do not look any further for student accommodation! <br>
-            Welcome to 18 Jorissen Street Student Residence your home away from home in Braamfontein! <br>
-            Save time and money as our campus is a 2-minute walk from the University of Witwatersrand and located on Jorissen Street and opposite the famous Wits Senate House.<br>
-            We provide an ideal choice for female only students who want to enjoy student life to the fullest but prefer not to be part of a traditional residence structure. <br>
-            Our sunny and spacious accommodation has been hosting students since 2016 and is proudly accredited as a Wits Private Housing Provider as well as Nsfas approved. <br>
-            There is single or double fully furnished luxurious rooms which provide quality hotel branded, Sealy mattresses for extra support and comfort with modern blinds for extra privacy. <br>
-            We cater for the fashion-conscious student who needs that extra cupboard space to pack and hang their clothes. <br>
-            A laundry is available with washing and drying machines as well as the option to hand wash with open washing lines for drying.<br>
-            A quiet library with uncapped Wi-Fi encourages students to have a dedicated space to study, complete assignments and prepare for exams.<br>
-            We boast a huge open courtyard for students to relax and get fresh air, keep active and stay in shape.<br>
-            Communal kitchens are spaced throughout the residence where everyone is welcome to share their daily experiences, support one another, relax and have fun. Bathrooms and kitchens are always spotlessly clean.<br>
-            Students can explore shopping malls, local markets and enjoy the nightlife all within 1km radius and still have the peace of mind living in a secure 24/7 fingerprint-access residence.<br>
-            Let us make your new home away from home a memorable experience.<br>
+    $body .= "<b>You have arrived!Don’t look any further for Student Accommodation!</b><br><br>
+Welcome to 18 Jorissen Street Student Residence – your home away from home in
+Braamfontein!<br>
+Save me and money as our campus is a 2-minute walk from the University of
+Witwatersrand and located on Jorissen Street and opposite the famous Wits Senate
+House.<br>
+We provide an ideal choice for female only students who want to enjoy their
+independent student life to the fullest but prefer not to be part of a tradional
+residence structure.<br>
+Our sunny and spacious accommodon has been hosng students since 2016 and is
+proudly accredited as a Wits Private Housing Provider as well as Nsfas approved.<br>
+There is single or double fully furnished luxurious rooms which provide quality hotel
+branded, Sealy maresses for extra support and comfort with modern blinds for extra
+privacy.<br>
+We cater for the fashion-conscious student who needs that extra cupboard space to
+pack and hang their clothes.<br>
+A laundry is available with washing and drying machines as well as the opon to hand
+wash with open washing lines for drying. There are 2 free washing loads per month.<br>
+A quiet library with uncapped Wi-Fi encourages students to have a dedicated space to
+study, complete assignments and prepare for exams.<br>
+We boast a huge open courtyard with a garden for students to relax and get fresh air,
+keep acve and stay in shape.<br>
+Communal kitchens are spaced throughout the residence where everyone is welcome
+to share their daily experiences, support one another, relax and have fun.<br>
+Bathrooms and kitchens are always spotlessly clean.<br>
+Students can explore shopping malls, local markets and enjoy the nightlife all within
+1km radius and stll have the peace of mind living in a secure 24/7 fingerprint-access
+residence. There is no curfew
+Let us make your new home away from home a memorable experience.<br>
             <b><a href='https://www.18jorissen.co.za/app/getQuotation.php?id=$last_id'>Click here to find your quotation.</a></b><br><br>
             ";
 
