@@ -194,7 +194,7 @@ if(isset($_GET["la_mail"])){
     $stdntName = $row["name"];
 
     $body = "Dear $stdntName,<br>";
-    $body .= "Please <a href='https://www.18jorissen.co.za/18J/files/LeaseAgreement.pdf'>Click here</a> to get the LEASE AGREEMENT<br>";
+    $body .= "Please <a href='https://www.18jorissen.co.za/app/files/LeaseAgreement.pdf'>Click here</a> to get the LEASE AGREEMENT<br>";
     $body .= "Kind Regards,<br>";
     $body .= "18 Jorissen Street Admin Team";
 
@@ -214,7 +214,7 @@ if(isset($_GET["rp_mail"])){
     $stdntName = $row["name"];
 
     $body = "Dear $stdntName,<br>";
-    $body .= "Please <a href='https://www.18jorissen.co.za/18J/files/Registration_process.docx'>Click here</a> to get the Registration process<br>";
+    $body .= "Please <a href='https://www.18jorissen.co.za/app/files/Registration_process.docx'>Click here</a> to get the Registration process<br>";
     $body .= "Kind Regards,<br>";
     $body .= "18 Jorissen Street Admin Team";
     $headers  = 'MIME-Version: 1.0' . "\r\n";
