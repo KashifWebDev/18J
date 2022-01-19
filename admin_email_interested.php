@@ -164,7 +164,9 @@ Students can explore shopping malls, local markets and enjoy the nightlife all w
 1km radius and stll have the peace of mind living in a secure 24/7 fingerprint-access
 residence. There is no curfew
 Let us make your new home away from home a memorable experience.<br>
-            <b><a href='https://www.18jorissen.co.za/app/getQuotation.php?id=$last_id'>Click here to find your quotation.</a></b><br><br>
+            <b><a href='https://www.18jorissen.co.za/app/getQuotation.php?id=$last_id'>Click here to find your quotation.</a></b><br>
+            <i><b>*Payments are to be made by the 1st of each month. Deposits are refundable at the end of the lease period.</b></i><br><br>
+            <br>
             ";
 
     $body .= "Kind Regards,<br>";
