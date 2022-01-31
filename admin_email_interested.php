@@ -127,13 +127,19 @@ if(isset($_POST["save_quote"])){
     date_default_timezone_set('Africa/Johannesburg');
     $timestamp = date('Y-m-d H:i:s', time());
 
-    $s = "INSERT INTO quotations (userID, start_date, end_date, registration, deposit, roomType, date_time) VALUES
-        ($uid, '$start', '$end', $registration, $deposit, '$roomType', '$timestamp')";
+
+    $PDFfilename = "PDF_".rand().".pdf";
+
+    $s = "INSERT INTO quotations (userID, start_date, end_date, registration, deposit, roomType, pdf, date_time) VALUES
+        ($uid, '$start', '$end', $registration, $deposit, '$roomType', '$PDFfilename', '$timestamp')";
     $qry = mysqli_query($con, $s);
     if(!$qry){
         echo mysqli_error($con); exit(); die();
     }
     $last_id = mysqli_insert_id($con);
+
+    require 'quoteGeneratePDF.php';
+
     $body = "Dear $stdntName,<br>";
     $body .= "<b>You have arrived!Do not look any further for Student Accommodation!</b><br><br>
 Welcome to 18 Jorissen Street Student Residence  your home away from home in
@@ -350,7 +356,7 @@ require 'parts/head.php';
                                                     if(mysqli_num_rows($sres)){
                                                         while($roo = mysqli_fetch_array($sres)){
                                                         ?>
-                                                        <a class="mr-1" target="_blank" href="getQuotation.php?id=<?php echo $roo["id"]; ?>" style="text-decoration: none;">
+                                                        <a class="mr-1" href="generatedPDFs/<?php echo $roo["pdf"]; ?>" style="text-decoration: none;">
                                                             <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">
                                                                 <i class="fas fa-file-invoice"></i>
                                                             </span>

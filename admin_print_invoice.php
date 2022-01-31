@@ -8,8 +8,14 @@
 
     $studentID = $row["userID"];
     $s = "SELECT * FROM students WHERE id=$studentID";
-    $s1 = mysqli_query($con, $s);
+    $s1 = $test =  mysqli_query($con, $s);
     $s2 = mysqli_fetch_array($s1);
+
+    $studentID = $row["userID"];
+    $s = "SELECT * FROM invoice WHERE userID=$studentID";
+    $s1  =  mysqli_query($con, $s);
+    $monthsPaid = mysqli_num_rows($s1);
+    $s3 = mysqli_fetch_array($s1);
 ?>
 <html>
     <head>
@@ -67,16 +73,20 @@
                                 <td class="w-50"><?php echo $s2["roomID"]; ?></td>
                             </tr>
                             <tr class="w-100">
-                                <td class="w-50">Start Date</td>
-                                <td class="w-50"><?php echo $row["startDate"]; ?></td>
+                                <td class="w-50">Months Paid</td>
+                                <td class="w-50">
+                                    <?php
+                                    $s = "SELECT * FROM invoice WHERE userID=$studentID";
+                                    $test =  mysqli_query($con, $s);
+                                    while($record = mysqli_fetch_assoc($test)){
+                                        echo date("F", strtotime($record["startDate"])).', ';
+                                    }
+                                    ?>
+                                </td>
                             </tr>
                             <tr class="w-100">
-                                <td class="w-50">End Date</td>
-                                <td class="w-50"><?php echo $row["endDate"]; ?></td>
-                            </tr>
-                            <tr class="w-100">
-                                <td class="w-50">Period (Months)</td>
-                                <td class="w-50"><?php echo $row["totalDays"]; ?></td>
+                                <td class="w-50">Total Months Paid</td>
+                                <td class="w-50"><?php echo $monthsPaid; ?></td>
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">Room Type</td>

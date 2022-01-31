@@ -90,14 +90,8 @@ require 'parts/head.php';
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="pwd">Start Date</label>
+                                                    <label for="pwd">Payment For Month</label>
                                                     <input id="first" type="month" name="startDate" class="form-control" onchange="roomTypeFunc()" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="pwd">End Date</label>
-                                                    <input id="second" type="month" name="endDate" class="form-control" onchange="roomTypeFunc()" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +140,7 @@ require 'parts/head.php';
                         $paymentDate = $_POST["paymentDate"];
                         $userID = $_POST["userID"];
                         $startDate = $_POST["startDate"].'-01';
-                        $endDate = $_POST["endDate"].'-01';
+//                        $endDate = $_POST["endDate"].'-01';
                         $roomType = $_POST["roomType"];
                         $totalAmountToPay = $_POST["totalAmountToPay"];
                         $roomType = $_POST["roomType"];
@@ -155,8 +149,8 @@ require 'parts/head.php';
                         date_default_timezone_set('Africa/Johannesburg');
                         $timestamp =  date('Y-m-d H:i:s', time());
 
-                        $sql = "INSERT INTO invoice (userID, paymentDate, startDate, endDate, roomType, totalAmount, totalDays, date_time)
-                                VALUES ($userID, '$paymentDate', '$startDate', '$endDate', '$roomType', '$totalAmountToPay', '$days', '$timestamp')";
+                        $sql = "INSERT INTO invoice (userID, paymentDate, startDate, roomType, totalAmount, totalDays, date_time)
+                                VALUES ($userID, '$paymentDate', '$startDate', '$roomType', '$totalAmountToPay', '$days', '$timestamp')";
 
 //                        echo $sql; exit(); die();
 
@@ -273,7 +267,8 @@ require 'parts/head.php';
         function roomTypeFunc() {
             var roomType = $("input[type='radio'].roomTypeSelection:checked").val();
             var amount = 0;
-            var months = monthsBtwnDates(first.value+"-01",second.value+"-01");
+            // var months = monthsBtwnDates(first.value+"-01",second.value+"-01");
+            var months = 1;
             console.log("Mnths: "+months);
             if(roomType==="Single Room") amount = 6000;
             if(roomType==="Double Room") amount = 4480;
