@@ -222,7 +222,7 @@ if(isset($_GET["rp_mail"])){
     $stdntName = $row["name"];
 
     $body = "Dear $stdntName,<br>";
-    $body .= "Please <a href='https://www.18jorissen.co.za/app/files/Registration_process.docx'>Click here</a> to get the Registration process<br>";
+    $body .= "Please <a href='https://www.18jorissen.co.za/app/files/Registration_process.docx'>Click here</a> to view the Registration process<br>";
     $body .= "Kind Regards,<br>";
     $body .= "18 Jorissen Street Admin Team";
     $headers  = 'MIME-Version: 1.0' . "\r\n";
