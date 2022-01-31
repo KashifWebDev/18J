@@ -117,7 +117,6 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
             <td class="roomTypes"><?php echo '1x '.$row["roomType"].' Room'; ?></td>
             <td>
             <?php
-            $perMonth = $charges/$diff;
             $start    = (new DateTime($row["start_date"]))->modify('first day of this month');
             $end      = (new DateTime($row["end_date"]))->modify('first day of next month');
             $interval = DateInterval::createFromDateString('1 month');
@@ -135,7 +134,7 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
             </td>
             <td>
             <?php
-            $perMonth = $charges/$diff;
+            $perMonth = intval($charges/$diff);
             foreach ($period as $dt) {
                 ?>
                 <p style="border-bottom: 1px solid black; margin: 0px;font-weight: normal">

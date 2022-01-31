@@ -4,6 +4,15 @@ if(isset($_GET["mail"])){
     $id = $_GET["id"];
     $invoice = $_GET["mail"];
 
+    $PDFfilename = "INVOICE_".rand().".pdf";
+
+    require 'invoiceGeneratePDF.php';
+
+    $s = "UPDATE invoice SET pdf='$PDFfilename' WHERE id=$invoice";
+    if(!mysqli_query($con, $s)){
+        echo mysqli_error($con);
+    }
+
     $appAddress = $GLOBALS["appAddress"];
     $path = "$appAddress/admin_print_invoice.php?id=$invoice";
 
@@ -82,7 +91,6 @@ require 'parts/head.php';
                                         <th>#</th>
                                         <th>Student</th>
                                         <th>Start Date</th>
-                                        <th>End Date</th>
                                         <th>Room Type</th>
                                         <th>No of Days</th>
                                         <th>Total Amount</th>
@@ -95,7 +103,6 @@ require 'parts/head.php';
                                         <th>#</th>
                                         <th>Student</th>
                                         <th>Start Date</th>
-                                        <th>End Date</th>
                                         <th>Room Type</th>
                                         <th>No of Days</th>
                                         <th>Total Amount</th>
@@ -118,7 +125,6 @@ require 'parts/head.php';
                                                 <td><?php echo $row["id"]; ?></td>
                                                 <td><?php echo $s2["name"].' '.$s2["surename"]; ?></td>
                                                 <td><?php echo $row["startDate"]; ?></td>
-                                                <td><?php echo $row["endDate"]; ?></td>
                                                 <td><?php echo $row["roomType"]; ?></td>
                                                 <td><?php echo $row["totalDays"]; ?></td>
                                                 <td><?php echo $row["totalAmount"]; ?></td>
