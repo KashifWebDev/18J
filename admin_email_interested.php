@@ -304,8 +304,7 @@ require 'parts/head.php';
                                         <th>Student ID</th>
                                         <th>Full Name</th>
                                         <th>Mobile</th>
-                                        <th>ID#</th>
-                                        <th>University</th>
+                                        <th>Email</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -315,8 +314,7 @@ require 'parts/head.php';
                                         <th>Student ID</th>
                                         <th>Full Name</th>
                                         <th>Mobile</th>
-                                        <th>ID#</th>
-                                        <th>University</th>
+                                        <th>Email</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
@@ -344,8 +342,7 @@ require 'parts/head.php';
                                                 <td><?php echo $uid; ?></td>
                                                 <td><?php echo $row["name"].' '.$row["surename"]; ?></td>
                                                 <td><?php echo $row["mobile"]; ?></td>
-                                                <td><?php echo $row["IDnum"]; ?></td>
-                                                <td><?php echo $row["uniName"]; ?></td>
+                                                <td><?php echo $row["email"]; ?></td>
                                                 <td>
                                                     <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#quote_<?php echo $rand; ?>">
                                                         Quotation

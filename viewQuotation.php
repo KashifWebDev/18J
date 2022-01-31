@@ -106,10 +106,42 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
             </tr>
         </th>
         <tbody>
+<!--        <tr>-->
+<!--            <td>1x --><?php //echo $_GET["roomType"]; ?><!-- Room</td>-->
+<!--            <td>--><?php //echo date("M Y", strtotime($_GET["start"])); ?><!-- - --><?php //echo date("M Y", strtotime($_GET["end"])); ?><!--</td>-->
+<!--            <td>R--><?php //echo $charges?><!-- x --><?php //echo $diff; ?><!--</td>-->
+<!--        </tr>-->
         <tr>
-            <td>1x <?php echo $_GET["roomType"]; ?> Room</td>
-            <td><?php echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); ?></td>
-            <td>R<?php echo $charges?> x <?php echo $diff; ?></td>
+            <td class="roomTypes"><?php echo '1x '.$_GET["roomType"].' Room'; ?></td>
+            <td>
+                <?php
+                $start    = (new DateTime($_GET["start"]))->modify('first day of this month');
+                $end      = (new DateTime($_GET["end"]))->modify('first day of next month');
+                $interval = DateInterval::createFromDateString('1 month');
+                $period   = new DatePeriod($start, $interval, $end);
+                $countMustOne = 1;
+                foreach ($period as $dt) {
+                    ?>
+                    <p style="border-bottom: 1px solid black; margin: 0px;">
+                        <span></span>
+                        <span style="font-weight: normal"><?php echo $dt->format("M, Y"); ?></span>
+                    </p>
+                    <?php
+                }
+                ?>
+            </td>
+            <td>
+                <?php
+                $perMonth = intval($charges/$diff);
+                foreach ($period as $dt) {
+                    ?>
+                    <p style="border-bottom: 1px solid black; margin: 0px;font-weight: normal">
+                        R<?php echo $perMonth; ?>
+                    </p>
+                    <?php
+                }
+                ?>
+            </td>
         </tr>
         <tr>
             <td><?php if($_GET["registration"]) echo "Registration"; ?></td>
@@ -134,6 +166,16 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
     </table>
     <img src="img/quot/4.png" alt="" id="quotationPic4">
 </div>
+
+<form action="admin_email_interested.php" method="post">
+    <input type="hidden" name="uid" value="<?php echo $student["id"]; ?>">
+    <input name="start" type="hidden" value="<?php echo $_GET["start"]; ?>">
+    <input name="end" type="hidden" value="<?php echo $_GET["end"]; ?>">
+    <input type="hidden" name="roomType" value="<?php echo $_GET["roomType"]; ?>">
+    <input type="hidden" name="registration" value="<?php echo $_GET["registration"]; ?>">
+    <input type="hidden" name="deposit" value="<?php echo $_GET["deposit"]; ?>">
+    <input type="submit" value="Send Quote" name="save_quote" class="btn btn-primary ml-2 mt-3 mb-4">
+</form>
 
 </body>
 </html>

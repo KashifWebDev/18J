@@ -183,6 +183,10 @@
                     <i class="fas fa-fw fa-address-book"></i>
                     <span>Unpaid Report</span>
                 </a>
+                <a class="collapse-item" href="admin_payement_statement.php">
+                    <i class="fas fa-fw fa-list"></i>
+                    <span>Payment Statement</span>
+                </a>
             </div>
         </div>
     </li>
