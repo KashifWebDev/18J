@@ -109,6 +109,11 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
     <h2 class="mainClr name_heading">Tenant Details:</h2>
     <table>
         <tr>
+            <td style="font-weight: bold; text-align: center">Services</td>
+            <td style="font-weight: bold; text-align: center">Date</td>
+            <td style="font-weight: bold; text-align: center">Amount</td>
+        </tr>
+        <tr>
             <td class="roomTypes"><?php echo '1x '.$row["roomType"].' Room'; ?></td>
             <td>
             <?php
@@ -122,7 +127,7 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
                 ?>
                 <p style="border-bottom: 1px solid black; margin: 0px;">
                     <span></span>
-                    <span style="font-weight: normal"><?php echo $dt->format("M, y"); ?></span>
+                    <span style="font-weight: normal"><?php echo $dt->format("M, Y"); ?></span>
                 </p>
             <?php
             }
