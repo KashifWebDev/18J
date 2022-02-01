@@ -92,7 +92,7 @@ $path = "./generatedPDFs/$PDFfilename";
 //echo is_dir("/public_html/app/generatedPDFs/"); exit(); die();
 
 //echo $pdf->Output($path, 'F');
-echo $pdf->Output($PDFfilename, 'F');
+echo $pdf->Output($PDFfilename, 'I');
 
 //$pdf->Output('example_006.pdf', 'I');
 
