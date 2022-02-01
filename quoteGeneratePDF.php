@@ -89,9 +89,11 @@ $path = "/public_html/app/generatedPDFs/".$PDFfilename;
 $path = "./generatedPDFs/$PDFfilename";
 //echo $path; exit(); die();
 
-echo is_dir("/public_html/app/generatedPDFs/"); exit(); die();
+//echo is_dir("/public_html/app/generatedPDFs/"); exit(); die();
 
-echo $pdf->Output($path, 'F');
+//echo $pdf->Output($path, 'F');
+echo $pdf->Output($PDFfilename, 'F');
+
 //$pdf->Output('example_006.pdf', 'I');
 
 //exit(); die();
