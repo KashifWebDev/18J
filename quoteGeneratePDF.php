@@ -82,7 +82,7 @@ $pdf->lastPage();
 $path = 'C:\xampp\htdocs\18J\generatedPDFs\\'.$PDFfilename;
 $path = 'https://18jorissen.co.za/app/generatedPDFs/'.$PDFfilename;
 $path = '/public_html/app/generatedPDFs/'.$PDFfilename;
-$path = $_SERVER['DOCUMENT_ROOT'].$PDFfilename;
+$path = __DIR__.$PDFfilename;
 //ob_clean();
 echo $pdf->Output($path, 'F');
 //$pdf->Output('example_006.pdf', 'I');
