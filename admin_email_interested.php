@@ -170,22 +170,45 @@ Students can explore shopping malls, local markets and enjoy the nightlife all w
 1km radius and stll have the peace of mind living in a secure 24/7 fingerprint-access
 residence. There is no curfew
 Let us make your new home away from home a memorable experience.<br>
-            <b><a href='https://www.18jorissen.co.za/app/getQuotation.php?id=$last_id'>Click here to find your quotation.</a></b><br>
+<b>Please find the attached quotation.</b><br>
             <i><b>*Payments are to be made by the 1st of each month. Deposits are refundable at the end of the lease period.</b></i><br><br>
             <br>
             ";
 
     $body .= "Kind Regards,<br>";
     $body .= "18 Jorissen Street Admin Team";
+
+
+    $boundary = md5("random"); // define boundary with a md5 hashed value
     $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= "From: info@18jorissen.co.za\r\n"; // Sender Email
+    $headers .= "Reply-To: info@18jorissen.co.za\r\n"; // Email address to reach back
+    $headers .= "Content-Type: multipart/mixed;"; // Defining Content-Type
+    $headers .= "boundary = $boundary\r\n"; //Defining the Boundary
     $headers .= 'X-Mailer: PHP/' . phpversion();
+
+    //plain text
+    $path = "generatedPDFs/".$PDFfilename;
+    $msg = "--$boundary\r\n";
+    $msg .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
+    $msg .= "Content-Transfer-Encoding: base64\r\n\r\n";
+    $msg .= chunk_split(base64_encode($body));
+    $msg .= "--$boundary\r\n";
+    $msg .="Content-Type: application/octet-stream; name=$path\r\n";
+    $msg .="Content-Disposition: attachment; filename=$path\r\n";
+    $msg .="Content-Transfer-Encoding: base64\r\n";
+    $msg .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
+    $handle = fopen($path, "r");
+    $content = fread($handle, filesize($path));
+    fclose($handle);
+    $encoded_content = chunk_split(base64_encode($content));
+    $msg .= $encoded_content;
 
     $sql = "SELECT * FROM students WHERE id=$uid";
     $sql1 = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($sql1);
 
-    mail($row["email"],"Quotation for 18 Jorissen Street Student Residence",$body,$headers);
+    mail($row["email"],"Quotation for 18 Jorissen Street Student Residence",$msg,$headers);
 
     js_redirect("admin_email_interested.php?quotation=1");
 }

@@ -80,6 +80,7 @@ $pdf->lastPage();
 //Close and output PDF document
 
 $path = 'C:\xampp\htdocs\18J\generatedPDFs\\'.$PDFfilename;
+$path = 'https://18jorissen.co.za/app/generatedPDFs/'.$PDFfilename;
 
 echo $pdf->Output($path, 'F');
 //$pdf->Output('example_006.pdf', 'I');
