@@ -87,8 +87,7 @@ $path = '/public_html/app/generatedPDFs/'.$PDFfilename;
 $path = realpath($_SERVER["DOCUMENT_ROOT"])."/".$PDFfilename;
 $path = "/public_html/app/generatedPDFs/".$PDFfilename;
 $path = "./generatedPDFs/$PDFfilename";
-echo $path; exit(); die();
-//ob_clean();
+//echo $path; exit(); die();
 echo $pdf->Output($path, 'F');
 //$pdf->Output('example_006.pdf', 'I');
 
