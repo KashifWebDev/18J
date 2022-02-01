@@ -34,7 +34,7 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 $pdf->setCreator(PDF_CREATOR);
 $pdf->setAuthor('18J');
 $pdf->setTitle('Quotation');
-$pdf->setSubject('TCPDF Tutorial');
+$pdf->setSubject('Quotatio');
 $pdf->setKeywords('TCPDF, PDF, example, test, guide');
 
 // remove default header/footer
@@ -86,8 +86,8 @@ $path = '/public_html/app/generatedPDFs/'.$PDFfilename;
 //echo realpath($_SERVER["DOCUMENT_ROOT"])."/".$PDFfilename; exit(); die();
 $path = realpath($_SERVER["DOCUMENT_ROOT"])."/".$PDFfilename;
 $path = "/public_html/app/generatedPDFs/".$PDFfilename;
-$path = "./generatedPDFs/$PDFfilename";
-//echo $path; exit(); die();
+$path = $_SERVER['DOCUMENT_ROOT']."/generatedPDFs/$PDFfilename";
+echo $path; exit(); die();
 
 //echo is_dir("/public_html/app/generatedPDFs/"); exit(); die();
 
