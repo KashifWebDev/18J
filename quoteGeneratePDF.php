@@ -67,7 +67,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 // add a page
 $pdf->AddPage();
 
-$html = file_get_contents('http://localhost:8080/18J/getQuoteHtml.php?id='.$last_id);
+$html = file_get_contents('https://18jorissen.co.za/app/getQuoteHtml.php?id='.$last_id);
 
 // output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');
