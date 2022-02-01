@@ -86,13 +86,12 @@ $path = '/public_html/app/generatedPDFs/'.$PDFfilename;
 //echo realpath($_SERVER["DOCUMENT_ROOT"])."/".$PDFfilename; exit(); die();
 $path = realpath($_SERVER["DOCUMENT_ROOT"])."/".$PDFfilename;
 $path = "/public_html/app/generatedPDFs/".$PDFfilename;
-$path = $_SERVER['DOCUMENT_ROOT']."/generatedPDFs/$PDFfilename";
-echo $path; exit(); die();
+$path = $_SERVER['DOCUMENT_ROOT']."generatedPDFs/$PDFfilename";
+//echo $path; exit(); die();
 
 //echo is_dir("/public_html/app/generatedPDFs/"); exit(); die();
 
-//echo $pdf->Output($path, 'F');
-echo $pdf->Output($PDFfilename, 'I');
+echo $pdf->Output($path, 'F');
 
 //$pdf->Output('example_006.pdf', 'I');
 
