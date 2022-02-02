@@ -134,11 +134,10 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
             </td>
             <td>
             <?php
-            $perMonth = intval($charges/$diff);
             foreach ($period as $dt) {
                 ?>
                 <p style="border-bottom: 1px solid black; margin: 0px;font-weight: normal">
-                    R<?php echo $perMonth; ?>
+                    R<?php echo $charges; ?>
                 </p>
             <?php
             }
