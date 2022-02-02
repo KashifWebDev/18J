@@ -190,7 +190,7 @@ Let us make your new home away from home a memorable experience.<br>
     //plain text
     $path = "generatedPDFs/".$PDFfilename;
     $msg = "--$boundary\r\n";
-    $msg .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
+    $msg .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
     $msg .= "Content-Transfer-Encoding: base64\r\n\r\n";
     $msg .= chunk_split(base64_encode($body));
     $msg .= "--$boundary\r\n";

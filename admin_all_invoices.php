@@ -48,7 +48,7 @@ if(isset($_GET["mail"])){
     //plain text
     $path = "generatedPDFs/".$PDFfilename;
     $msg = "--$boundary\r\n";
-    $msg .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
+    $msg .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
     $msg .= "Content-Transfer-Encoding: base64\r\n\r\n";
     $msg .= chunk_split(base64_encode($txt));
     $msg .= "--$boundary\r\n";
