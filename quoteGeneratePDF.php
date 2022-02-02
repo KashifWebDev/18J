@@ -79,27 +79,5 @@ $pdf->lastPage();
 
 //Close and output PDF documents
 
-$path = 'C:\xampp\htdocs\18J\generatedPDFs\\'.$PDFfilename;
-$path = 'https://18jorissen.co.za/app/generatedPDFs/'.$PDFfilename;
-$path = '/public_html/app/generatedPDFs/'.$PDFfilename;
-//echo realpath($_SERVER["DOCUMENT_ROOT"]); exit(); die();
-//echo realpath($_SERVER["DOCUMENT_ROOT"])."/".$PDFfilename; exit(); die();
-$path = realpath($_SERVER["DOCUMENT_ROOT"])."/".$PDFfilename;
-$path = "/public_html/app/generatedPDFs/".$PDFfilename;
-$path = $_SERVER['DOCUMENT_ROOT']."generatedPDFs/$PDFfilename";
-$path = "/public_html/app/generatedPDFs/$PDFfilename";
-//echo $path; exit(); die();
-
-//echo is_dir("/public_html/app/generatedPDFs/"); exit(); die();
-
-$path = $_SERVER['DOCUMENT_ROOT']."generatedPDFs/testtt.txt";
-$path = "/public_html/app/generatedPDFs/testtt.txt";
 $path = "/home/j18jocnn/public_html/app/generatedPDFs/$PDFfilename";
-//echo $path."<br>";
-//if(file_exists($path)){echo "exists";}else{echo "not exist";}; exit(); die();
-
 echo $pdf->Output($path, 'F');
-
-//$pdf->Output('example_006.pdf', 'I');
-
-//exit(); die();

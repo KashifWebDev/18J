@@ -68,7 +68,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 $pdf->AddPage();
 
 $html = file_get_contents('http://localhost:8080/18J/getInvoiceHtml.php?id=6');
-//$html = file_get_contents('http://localhost:8080/18J/getQuoteHtml.php?id='.$last_id);
+$html = file_get_contents('https://18jorissen.co.za/app/getInvoiceHtml.php?id='.$invoice);
 
 // output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');
@@ -80,6 +80,7 @@ $pdf->lastPage();
 
 //Close and output PDF document
 $path = 'C:\xampp\htdocs\18J\generatedPDFs\\'.$PDFfilename;
+$path = "/home/j18jocnn/public_html/app/generatedPDFs/$PDFfilename";
 
 echo $pdf->Output($path, 'F');
 //$pdf->Output('example_006.pdf', 'I');

@@ -6,12 +6,17 @@ if(isset($_GET["mail"])){
 
     $PDFfilename = "INVOICE_".rand().".pdf";
 
-    require 'invoiceGeneratePDF.php';
 
     $s = "UPDATE invoice SET pdf='$PDFfilename' WHERE id=$invoice";
     if(!mysqli_query($con, $s)){
         echo mysqli_error($con);
     }
+
+//    $s = "SELECT * FROM invoice SET pdf='$PDFfilename' WHERE id=$invoice";
+//    $res = mysqli_query($con, $s);
+
+    require 'invoiceGeneratePDF.php';
+
 
     $appAddress = $GLOBALS["appAddress"];
     $path = "$appAddress/admin_print_invoice.php?id=$invoice";
@@ -32,12 +37,33 @@ if(isset($_GET["mail"])){
     $txt .= "Kind Regards,<br>";
     $txt .= "18 Jorissen Admin Team";
 
+    $boundary = md5("random"); // define boundary with a md5 hashed value
     $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= "From: info@18jorissen.co.za\r\n"; // Sender Email
+    $headers .= "Reply-To: info@18jorissen.co.za\r\n"; // Email address to reach back
+    $headers .= "Content-Type: multipart/mixed;"; // Defining Content-Type
+    $headers .= "boundary = $boundary\r\n"; //Defining the Boundary
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
+    //plain text
+    $path = "generatedPDFs/".$PDFfilename;
+    $msg = "--$boundary\r\n";
+    $msg .= "Content-Type: text/plain; charset=ISO-8859-1\r\n";
+    $msg .= "Content-Transfer-Encoding: base64\r\n\r\n";
+    $msg .= chunk_split(base64_encode($txt));
+    $msg .= "--$boundary\r\n";
+    $msg .="Content-Type: application/octet-stream; name=$path\r\n";
+    $msg .="Content-Disposition: attachment; filename=$path\r\n";
+    $msg .="Content-Transfer-Encoding: base64\r\n";
+    $msg .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
+    $handle = fopen($path, "r");
+    $content = fread($handle, filesize($path));
+    fclose($handle);
+    $encoded_content = chunk_split(base64_encode($content));
+    $msg .= $encoded_content;
 
-    if(mail($to,$subject,$txt,$headers)){
+
+    if(mail($to,$subject,$msg,$headers)){
         js_redirect("admin_all_invoices.php?mailSent=1");
     }else{
         echo "============= MAIL WAS NOT SENT =============";
