@@ -30,7 +30,7 @@ if(isset($_GET["mail"])){
     $name = $row["name"];
 
     $txt = "Dear $name,<br>";
-    $txt .= "Please click on the following link to get your invoice.
+    $txt .= "Please find the attached Invoice, OR click on the following link to get your invoice.
       <br><br>";
     $txt .= "<br><a href='$path' style='text-decoration: none;background: #202a5b;color: white;padding: 5px 10px;border-radius: 10px;font-size: 20px;'>Get your Invoice</a><br><br><br>";
     $txt .= "Should you need any help or support, please do not hesitate to reach out.<br><br>";
