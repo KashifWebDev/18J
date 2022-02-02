@@ -77,7 +77,7 @@ $pdf->lastPage();
 
 // ---------------------------------------------------------
 
-//Close and output PDF document
+//Close and output PDF documents
 
 $path = 'C:\xampp\htdocs\18J\generatedPDFs\\'.$PDFfilename;
 $path = 'https://18jorissen.co.za/app/generatedPDFs/'.$PDFfilename;
