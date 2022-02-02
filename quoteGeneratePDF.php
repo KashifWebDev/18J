@@ -94,9 +94,9 @@ $path = "/public_html/app/generatedPDFs/$PDFfilename";
 
 $path = $_SERVER['DOCUMENT_ROOT']."generatedPDFs/testtt.txt";
 $path = "/public_html/app/generatedPDFs/testtt.txt";
-$path = "/home/j18jocnn/public_html/app/generatedPDFs/testtt.txt";
-echo $path."<br>";
-if(file_exists($path)){echo "exists";}else{echo "not exist";}; exit(); die();
+$path = "/home/j18jocnn/public_html/app/generatedPDFs/$PDFfilename";
+//echo $path."<br>";
+//if(file_exists($path)){echo "exists";}else{echo "not exist";}; exit(); die();
 
 echo $pdf->Output($path, 'F');
 
