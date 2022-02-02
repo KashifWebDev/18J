@@ -128,7 +128,7 @@ if(isset($_POST["save_quote"])){
     $timestamp = date('Y-m-d H:i:s', time());
 
 
-    $PDFfilename = "QUOTE_".rand().".pdf";
+    $PDFfilename = "QUOTE_$stdntName"."_".rand().".pdf";
 
     $s = "INSERT INTO quotations (userID, start_date, end_date, registration, deposit, roomType, pdf, date_time) VALUES
         ($uid, '$start', '$end', $registration, $deposit, '$roomType', '$PDFfilename', '$timestamp')";
