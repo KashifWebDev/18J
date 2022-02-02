@@ -1,6 +1,6 @@
 <?php
 require 'parts/app.php';
-$sql = "SELECT * FROM students WHERE bedID=6969 AND roomID=6969";
+$sql = "SELECT * FROM students WHERE bedID=6969 AND roomID=6969 and id=104";
 $res = mysqli_query($con, $sql);
 if(isset($_GET["email"])){
     $subject = "18 Jorissen Accommodation";
