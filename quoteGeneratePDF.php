@@ -93,6 +93,7 @@ $path = "/public_html/app/generatedPDFs/$PDFfilename";
 //echo is_dir("/public_html/app/generatedPDFs/"); exit(); die();
 
 $path = $_SERVER['DOCUMENT_ROOT']."generatedPDFs/testtt.txt";
+$path = "/public_html/app/generatedPDFs/testtt.txt";
 echo $path."<br>";
 if(file_exists($path)){echo "exists";}else{echo "not exist";}; exit(); die();
 
