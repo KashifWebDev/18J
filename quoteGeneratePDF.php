@@ -87,7 +87,7 @@ $path = '/public_html/app/generatedPDFs/'.$PDFfilename;
 $path = realpath($_SERVER["DOCUMENT_ROOT"])."/".$PDFfilename;
 $path = "/public_html/app/generatedPDFs/".$PDFfilename;
 $path = $_SERVER['DOCUMENT_ROOT']."generatedPDFs/$PDFfilename";
-echo dirname(__FILE__); exit(); die();
+//echo dirname(__FILE__); exit(); die();
 
 //echo is_dir("/public_html/app/generatedPDFs/"); exit(); die();
 
