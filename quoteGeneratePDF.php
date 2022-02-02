@@ -92,7 +92,7 @@ $path = "/public_html/app/generatedPDFs/$PDFfilename";
 
 //echo is_dir("/public_html/app/generatedPDFs/"); exit(); die();
 
-echo file_exists("/public_html/app/generatedPDFs/testtt.txt"); exit(); die();
+if(file_exists("/public_html/app/generatedPDFs/testtt.txt")){echo "exists";}else{echo "not exist";}; exit(); die();
 
 echo $pdf->Output($path, 'F');
 
