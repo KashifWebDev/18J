@@ -95,7 +95,7 @@ require 'parts/head.php';
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Select if paid:</label>
+                                                <p>Select if paid:</p>
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
                                                         <input type="checkbox" class="form-check-input" name="reg" value="reg">Registration
