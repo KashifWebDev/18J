@@ -47,12 +47,14 @@ require 'parts/head.php';
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Student Name</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Student Name</th>
                                         <th>Action</th>
                                     </tr>
@@ -65,7 +67,8 @@ require 'parts/head.php';
                                         while($row = mysqli_fetch_array($res)){
                                             ?>
                                             <tr>
-                                                <td><?php echo $row["name"]; ?></td>
+                                                <td><?php echo $row["id"]; ?></td>
+                                                <td><?php echo $row["name"].$row["surename"]; ?></td>
                                                 <td>
                                                     <a target="_blank" href="admin_print_statement.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">
                                                         <span class="text">Get Statement</span>
