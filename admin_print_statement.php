@@ -14,7 +14,7 @@
 ?>
 <html>
     <head>
-        <title>Invoice Details</title>
+        <title>User Statement</title>
         <link href="css/sb-admin-2.min.css?v=<?php echo rand(); ?>" rel="stylesheet">
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <style>
