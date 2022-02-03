@@ -98,12 +98,12 @@ require 'parts/head.php';
                                                 <p>Select if paid:</label>
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="topups" value="reg">Registration
+                                                        <input type="checkbox" class="form-check-input" name="reg" value="reg">Registration
                                                     </label>
                                                 </div>
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="topups" value="dep">Deposit
+                                                        <input type="checkbox" class="form-check-input" name="dep" value="dep">Deposit
                                                     </label>
                                                 </div>
                                             </div>
@@ -159,8 +159,8 @@ require 'parts/head.php';
                         $roomType = $_POST["roomType"];
                         $days = $_POST["days"];
                         $topups = $_POST["topups"];
-                        $reg = isset($_POST["topups"]) && $_POST["topups"]=="reg" ? 1 : 0;
-                        $dep = isset($_POST["topups"]) && $_POST["topups"]=="dep" ? 1 : 0;
+                        $reg = isset($_POST["topups"]) && $_POST["reg"]=="reg" ? 1 : 0;
+                        $dep = isset($_POST["topups"]) && $_POST["dep"]=="dep" ? 1 : 0;
 
                         date_default_timezone_set('Africa/Johannesburg');
                         $timestamp =  date('Y-m-d H:i:s', time());
