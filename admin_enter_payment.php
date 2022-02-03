@@ -159,8 +159,8 @@ require 'parts/head.php';
                         $roomType = $_POST["roomType"];
                         $days = $_POST["days"];
                         $topups = $_POST["topups"];
-                        $reg = isset($_POST["topups"]) && $_POST["reg"]=="reg" ? 1 : 0;
-                        $dep = isset($_POST["topups"]) && $_POST["dep"]=="dep" ? 1 : 0;
+                        $reg = isset($_POST["reg"]) && $_POST["reg"]=="reg" ? 1 : 0;
+                        $dep = isset($_POST["dep"]) && $_POST["dep"]=="dep" ? 1 : 0;
 
                         date_default_timezone_set('Africa/Johannesburg');
                         $timestamp =  date('Y-m-d H:i:s', time());
