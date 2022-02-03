@@ -47,57 +47,47 @@ require 'parts/head.php';
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                     <tr>
-                                        <th>Invoice#</th>
                                         <th>Student Name</th>
-                                        <th>Paid for Month</th>
-<!--                                        <th>PDF File</th>-->
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                        <th>Invoice#</th>
                                         <th>Student Name</th>
-                                        <th>Paid for Month</th>
-<!--                                        <th>PDF File</th>-->
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php
-                                    $sql = "SELECT * FROM invoice";
+                                    $sql = "SELECT * FROM students";
                                     $res = mysqli_query($con, $sql);
                                     if(mysqli_num_rows($res)){
                                         while($row = mysqli_fetch_array($res)){
-                                            $userID = $row["userID"];
-                                        $s = "SELECT * FROM students WHERE id=$userID";
-                                        $s1 = mysqli_query($con, $s);
-                                        if(mysqli_num_rows($s1)){
-                                        $r = mysqli_fetch_array($s1);
                                             ?>
                                             <tr>
-                                                <td><?php echo $row["id"]; ?></td>
-                                                <td><?php echo $r["name"]; ?></td>
-                                                <td><?php echo date("M, Y", strtotime($row["startDate"])); ?></td>
-<!--                                                <td><a href="generatedPDFs/--><?php //echo $row["pdf"]; ?><!--"><i class="fas fa-file-pdf mr-1"></i>Download</a></td>-->
+                                                <td><?php echo $row["name"]; ?></td>
                                                 <td>
-                                                    <div class="dropdown mb-4">
-                                                        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Actions
-                                                        </button>
-                                                        <div class="dropdown-menu animated--fade-in text-center bg-gray-200" aria-labelledby="dropdownMenuButton" style="" id="dropdown_a">
-                                                            <a target="_blank" href="admin_print_invoice.php?id=<?php echo $r["id"]; ?>" class="btn btn-primary">
-                                                                <span class="text">Print</span>
-                                                            </a>
-                                                            <a href="admin_all_invoices.php?mail=1&id=<?php echo $r["id"]; ?>&email=<?php echo $row["email"]; ?>" target="_blank" class="btn btn-info">
-                                                                <span class="text">Email</span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                                    <a target="_blank" href="admin_print_statement.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">
+                                                        <span class="text">Get Statement</span>
+                                                    </a>
                                                 </td>
+<!--                                                <td>-->
+<!--                                                    <div class="dropdown mb-4">-->
+<!--                                                        <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                                            Actions-->
+<!--                                                        </button>-->
+<!--                                                        <div class="dropdown-menu animated--fade-in text-center bg-gray-200" aria-labelledby="dropdownMenuButton" style="" id="dropdown_a">-->
+<!--                                                            <a target="_blank" href="admin_print_invoice.php?id=--><?php //echo $row["id"]; ?><!--" class="btn btn-primary">-->
+<!--                                                                <span class="text">Print</span>-->
+<!--                                                            </a>-->
+<!--                                                            <a href="admin_all_invoices.php?mail=1&id=--><?php //echo $row["id"]; ?><!--&email=--><?php //echo $row["email"]; ?><!--" target="_blank" class="btn btn-info">-->
+<!--                                                                <span class="text">Email</span>-->
+<!--                                                            </a>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </td>-->
                                             </tr>
                                             <?php
-                                        }
                                         }
                                     }
                                     ?>
