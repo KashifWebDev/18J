@@ -78,7 +78,7 @@
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">Room #</td>
-                                <td class="w-50"><?php echo $s2["roomID"]; ?></td>
+                                <td class="w-50"><?php if($s2["roomID"]!="6969") echo $s2["roomID"]; ?></td>
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">Months Paid</td>
