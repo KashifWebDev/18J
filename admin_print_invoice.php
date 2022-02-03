@@ -16,6 +16,14 @@
     $s1  =  mysqli_query($con, $s);
     $monthsPaid = mysqli_num_rows($s1);
     $s3 = mysqli_fetch_array($s1);
+
+    $s = "SELECT * FROM invoice WHERE userID=$studentID and reg=1";
+    $s1  =  mysqli_query($con, $s);
+    $regPaid = mysqli_num_rows($s1)>0 ? "Paid":"Unpaid";
+
+    $s = "SELECT * FROM invoice WHERE userID=$studentID and dep=1";
+    $s1  =  mysqli_query($con, $s);
+    $depPaid = mysqli_num_rows($s1)>0 ? "Paid":"Unpaid";
 ?>
 <html>
     <head>
@@ -66,7 +74,7 @@
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">University (Reg #)</td>
-                                <td class="w-50"><?php echo $s2["uniName"].' ('.$s2["UniRegNum"].')'; ?></td>
+                                <td class="w-50"><?php echo $s2["uniName"].' '.$s2["UniRegNum"].''; ?></td>
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">Room #</td>
@@ -91,6 +99,10 @@
                             <tr class="w-100">
                                 <td class="w-50">Room Type</td>
                                 <td class="w-50"><?php echo $row["roomType"]; ?></td>
+                            </tr>
+                            <tr class="w-100">
+                                <td class="w-50">Registration / Deposit</td>
+                                <td class="w-50"><?php echo $regPaid." / ".$depPaid; ?></td>
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">&nbsp</td>

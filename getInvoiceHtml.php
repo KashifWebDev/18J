@@ -16,6 +16,16 @@
     $s1  =  mysqli_query($con, $s);
     $monthsPaid = mysqli_num_rows($s1);
     $s3 = mysqli_fetch_array($s1);
+
+
+
+    $s = "SELECT * FROM invoice WHERE userID=$studentID and reg=1";
+    $s1  =  mysqli_query($con, $s);
+    $regPaid = mysqli_num_rows($s1)>0 ? "Paid":"Unpaid";
+
+    $s = "SELECT * FROM invoice WHERE userID=$studentID and dep=1";
+    $s1  =  mysqli_query($con, $s);
+    $depPaid = mysqli_num_rows($s1)>0 ? "Paid":"Unpaid";
 ?>
 
 <style>
@@ -93,6 +103,10 @@
     <tr>
         <td>Room Type</td>
         <td><?php echo $row["roomType"]; ?></td>
+    </tr>
+    <tr>
+        <td>Registration / Deposit</td>
+        <td><?php echo $regPaid." / ".$depPaid; ?></td>
     </tr>
     <tr>
         <td style="font-weight: bold">Total</td>

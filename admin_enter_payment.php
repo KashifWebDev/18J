@@ -94,6 +94,19 @@ require 'parts/head.php';
                                                     <input id="first" type="month" name="startDate" class="form-control" onchange="roomTypeFunc()" required>
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">
+                                                <p>Select if paid:</label>
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input type="radio" class="form-check-input" name="topups" value="reg">Registration
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input type="radio" class="form-check-input" name="topups" value="dep">Deposit
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 mt-3">
@@ -145,12 +158,17 @@ require 'parts/head.php';
                         $totalAmountToPay = $_POST["totalAmountToPay"];
                         $roomType = $_POST["roomType"];
                         $days = $_POST["days"];
+                        $topups = $_POST["topups"];
+                        $reg = isset($_POST["topups"]) && $_POST["topups"]=="reg" ? 1 : 0;
+                        $dep = isset($_POST["topups"]) && $_POST["topups"]=="dep" ? 1 : 0;
 
                         date_default_timezone_set('Africa/Johannesburg');
                         $timestamp =  date('Y-m-d H:i:s', time());
 
-                        $sql = "INSERT INTO invoice (userID, paymentDate, startDate, roomType, totalAmount, totalDays, date_time)
-                                VALUES ($userID, '$paymentDate', '$startDate', '$roomType', '$totalAmountToPay', '$days', '$timestamp')";
+                        $sql = "INSERT INTO invoice (userID, paymentDate, startDate, roomType,
+                                                    totalAmount, totalDays, date_time, reg, dep)
+                                VALUES ($userID, '$paymentDate', '$startDate', '$roomType',
+                                        '$totalAmountToPay','$days', '$timestamp', '$reg', '$dep')";
 
 //                        echo $sql; exit(); die();
 
