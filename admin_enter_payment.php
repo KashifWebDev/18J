@@ -98,12 +98,12 @@ require 'parts/head.php';
                                                 <p>Select if paid:</label>
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" name="topups" value="reg">Registration
+                                                        <input type="checkbox" class="form-check-input" name="topups" value="reg">Registration
                                                     </label>
                                                 </div>
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" name="topups" value="dep">Deposit
+                                                        <input type="checkbox" class="form-check-input" name="topups" value="dep">Deposit
                                                     </label>
                                                 </div>
                                             </div>
