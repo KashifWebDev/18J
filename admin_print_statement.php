@@ -59,8 +59,8 @@
                     <table class="table table-striped text-center">
                         <tbody>
                         <tr>
-                            <td class="font-weight-bolder">Date of Payment</td>
-                            <td class="font-weight-bolder">Amount</td>
+                            <td class="font-weight-bolder">DATE OF PAYMENT</td>
+                            <td class="font-weight-bolder">AMOUNT</td>
                         </tr>
 
                         <?php
@@ -81,8 +81,8 @@
                         }
                         ?>
                         <tr class="w-100">
-                            <td class="w-50">&nbsp</td>
-                            <td class="w-50"><b>Total &nbsp;</b><?php echo $total; ?></td>
+                            <td class="w-50"><b>Total Paid</b></td>
+                            <td class="w-50"><?php echo $total; ?></td>
                         </tr>
                         </tbody>
                     </table>
@@ -115,16 +115,8 @@
                             }
                             ?>
                             <tr>
-                                <td class="w-50">&nbsp</td>
-                                <td class="w-50"><b>Total &nbsp;</b><?php echo $totalQuote; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="w-50"></td>
-                                <td class="w-50"></td>
-                            </tr>
-                            <tr>
-                                <td class="w-50">Total invoice - Total paid</td>
-                                <td class="w-50"><?php echo $totalQuote-$total; ?></td>
+                                <td class="w-50"><b>Total Invoice</b></td>
+                                <td class="w-50"><?php echo $totalQuote; ?></td>
                             </tr>
                             <tr>
                                 <td class="w-50"></td>
