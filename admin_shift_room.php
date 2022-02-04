@@ -34,6 +34,15 @@ require 'parts/head.php';
                         </div>
                         <?php
                     }
+                    if(isset($_GET["removed"]) && $_GET["removed"]){
+                        ?>
+                        <div class="card mb-4 py-3 border-left-success">
+                            <div class="card-body text-success">
+                                <strong>Success! </strong> Remove reservation was deleted!
+                            </div>
+                        </div>
+                        <?php
+                    }
                     if(isset($_GET["assign"]) && $_GET["assign"]){
                         ?>
                         <div class="card mb-4 py-3 border-left-success">
@@ -46,6 +55,84 @@ require 'parts/head.php';
                     ?>
 
                     <!-- Page Heading -->
+                    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#myModal">
+                        Empty Reservation
+                    </button>
+
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Empty a reserved bed</h4>
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form method="POST">
+                                        <div class="form-group">
+                                            <label for="sel1">Select Room:</label>
+                                            <select class="form-control" name="roomId">
+                                                <option>-- SELECT --</option>
+                                                <?php
+                                                $s = "SELECT * FROM rooms";
+                                                $s1 = mysqli_query($con, $s);
+                                                while($s2 = mysqli_fetch_array($s1)){
+                                                    ?>
+                                                    <option value="<?php echo $s2["id"]; ?>"><?php echo $s2["room"]; ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sel1">Select Bed:</label>
+                                            <select class="form-control" name="bedID">
+                                                <option>-- SELECT --</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5 ">5</option>
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <button type="submit" name="delReservation" class="btn-danger w-100 btn">
+                                                    <i class="fas fa-user-times"></i>
+                                                    Delete Reservation
+                                                </button>
+                                                <?php
+                                                if(isset($_POST["delReservation"])){
+                                                    $room = $_POST["roomId"];
+                                                    $bed = $_POST["bedID"];
+
+                                                    $new_bedCol = "";
+                                                    if($bed ==1 ) $new_bedCol = "bed1";
+                                                    if($bed ==2 ) $new_bedCol = "bed2";
+                                                    if($bed ==3 ) $new_bedCol = "bed3";
+                                                    if($bed ==4 ) $new_bedCol = "bed4";
+
+                                                    phpRunSingleQuery("UPDATE rooms SET $new_bedCol=69 WHERE id=$room");
+                                                    phpRunSingleQuery("UPDATE students SET roomID=6969, roomID=6969 WHERE roomID=$room and bedID=$bed");
+                                                    js_redirect("admin_shift_room.php?removed=1");
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary"><?php echo $title; ?></h6>
