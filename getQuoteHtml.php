@@ -86,7 +86,7 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
 </style>
 <div class="container-fluid">
     <img src="img/quot/1.png" alt="">
-    <h2>KBW PROPERTIES</h2>
+    <h2>KBW PROPERTIES - 18 Jorissen Student Accommodation </h2>
     <h2 class="mainClr">QUOTATION</h2>
     <p class="name_heading">Quotation Number</p>
     <p id="value"><?php echo $row["id"]; ?></p>

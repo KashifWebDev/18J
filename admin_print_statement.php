@@ -123,7 +123,7 @@
                                 <td class="w-50"></td>
                             </tr>
                             <tr>
-                                <td class="w-50">Total Outstanding</td>
+                                <td class="w-50 font-weight-bolder">Total Outstanding</td>
                                 <td class="w-50"><?php echo $totalQuote-$total; ?></td>
                             </tr>
                             </tbody>
@@ -134,7 +134,7 @@
                     <p>Please include your name as reference</p>
                     <p class="font-weight-bolder">Banking Details</p>
                     <p>Standard Bank Bedford Gardens</p>
-                    <p>KBW Properties cc</p>
+                    <p>KBW Properties PTY LTD</p>
                     <p>Acc No:  401944670</p>
                     <p>Branch Code  051001</p>
                 </div>
