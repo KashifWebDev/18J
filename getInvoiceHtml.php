@@ -82,7 +82,7 @@
     </tr>
     <tr>
         <td>Room #</td>
-        <td><?php echo $s2["roomID"]; ?></td>
+        <td><?php if($s2["roomID"]!=6969) echo $s2["roomID"]; ?></td>
     </tr>
     <tr>
         <td>Months Paid</td>
