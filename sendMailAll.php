@@ -92,10 +92,6 @@
         $encoded_content = chunk_split(base64_encode($content));
         $msg .= $encoded_content;
 
-        $sql = "SELECT * FROM students WHERE id=$uid";
-        $sql1 = mysqli_query($con, $sql);
-        $row = mysqli_fetch_array($sql1);
-
         mail($row["email"],"Quotation for 18 Jorissen Street Student Residence",$msg,$headers);
 //    js_redirect("admin_email_interested.php?quotation=1");
         echo $uid."<br>";
