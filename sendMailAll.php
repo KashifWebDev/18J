@@ -7,7 +7,7 @@
     $deposit = 1;
 
 
-    $sql = "SELECT * FROM students where id>481";
+    $sql = "SELECT * FROM students where id>650";
     $sql1 = mysqli_query($con, $sql);
 
 
