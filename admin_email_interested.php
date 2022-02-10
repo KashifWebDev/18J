@@ -5,21 +5,21 @@ $res = mysqli_query($con, $sql);
 if(isset($_GET["email"])){
     $subject = "18 Jorissen Accommodation";
     $txt = "Dear Student<br>
-            Welcome to 18 Jorissen Street Student Residence your home away from home in Braamfontein! You have arrived! Do nott look any further for student accommodation!<br><br>
+            Welcome to 18 Jorissen Street Student Residence your home away from home in Braamfontein! You have arrived! Do not look any further for student accommodation!<br><br>
             
-            •	We are a 2-minute walk from the University of Witwatersrand<br>
-            •	Opposite the famous Wits Senate House.<br>
-            •	We offer accommodation to Female students only.<br>
-            •	There are Single or Double rooms fully furnished <br>
-            •	Sealy mattresses for extra support and comfort <br>
-            •	A laundry is available with washing and drying machines as well as the option to hand wash with open washing lines for drying.<br>
-            •	A quiet library <br>
-            •	Uncapped Wi-Fi <br>
-            •	Huge open court-yard for students to relax and get fresh air, keep active and stay in shape.<br>
-            •	Communal kitchens are spaced throughout the residence <br>
-            •	Modern Bathrooms and kitchens are always spotlessly clean.<br>
-            •	Secure 24/7 fingerprint-access<br>
-            •	Let us make your new home away from home a memorable experience.<br><br>
+            ->	We are a 2-minute walk from the University of Witwatersrand<br>
+            ->	Opposite the famous Wits Senate House.<br>
+            ->	We offer accommodation to Female students only.<br>
+            ->	There are Single or Double rooms fully furnished <br>
+            ->	Sealy mattresses for extra support and comfort <br>
+            ->	A laundry is available with washing and drying machines as well as the option to hand wash with open washing lines for drying.<br>
+            ->	A quiet library <br>
+            ->	Uncapped Wi-Fi <br>
+            ->	Huge open court-yard for students to relax and get fresh air, keep active and stay in shape.<br>
+            ->	Communal kitchens are spaced throughout the residence <br>
+            ->	Modern Bathrooms and kitchens are always spotlessly clean.<br>
+            ->	Secure 24/7 fingerprint-access<br>
+            ->	Let us make your new home away from home a memorable experience.<br><br>
             ";
     $txt .= "Kind Regards,<br>";
     $txt .= "18 Jorissen Street Admin Team";
