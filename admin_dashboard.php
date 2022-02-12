@@ -10,7 +10,7 @@ function sum_rows($qry){
     $s = "SELECT SUM(beds) as available FROM rooms WHERE $qry";
     $b = mysqli_query($GLOBALS["con"], $s);
     $c = mysqli_fetch_array($b);
-    return $c["available"];
+    return $c["available"] ?? 0;
 }
 ?>
 <!DOCTYPE html>
@@ -85,7 +85,7 @@ require 'parts/head.php';
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Available Beds</div>
+                                                Available Rooms</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo sum_rows("bed1=0 OR bed2=0 OR bed3=0 OR bed4=0"); ?></div>
                                         </div>
                                         <div class="col-auto">
