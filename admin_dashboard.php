@@ -86,7 +86,8 @@ require 'parts/head.php';
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Available Rooms</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo sum_rows("bed1=0 OR bed2=0 OR bed3=0 OR bed4=0"); ?></div>
+<!--                                            <div class="h5 mb-0 font-weight-bold text-gray-800">--><?php //echo sum_rows("bed1=0 OR bed2=0 OR bed3=0 OR bed4=0"); ?><!--</div>-->
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">109</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-bed fa-2x text-gray-300"></i>
