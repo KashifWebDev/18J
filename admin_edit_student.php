@@ -151,6 +151,10 @@ require 'parts/head.php';
                                             <label for="pwd">Guardian Emergency contact#2:</label>
                                             <input type="text" name="contact2" class="form-control" value="<?php echo $student["guardian2"]; ?>">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="pwd">Move In Date</label>
+                                            <input type="text" name="moveIn" class="form-control" value="<?php echo $student["moveIn"]; ?>">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -182,6 +186,7 @@ require 'parts/head.php';
                         $address = $_POST["address"];
                         $contact1 = $_POST["contact1"];
                         $contact2 = $_POST["contact2"];
+                        $moveIn = $_POST["moveIn"];
                         $pic = "";
 
 
@@ -218,7 +223,7 @@ require 'parts/head.php';
 
                         $sql = "UPDATE students SET name='$name', surename='$surname', email='$email', mobile='$mob', IDnum='$idNumber', linkToLease='$pic',uniName='$uniName',
                                     UniRegNum='$uniRegistrationNum', privateSponsored='$privateSponsored',sponsorName='$sponsorName', address='$address',
-                    guardian1='$contact1', guardian2='$contact2' WHERE  id = $student_ID";
+                    guardian1='$contact1', guardian2='$contact2', moveIn='$moveIn' WHERE  id = $student_ID";
 
 
                         if(phpRunSingleQuery($sql)){

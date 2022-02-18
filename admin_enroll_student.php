@@ -146,6 +146,10 @@ require 'parts/head.php';
                                             <label for="pwd">Guardian Emergency contact#2:</label>
                                             <input type="text" name="contact2" class="form-control">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="pwd">Move In Date:</label>
+                                            <input type="date" name="moveIn" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -176,6 +180,7 @@ require 'parts/head.php';
                         $address = $_POST["address"];
                         $contact1 = $_POST["contact1"];
                         $contact2 = $_POST["contact2"];
+                        $moveIn = $_POST["moveIn"];
                         $pic = "";
 
 
@@ -203,9 +208,9 @@ require 'parts/head.php';
                         }
                         $pic = strtolower($pic);
                         $sql = "INSERT INTO students (name, surename, email, mobile, IDnum,
-                                      linkToLease, uniName, UniRegNum, privateSponsored, sponsorName, address, guardian1, guardian2) VALUES 
+                                      linkToLease, uniName, UniRegNum, privateSponsored, sponsorName, address, guardian1, guardian2, moveIn) VALUES 
                                 ('$name', '$surname', '$email', '$mob', '$idNumber', '$pic', '$uniName',
-                                 '$uniRegistrationNum', '$privateSponsored', '$sponsorName', '$address', '$contact1', '$contact2')";
+                                 '$uniRegistrationNum', '$privateSponsored', '$sponsorName', '$address', '$contact1', '$contact2', '$moveIn')";
 
 
                         if(phpRunSingleQuery($sql)){

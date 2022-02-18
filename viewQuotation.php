@@ -23,7 +23,7 @@ $RegCharges = 0;
 $DepositCharges = 0;
 
 if($_GET["roomType"]=="Single") $charges = 6000;
-if($_GET["roomType"]=="Double") $charges = 4480;
+if($_GET["roomType"]=="Double") $charges = 4500;
 if($_GET["roomType"]=="Triple") $charges = 4000;
 
 if($_GET["registration"]) $RegCharges = 500;

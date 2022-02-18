@@ -112,24 +112,27 @@ require 'parts/head.php';
                                             <div class="col-md-12 mt-3">
                                                 <label for="" class="mr-3 font-weight-bold">Select Bed Type </label>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio1" onclick="roomTypeFunc()" value="Single Room">
+                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio1"  value="Single Room" checked>
                                                     <label class="form-check-label" for="inlineRadio1">Single Room</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio2" onclick="roomTypeFunc()" value="Double Room">
+                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio2"  value="Double Room">
                                                     <label class="form-check-label" for="inlineRadio2">Double Room</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio3" onclick="roomTypeFunc()" value="Triple Room">
+                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio3" value="Triple Room">
                                                     <label class="form-check-label" for="inlineRadio3">Triple Room</label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="container text-right">
-                                        <h3>Total Payable : <span id="charges">0</span></h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="totalAmount">Total Payable</label>
+                                                    <input type="number" name="totalAmountToPay" class="form-control" id="totalAmount" required>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <br>
@@ -140,8 +143,7 @@ require 'parts/head.php';
                                         </button>
                                     </div>
                                 </div>
-                                <input type="hidden" name="totalAmountToPay" id="totalAmountToPay">
-                                <input type="hidden" name="roomType" id="roomType">
+                                <input type="hidden" name="roomType1" id="roomType">
                                 <input type="hidden" name="days" id="days">
                             </form>
                         </div>
@@ -156,9 +158,7 @@ require 'parts/head.php';
 //                        $endDate = $_POST["endDate"].'-01';
                         $roomType = $_POST["roomType"];
                         $totalAmountToPay = $_POST["totalAmountToPay"];
-                        $roomType = $_POST["roomType"];
                         $days = $_POST["days"];
-                        $topups = $_POST["topups"];
                         $reg = isset($_POST["reg"]) && $_POST["reg"]=="reg" ? 1 : 0;
                         $dep = isset($_POST["dep"]) && $_POST["dep"]=="dep" ? 1 : 0;
 
@@ -170,7 +170,6 @@ require 'parts/head.php';
                                 VALUES ($userID, '$paymentDate', '$startDate', '$roomType',
                                         '$totalAmountToPay','$days', '$timestamp', '$reg', '$dep')";
 
-//                        echo $sql; exit(); die();
 
                         if(mysqli_query($con, $sql)){
                             $last_id = mysqli_insert_id($con);

@@ -1,5 +1,28 @@
 <?php
 require 'parts/app.php';
+if(isset($_GET["email"])){
+    $studentID = $_GET["email"];
+    $s = "SELECT * FROM students WHERE id=$studentID";
+    $s1 = $test =  mysqli_query($con, $s);
+    $stdntRow = mysqli_fetch_array($s1);
+    $to = $stdntRow["email"];
+
+    $subject = "Payment Statement | 18 Jorissen Accommodation";
+
+    $txt = "Dear student,<br>";
+    $txt = "Please follow the bellow link to get your statement. Thank you.<br><br>
+            <a href='https://www.18jorissen.co.za/app/admin_print_statement.php?id=$studentID'>Get Statement Now</a>
+            ";
+    $txt .= "Kind Regards,<br>";
+    $txt .= "18 Jorissen Street Admin Team";
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion();
+
+
+    mail($to,$subject,$txt,$headers);
+    js_redirect("admin_payement_statement.php?email=1");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +52,7 @@ require 'parts/head.php';
                         ?>
                         <div class="card mb-4 py-3 border-left-success">
                             <div class="card-body text-success">
-                                <strong>Success! </strong> Course added Successfully!
+                                <strong>Success! </strong> Statement was sent to the registered email!
                             </div>
                         </div>
                         <?php
@@ -72,6 +95,9 @@ require 'parts/head.php';
                                                 <td>
                                                     <a target="_blank" href="admin_print_statement.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">
                                                         <span class="text">Get Statement</span>
+                                                    </a>
+                                                    <a target="_blank" href="admin_print_statement.php?email=<?php echo $row["id"]; ?>" class="btn btn-success">
+                                                        <span class="text">Email Statement</span>
                                                     </a>
                                                 </td>
 <!--                                                <td>-->
