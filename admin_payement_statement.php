@@ -21,7 +21,7 @@ if(isset($_GET["email"])){
 
 
     mail($to,$subject,$txt,$headers);
-    js_redirect("admin_payement_statement.php?email=1");
+    js_redirect("admin_payement_statement.php?success=1");
 }
 ?>
 <!DOCTYPE html>
