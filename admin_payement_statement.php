@@ -96,7 +96,7 @@ require 'parts/head.php';
                                                     <a target="_blank" href="admin_print_statement.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">
                                                         <span class="text">Get Statement</span>
                                                     </a>
-                                                    <a target="_blank" href="admin_payement_statement.php?email=<?php echo $row["id"]; ?>" class="btn btn-success">
+                                                    <a href="admin_payement_statement.php?email=<?php echo $row["id"]; ?>" class="btn btn-success">
                                                         <span class="text">Email Statement</span>
                                                     </a>
                                                 </td>
