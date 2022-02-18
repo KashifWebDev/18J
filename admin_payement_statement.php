@@ -19,7 +19,8 @@ if(isset($_GET["email"])){
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
-
+echo "TO: $to<br>";
+echo $txt; die(); exit();
     mail($to,$subject,$txt,$headers);
     js_redirect("admin_payement_statement.php?email=1");
 }
