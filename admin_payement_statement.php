@@ -11,7 +11,7 @@ if(isset($_GET["email"])){
 
     $txt = "Dear student,<br>";
     $txt = "Please follow the bellow link to get your statement. Thank you.<br><br>
-            <a href='https://www.18jorissen.co.za/app/admin_print_statement.php?id=$studentID'>Get Statement Now</a>
+            <a href='https://www.18jorissen.co.za/app/admin_print_statement.php?id=$studentID'>Get Statement Now</a><br><br>
             ";
     $txt .= "Kind Regards,<br>";
     $txt .= "18 Jorissen Street Admin Team";
@@ -19,8 +19,7 @@ if(isset($_GET["email"])){
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
-echo "TO: $to<br>";
-echo $txt; die(); exit();
+
     mail($to,$subject,$txt,$headers);
     js_redirect("admin_payement_statement.php?email=1");
 }
