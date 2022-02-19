@@ -166,9 +166,9 @@ require 'parts/head.php';
                         $timestamp =  date('Y-m-d H:i:s', time());
 
                         $sql = "INSERT INTO invoice (userID, paymentDate, startDate, roomType,
-                                                    totalAmount, date_time, reg, dep)
+                                                    totalAmount, totalDays, date_time, reg, dep)
                                 VALUES ($userID, '$paymentDate', '$startDate', '$roomType',
-                                        '$totalAmountToPay', '$timestamp', '$reg', '$dep')";
+                                        '$totalAmountToPay','1', '$timestamp', '$reg', '$dep')";
 
 
                         if(mysqli_query($con, $sql)){
