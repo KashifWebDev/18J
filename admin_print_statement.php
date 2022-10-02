@@ -42,10 +42,17 @@
                     <div class="w-100" style="border-top: .105rem solid #5a5c69!important; height: 10px !important;">&nbsp;</div>
                 </div>
                 <div class="col-12">
-                    <div class="col-6 float-left">
-                        <p class="bg-primary text-white py-1 px-2 w-50">Bill To:</p>
-                        <p><?php echo $row["name"].' '.$row["surename"]; ?></p>
-                        <p><?php echo $quote["roomType"]; ?></p>
+                    <div class="col-6 float-left d-flex">
+                        <div class="d-flex flex-column">
+                            <p class="bg-primary text-white py-1 px-2 ">Bill To:</p>
+                            <p class="font-weight-bold"><?php echo $row["name"].' '.$row["surename"]; ?></p>
+                            <p class="font-weight-bold"><?php echo $quote["roomType"]; ?></p>
+                        </div>
+                        <div class="d-flex flex-column ml-4">
+                            <p class="bg-primary text-white py-1 px-2 ">Other Payments:</p>
+                            <p><span class="font-weight-bold">Registration: </span><?php echo $row["registrationCharges"] ?  'Paid' : 'Unpaid'; ?></p>
+                            <p><span class="font-weight-bold">Deposit: </span><?php echo $row["depositCharges"] ?  'Paid' : 'Unpaid'; ?></p>
+                        </div>
                     </div>
                     <div class="float-right col-6 font-weight-normal">
                         <p class="float-right">
