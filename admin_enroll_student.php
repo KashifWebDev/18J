@@ -114,7 +114,7 @@ require 'parts/head.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="email">University Name</label>
-                                            <input type="text" class="form-control" name="uniName" >
+                                            <input type="text" class="form-control" name="leaseDuration" >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -123,16 +123,21 @@ require 'parts/head.php';
                                             <input type="text" class="form-control" name="uniRegistrationNum" >
                                         </div>
                                         <div class="form-group mt-2">
-                                            <label for="sel1">Private/Sponsored:</label>
+                                            <label for="sel1">Student Status</label>
+                                            <select class="form-control" name="studentStatus" id="sts">
+                                                <option value="">-- SELECT --</option>
+                                                <option value="Self-Funded">Self-Funded</option>
+                                                <option value="NSFAS">NSFAS</option>
+                                                <option value="Private Bursar">Private Bursar</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2" id="box">
+                                            <label for="sel1">Private Bursar Name:</label>
                                             <select class="form-control" name="privateSponsored" >
                                                 <option value="">-- SELECT --</option>
                                                 <option value="Private">Private</option>
                                                 <option value="Sponsored">Sponsored</option>
                                             </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pwd">Sponsored Name:</label>
-                                            <input type="text" name="sponsorName" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Home Address:</label>
@@ -149,6 +154,14 @@ require 'parts/head.php';
                                         <div class="form-group">
                                             <label for="pwd">Move In Date:</label>
                                             <input type="date" name="moveIn" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd">Move Out Date:</label>
+                                            <input type="date" name="moveOut" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Duration of the Lease</label>
+                                            <input type="text" class="form-control" name="uniName" >
                                         </div>
                                     </div>
                                 </div>
@@ -175,12 +188,15 @@ require 'parts/head.php';
                         $idNumber = $_POST["idNumber"];
                         $uniName = $_POST["uniName"];
                         $uniRegistrationNum = $_POST["uniRegistrationNum"];
-                        $privateSponsored = $_POST["privateSponsored"];
+//                        $privateSponsored = $_POST["privateSponsored"];
                         $sponsorName = $_POST["sponsorName"];
                         $address = $_POST["address"];
                         $contact1 = $_POST["contact1"];
                         $contact2 = $_POST["contact2"];
                         $moveIn = $_POST["moveIn"];
+                        $moveOut = $_POST["moveOut"];
+                        $studentStatus = $_POST["studentStatus"];
+                        $leaseDuration = $_POST["leaseDuration"];
                         $pic = "";
 
 
@@ -208,9 +224,9 @@ require 'parts/head.php';
                         }
                         $pic = strtolower($pic);
                         $sql = "INSERT INTO students (name, surename, email, mobile, IDnum,
-                                      linkToLease, uniName, UniRegNum, privateSponsored, sponsorName, address, guardian1, guardian2, moveIn) VALUES 
+                                      linkToLease, uniName, UniRegNum, studentStatus, sponsorName, address, guardian1, guardian2, moveIn, moveOut, leaseDuration) VALUES 
                                 ('$name', '$surname', '$email', '$mob', '$idNumber', '$pic', '$uniName',
-                                 '$uniRegistrationNum', '$privateSponsored', '$sponsorName', '$address', '$contact1', '$contact2', '$moveIn')";
+                                 '$uniRegistrationNum', '$studentStatus', '$sponsorName', '$address', '$contact1', '$contact2', '$moveIn', '$moveOut', '$leaseDuration')";
 
 
                         if(phpRunSingleQuery($sql)){
@@ -254,6 +270,20 @@ require 'parts/head.php';
 <!--COuntry-->
     <script src="js/select.js"></script>
     <script type="text/javascript">
+        const el = document.getElementById('sts');
+
+        const box = document.getElementById('box');
+        box.style.display = 'none';
+
+        el.addEventListener('change', function handleChange(event) {
+            if (event.target.value === 'Private Bursar') {
+                box.style.display = 'block';
+            } else {
+                box.style.display = 'none';
+            }
+        });
+
+
         $(document).ready(function () {
             $('.songs').select2();
         });

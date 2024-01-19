@@ -65,9 +65,7 @@ require 'parts/head.php';
                                         <th>Full Name</th>
                                         <th>Room#</th>
                                         <th>Bed#</th>
-                                        <th>ID#</th>
                                         <th>LeaseAgr.</th>
-                                        <th>University</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -77,9 +75,7 @@ require 'parts/head.php';
                                         <th>Full Name</th>
                                         <th>Room#</th>
                                         <th>Bed#</th>
-                                        <th>ID#</th>
                                         <th>LeaseAgr.</th>
-                                        <th>University</th>
                                         <th>Actions</th>
                                     </tr>
                                     </tfoot>
@@ -108,9 +104,7 @@ require 'parts/head.php';
                                                 <td><?php echo $row["name"].' '.$row["surename"]; ?></td>
                                                 <td><?php echo $roomNum; ?></td>
                                                 <td><?php echo $row["bedID"]; ?></td>
-                                                <td><?php echo $row["IDnum"]; ?></td>
                                                 <td><a target="_blank" href="leaseAgreement/<?php echo $row["linkToLease"]; ?>">View/Download</a></td>
-                                                <td><?php echo $row["uniName"]; ?></td>
                                                 <td>
                                                     <div class="dropdown mb-4">
                                                         <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -122,9 +116,6 @@ require 'parts/head.php';
                                                             </a>
                                                             <a class="btn btn-success" href="admin_edit_student.php?id=<?php echo $row["id"]; ?>">
                                                                 <span class="text">Edit</span>
-                                                            </a>
-                                                            <a class="btn btn-info" data-toggle="modal" data-target="#registrationCharges_<?php echo $rand; ?>">
-                                                                <span class="text">Registration Charges</span>
                                                             </a>
                                                         </div>
                                                     </div>

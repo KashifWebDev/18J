@@ -67,10 +67,6 @@
                     <i class="fas fa-fw fa-times-circle"></i>
                     <span>Occupied</span>
                 </a>
-                <a class="collapse-item" href="admin_rooms_available.php">
-                    <i class="fas fa-fw fa-check"></i>
-                    <span>Available</span>
-                </a>
                 <a class="collapse-item" href="admin_rooms_reserved.php">
                     <i class="fas fa-fw fa-exclamation-circle"></i>
                     <span>Reserved</span>
@@ -102,6 +98,14 @@
                 <a class="collapse-item" href="admin_shift_room.php">
                     <i class="fas fa-fw fa-hospital"></i>
                     <span>Rooms Management</span>
+                </a>
+<!--                <a class="collapse-item" href="">-->
+<!--                    <i class="fas fa-fw fa-hospital"></i>-->
+<!--                    <span>Breach Lease Agreement</span>-->
+<!--                </a>-->
+                <a class="collapse-item" href="admin_checkIn_list.php">
+                    <i class="fas fa-fw fa-check"></i>
+                    <span>Check In List</span>
                 </a>
             </div>
         </div>
