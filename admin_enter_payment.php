@@ -195,7 +195,6 @@ require 'parts/head.php';
                                                     totalAmount, totalDays, date_time, descr)
                                 VALUES ($userID, '$paymentDate', '$startDate', '$roomType',
                                         '$totalAmountToPay','1', '$timestamp', '$desc')";
-                        echo $sql;
 
                         if(mysqli_query($con, $sql)){
                             $last_id = mysqli_insert_id($con);
@@ -212,10 +211,10 @@ require 'parts/head.php';
                             if($bed ==3 ) $new_bedCol = "bed3";
                             if($bed ==4 ) $new_bedCol = "bed4";
 
-                            $s = "UPDATE rooms SET $new_bedCol = 1 WHERE id=$roomID";
-                            echo $s; exit(); die();
-                            mysqli_query($con, $s);
-                            exit(); die();
+//                            $s = "UPDATE rooms SET $new_bedCol = 1 WHERE id=$roomID";
+//                            echo $s; exit(); die();
+//                            mysqli_query($con, $s);
+//                            exit(); die();
 
                             js_redirect("admin_enter_payment.php?success=1&last_id=$last_id");
                         }else{
