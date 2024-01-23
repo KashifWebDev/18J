@@ -27,7 +27,7 @@ if(isset($_POST['submit'])){
         '$note', '$tenantCheckBox', '$landlordCheckBox', '$roomNumber', '$type')";
 
     if ($con->query($sql) === TRUE) {
-        js_redirect("admin_checkIn_list.php?success=1");
+        js_redirect("admin_checkin_list.php?success=1");
     } else {
         echo "Error: " . $sql . "<br>" . $con->error;
     }
