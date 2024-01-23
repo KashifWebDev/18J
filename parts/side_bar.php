@@ -103,7 +103,7 @@
 <!--                    <i class="fas fa-fw fa-hospital"></i>-->
 <!--                    <span>Breach Lease Agreement</span>-->
 <!--                </a>-->
-                <a class="collapse-item" href="admin_checkIn_list.php">
+                <a class="collapse-item" href="admin_checkin_list.php">
                     <i class="fas fa-fw fa-check"></i>
                     <span>Check In/Out List</span>
                 </a>
