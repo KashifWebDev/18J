@@ -95,15 +95,25 @@ require 'parts/head.php';
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Select if paid:</p>
+                                                <p>Payment Description:</p>
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="reg" value="reg">Registration
+                                                        <input type="checkbox" class="form-check-input" name="dep[]" value="reg">Registration
                                                     </label>
                                                 </div>
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" class="form-check-input" name="dep" value="dep">Deposit
+                                                        <input type="checkbox" class="form-check-input" name="dep[]" value="dep">Deposit
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="dep[]" value="rental">Rental
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input type="checkbox" class="form-check-input" name="dep[]" value="topup">Top up
                                                     </label>
                                                 </div>
                                             </div>
@@ -123,6 +133,10 @@ require 'parts/head.php';
                                                     <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio3" value="Triple Room">
                                                     <label class="form-check-label" for="inlineRadio3">Triple Room</label>
                                                 </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input roomTypeSelection" type="radio" name="roomType" id="inlineRadio3" value="Quadruple Room">
+                                                    <label class="form-check-label" for="inlineRadio3">Quadruple Room</label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -130,6 +144,18 @@ require 'parts/head.php';
                                                 <div class="form-group">
                                                     <label for="totalAmount">Total Payable</label>
                                                     <input type="number" name="totalAmountToPay" class="form-control" id="totalAmount" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="ref">Bank Reference</label>
+                                                    <input type="number" name="bankReference" class="form-control" id="ref" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="studentBank">Student Banking Details</label>
+                                                    <textarea class="form-control" id="studentBank" rows="3" name="studentBank"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -150,7 +176,6 @@ require 'parts/head.php';
                     </div>
                     <?php
                     if(isset($_POST["add_payment"])){
-//                        print_r($_POST); exit(); die();
                         require 'parts/db.php';
                         $paymentDate = $_POST["paymentDate"];
                         $userID = $_POST["userID"];
@@ -159,16 +184,17 @@ require 'parts/head.php';
                         $roomType = $_POST["roomType"];
                         $totalAmountToPay = $_POST["totalAmountToPay"];
                         $days = $_POST["days"];
-                        $reg = isset($_POST["reg"]) && $_POST["reg"]=="reg" ? 1 : 0;
-                        $dep = isset($_POST["dep"]) && $_POST["dep"]=="dep" ? 1 : 0;
+                        $bankReference = $_POST["bankReference"];
+                        $studentBank  = $_POST["studentBank"];
+                        $desc = json_encode($_POST['dep']);
 
                         date_default_timezone_set('Africa/Johannesburg');
                         $timestamp =  date('Y-m-d H:i:s', time());
 
                         $sql = "INSERT INTO invoice (userID, paymentDate, startDate, roomType,
-                                                    totalAmount, totalDays, date_time, reg, dep)
+                                                    totalAmount, totalDays, date_time, descr)
                                 VALUES ($userID, '$paymentDate', '$startDate', '$roomType',
-                                        '$totalAmountToPay','1', '$timestamp', '$reg', '$dep')";
+                                        '$totalAmountToPay','1', '$timestamp', '$desc')";
 
 
                         if(mysqli_query($con, $sql)){

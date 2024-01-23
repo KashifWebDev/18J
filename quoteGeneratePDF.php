@@ -67,7 +67,11 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 // add a page
 $pdf->AddPage();
 
-$html = file_get_contents('https://18jorissen.co.za/app/getQuoteHtml.php?id='.$last_id);
+$j = str_contains($url, 'localhost') ? "/18j":
+    "/app/";
+
+$html = file_get_contents($url.$j.'/getQuoteHtml.php?id='.$last_id);
+//echo $html; die();
 
 // output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');
@@ -79,5 +83,9 @@ $pdf->lastPage();
 
 //Close and output PDF documents
 
-$path = "/home/j18jocnn/public_html/app/generatedPDFs/$PDFfilename";
+$path = str_contains($url, 'localhost') ?
+    "C:/wamp64/www/18J/generatedPDFs/".$PDFfilename :
+    "/home/j18jocnn/public_html/app/generatedPDFs/$PDFfilename";
+
+ob_clean();
 echo $pdf->Output($path, 'F');

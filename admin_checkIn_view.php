@@ -12,7 +12,7 @@ $row = mysqli_fetch_array($res);
 <html lang="en">
 
 <?php
-$title = "Check In List";
+$title = "Check In/Out List";
 require 'parts/head.php';
 ?>
 
@@ -44,7 +44,7 @@ require 'parts/head.php';
                     ?>
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Check In List Report</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Check <?=$row["type"]?> List Report</h1>
 
                     <form id="myForm">
                         <div class="row">

@@ -17,13 +17,8 @@
     $monthsPaid = mysqli_num_rows($s1);
     $s3 = mysqli_fetch_array($s1);
 
-    $s = "SELECT * FROM invoice WHERE userID=$studentID and reg=1";
-    $s1  =  mysqli_query($con, $s);
-    $regPaid = mysqli_num_rows($s1)>0 ? "Paid":"Unpaid";
+    $desc = json_decode($s3['descr']);
 
-    $s = "SELECT * FROM invoice WHERE userID=$studentID and dep=1";
-    $s1  =  mysqli_query($con, $s);
-    $depPaid = mysqli_num_rows($s1)>0 ? "Paid":"Unpaid";
 ?>
 <html>
     <head>
@@ -102,7 +97,11 @@
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">Registration / Deposit</td>
-                                <td class="w-50"><?php echo $regPaid." / ".$depPaid; ?></td>
+                                <td class="w-50"><?php echo status('reg', $desc) ." / ". status('dep', $desc); ?></td>
+                            </tr>
+                            <tr class="w-100">
+                                <td class="w-50">Rental / Top up</td>
+                                <td class="w-50"><?php echo status('rental', $desc) ." / ". status('topup', $desc); ?></td>
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">&nbsp</td>
@@ -115,3 +114,8 @@
         </div>
     </body>
 </html>
+<?php
+function status($status, $desc){
+    return in_array($status, $desc) ? "Paid":"Unpaid";
+}
+?>

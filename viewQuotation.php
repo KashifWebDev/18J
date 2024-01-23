@@ -10,6 +10,7 @@ $uid = $id = $_GET["uid"];
 
 $date1 = $_GET["start"];
 $date2 = $_GET["end"];
+$regCharges = $_GET["regCharges"];
 $ts1 = strtotime($date1);
 $ts2 = strtotime($date2);
 $year1 = date('Y', $ts1);
@@ -26,7 +27,7 @@ if($_GET["roomType"]=="Single") $charges = 6000;
 if($_GET["roomType"]=="Double") $charges = 4500;
 if($_GET["roomType"]=="Triple") $charges = 4000;
 
-if($_GET["registration"]) $RegCharges = 500;
+if($_GET["registration"]) $RegCharges = $regCharges;
 if($_GET["deposit"]) $DepositCharges = 2000;
 
 $s = "SELECT * FROM students WHERE id = $id";
@@ -74,10 +75,10 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
             padding-left: 10px;
         }
         .name_heading{
-            font-size: 20px;
+            font-size: 18px;
             background-color: #374f8b;
             width: 349px;
-            color: #e9ebf2;
+            color: #ffffff;
             padding-left: 9px;
         }
         .name_value{
@@ -89,10 +90,17 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
 <body>
 <div class="container-fluid">
     <img src="img/quot/1.png" alt="" id="quotationPic1">
-    <p><?php echo $_GET["uid"]; ?></p>
+    <div style="margin-bottom: 10px;">
+        <h1 class="name_heading">User ID</h1>
+        <span class="name_value"><?php echo $_GET["uid"]; ?></span>
+    </div>
     <div style="margin-bottom: 10px;">
         <h1 class="name_heading">Name</h1>
         <span class="name_value"><?php echo $student["name"].' '.$student["surename"]; ?></span>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <h1 class="name_heading">Student Status</h1>
+        <span class="name_value"><?php echo $student["studentStatus"]; ?></span>
     </div>
     <img src="img/quot/2.png" alt="" id="quotationPic2">
     <p><?php echo date("d M, Y - H:i:s"); ?></p>
@@ -146,7 +154,7 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
         <tr>
             <td><?php if($_GET["registration"]) echo "Registration"; ?></td>
             <td><?php if($_GET["registration"]) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
-            <td><?php if($_GET["registration"]) {echo "500";} else{ echo "&nbsp;";} ?></td>
+            <td><?php if($_GET["registration"]) {echo $regCharges;} else{ echo "&nbsp;";} ?></td>
         </tr>
         <tr>
             <td><?php if($_GET["deposit"]) echo "Security Deposit"; ?></td>

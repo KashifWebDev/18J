@@ -116,11 +116,8 @@ require 'parts/head.php';
                                     <tr>
                                         <th>#</th>
                                         <th>Student</th>
-                                        <th>Start Date</th>
                                         <th>Room Type</th>
-                                        <th>No of Days</th>
                                         <th>Total Amount</th>
-                                        <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -128,11 +125,8 @@ require 'parts/head.php';
                                     <tr>
                                         <th>#</th>
                                         <th>Student</th>
-                                        <th>Start Date</th>
                                         <th>Room Type</th>
-                                        <th>No of Days</th>
                                         <th>Total Amount</th>
-                                        <th>Payment Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
@@ -150,11 +144,8 @@ require 'parts/head.php';
                                             <tr>
                                                 <td><?php echo $row["id"]; ?></td>
                                                 <td><?php echo $s2["name"].' '.$s2["surename"]; ?></td>
-                                                <td><?php echo $row["startDate"]; ?></td>
                                                 <td><?php echo $row["roomType"]; ?></td>
-                                                <td><?php echo $row["totalDays"]; ?></td>
                                                 <td><?php echo $row["totalAmount"]; ?></td>
-                                                <td><?php echo $row["paymentDate"]; ?></td>
                                                 <td>
                                                     <div class="dropdown mb-4">
                                                         <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

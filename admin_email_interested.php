@@ -1,6 +1,7 @@
 <?php
+$url = "https://$_SERVER[HTTP_HOST]";
 require 'parts/app.php';
-$sql = "SELECT * FROM students WHERE bedID=6969 AND roomID=6969";
+$sql = "SELECT * FROM students WHERE bedID=6969 AND roomID=6969 AND intrestedDeleted = 0";
 $res = mysqli_query($con, $sql);
 if(isset($_GET["email"])){
     $subject = "18 Jorissen Accommodation";
@@ -66,13 +67,14 @@ Let us make your new home away from home a memorable experience.<br><br>
 if(isset($_POST["view_quote"])){
     $uid = $_POST["uid"];
     $roomType = $_POST["roomType"];
+    $regCharges = $_POST["regCharges"];
     $start = $_POST["start"].'-01';
     $end = $_POST["end"].'-01';
     $registration = isset($_POST["registration"]) ? 1 : 0;
     $deposit = isset($_POST["deposit"]) ? 1 : 0;
 
 
-    js_redirect("viewQuotation.php?uid=$uid&roomType=$roomType&start=$start&end=$end&registration=$registration&deposit=$deposit");
+    js_redirect("viewQuotation.php?uid=$uid&roomType=$roomType&start=$start&end=$end&registration=$registration&deposit=$deposit&regCharges=$regCharges");
 }
 if(isset($_GET["intro_email"])){
     $uid = $_GET["intro_email"];
@@ -92,7 +94,7 @@ if(isset($_GET["intro_email"])){
 
     $body = "Dear $stdntName,<br>";
     $body .= "
-            Please find the intro <a href='https://18jorissen.co.za/app/files/intro.pdf'>HERE</a><br>
+            Please find the intro <a href='".$url."/app/files/intro.pdf'>HERE</a><br>
             <a href='https://www.18jorissen.co.za/app/enroll_student.php'>Get yourself Registered Now</a><br><br>
             ";
 
@@ -115,8 +117,7 @@ if(isset($_POST["save_quote"])){
     $roomType = $_POST["roomType"];
     $start = $_POST["start"].'-01';
     $end = $_POST["end"].'-01';
-    $registration = isset($_POST["registration"]) ? 1 : 0;
-    $deposit = isset($_POST["deposit"]) ? 1 : 0;
+    $payable = json_encode($_POST['payable']);
 
 
     $sql = "SELECT * FROM students WHERE id=$uid";
@@ -130,8 +131,8 @@ if(isset($_POST["save_quote"])){
 
     $PDFfilename = "QUOTE_$stdntName"."_".rand().".pdf";
 
-    $s = "INSERT INTO quotations (userID, start_date, end_date, registration, deposit, roomType, pdf, date_time) VALUES
-        ($uid, '$start', '$end', $registration, $deposit, '$roomType', '$PDFfilename', '$timestamp')";
+    $s = "INSERT INTO quotations (userID, start_date, end_date, payable, roomType, pdf, date_time) VALUES
+        ($uid, '$start', '$end', '$payable', '$roomType', '$PDFfilename', '$timestamp')";
     $qry = mysqli_query($con, $s);
     if(!$qry){
         echo mysqli_error($con); exit(); die();
@@ -225,7 +226,7 @@ if(isset($_GET["la_mail"])){
     $stdntName = $row["name"];
 
     $body = "Dear $stdntName,<br>";
-    $body .= "Please <a href='https://www.18jorissen.co.za/app/files/LeaseAgreement.pdf'>Click here</a> to get the LEASE AGREEMENT<br>";
+    $body .= "Please <a href='".$url."/app/files/LeaseAgreement.pdf'>Click here</a> to get the LEASE AGREEMENT<br>";
     $body .= "Kind Regards,<br>";
     $body .= "18 Jorissen Street Admin Team";
 
@@ -245,7 +246,7 @@ if(isset($_GET["rp_mail"])){
     $stdntName = $row["name"];
 
     $body = "Dear $stdntName,<br>";
-    $body .= "Please <a href='https://www.18jorissen.co.za/app/files/Registration_process.docx'>Click here</a> to view the Registration process<br>";
+    $body .= "Please <a href='".$url."/app/files/Registration_process.docx'>Click here</a> to view the Registration process<br>";
     $body .= "Kind Regards,<br>";
     $body .= "18 Jorissen Street Admin Team";
     $headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -257,6 +258,12 @@ if(isset($_GET["rp_mail"])){
     $sql = "UPDATE students SET rp_email=1 WHERE id=$uid";
     mysqli_query($con, $sql);
     js_redirect("admin_email_interested.php?quotation=1");
+}
+if(isset($_GET['del'])){
+    $id = $_GET['del'];
+    $s = "UPDATE students SET intrestedDeleted = 1 WHERE id = $id";
+    $qry = mysqli_query($con, $s);
+    js_redirect("admin_email_interested.php?delDone=1");
 }
 ?>
 <!DOCTYPE html>
@@ -306,6 +313,15 @@ require 'parts/head.php';
                         <div class="card mb-4 py-3 border-left-success">
                             <div class="card-body text-success">
                                 <strong>Success! </strong> Quotation was sent to the registered email!
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    if(isset($_GET["delDone"]) && $_GET["delDone"]){
+                        ?>
+                        <div class="card mb-4 py-3 border-left-success">
+                            <div class="card-body text-success">
+                                <strong>Success! </strong> Interested student was removed.
                             </div>
                         </div>
                         <?php
@@ -386,13 +402,16 @@ require 'parts/head.php';
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-info" href="admin_email_interested.php?intro_email=<?php echo $row["id"]; ?>" style="text-decoration: none;">
-                                                        Introduction email<?php if($row["intro_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
+                                                        Introduction email<?php if(isset($row["intro_email"]) && $row["intro_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
                                                     </a>
                                                     <a class="btn btn-primary" href="admin_email_interested.php?la_mail=<?php echo $row["id"]; ?>" style="text-decoration: none;">
-                                                        Lease Agr<?php if($row["la_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
+                                                        Lease Agr<?php if(isset($row["la_email"]) && $row["la_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
                                                     </a>
                                                     <a class="btn btn-secondary" href="admin_email_interested.php?rp_mail=<?php echo $row["id"]; ?>" style="text-decoration: none;">
-                                                        Reg Process<?php if($row["rp_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
+                                                        Reg Process<?php if(isset($row["rp_email"]) && $row["rp_email"]) echo "<span class='badge bg-white text-info ml-1'>Sent</span>"; ?>
+                                                    </a>
+                                                    <a class="btn btn-danger" href="admin_email_interested.php?del=<?php echo $row["id"]; ?>" style="text-decoration: none;">
+                                                        Delete
                                                     </a>
                                                 </td>
                                             </tr>
@@ -417,6 +436,10 @@ require 'parts/head.php';
                                                                     <label for="exampleInputPassword1_<?php echo $rand; ?>">End</label>
                                                                     <input name="end" type="month" class="form-control" id="exampleInputPassword1_<?php echo $rand; ?>">
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputPassword1_<?php echo $rand; ?>">Registration Charges</label>
+                                                                    <input name="regCharges" type="number" class="form-control" id="exampleInputPassword1_<?php echo $rand; ?>">
+                                                                </div>
                                                                 <p class="m-0 font-weight-bold">Select Room Type</p>
                                                                 <div class="form-check form-check-inline mb-3">
                                                                     <input class="form-check-input" type="radio" name="roomType" id="inlineRadio1" value="Single">
@@ -430,14 +453,26 @@ require 'parts/head.php';
                                                                     <input class="form-check-input" type="radio" name="roomType" id="inlineRadio3" value="Triple">
                                                                     <label class="form-check-label" for="inlineRadio3">Triple</label>
                                                                 </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="roomType" id="inlineRadio3" value="Quadruple">
+                                                                    <label class="form-check-label" for="inlineRadio3">Quadruple</label>
+                                                                </div>
                                                                 <p class="m-0 font-weight-bold">Payable</p>
                                                                 <div class="form-check">
-                                                                    <input type="checkbox" name="registration" class="form-check-input" id="exampleCheck1_<?php echo $rand; ?>" value="1">
+                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck1_<?php echo $rand; ?>" value="reg">
                                                                     <label class="form-check-label" for="exampleCheck1_<?php echo $rand; ?>">Registration Charges</label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input type="checkbox" name="deposit" class="form-check-input" id="exampleCheck2_<?php echo $rand; ?>" value="1">
+                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck2_<?php echo $rand; ?>" value="dep">
                                                                     <label class="form-check-label" for="exampleCheck2_<?php echo $rand; ?>">Deposit Charges</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck1_<?php echo $rand; ?>" value="rental">
+                                                                    <label class="form-check-label" for="exampleCheck1_<?php echo $rand; ?>">Rental Charges</label>
+                                                                </div>
+                                                                <div class="form-check">
+                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck2_<?php echo $rand; ?>" value="topup">
+                                                                    <label class="form-check-label" for="exampleCheck2_<?php echo $rand; ?>">Top up</label>
                                                                 </div>
                                                                 <div class="d-flex justify-content-around mt-4 mb-2">
                                                                     <button type="submit" class="btn btn-primary" name="save_quote">Send</button>

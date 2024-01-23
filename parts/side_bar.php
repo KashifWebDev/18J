@@ -105,7 +105,7 @@
 <!--                </a>-->
                 <a class="collapse-item" href="admin_checkIn_list.php">
                     <i class="fas fa-fw fa-check"></i>
-                    <span>Check In List</span>
+                    <span>Check In/Out List</span>
                 </a>
             </div>
         </div>
@@ -155,14 +155,14 @@
                     <i class="fas fa-fw fa-at"></i>
                     <span>Interested Students</span>
                 </a>
-                <a class="collapse-item" href="admin_email_reserved.php">
-                    <i class="fas fa-fw fa-at"></i>
-                    <span>Reserved Students</span>
-                </a>
-                <a class="collapse-item" href="admin_email_booked.php">
-                    <i class="fas fa-fw fa-at"></i>
-                    <span>Booked Students</span>
-                </a>
+<!--                <a class="collapse-item" href="admin_email_reserved.php">-->
+<!--                    <i class="fas fa-fw fa-at"></i>-->
+<!--                    <span>Reserved Students</span>-->
+<!--                </a>-->
+<!--                <a class="collapse-item" href="admin_email_booked.php">-->
+<!--                    <i class="fas fa-fw fa-at"></i>-->
+<!--                    <span>Booked Students</span>-->
+<!--                </a>-->
             </div>
         </div>
     </li>

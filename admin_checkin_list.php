@@ -42,6 +42,7 @@ require 'parts/head.php';
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Record Type</th>
                                         <th>Inspection Date</th>
                                         <th>Inspection Time</th>
                                         <th>Tenant Name</th>
@@ -53,6 +54,7 @@ require 'parts/head.php';
                                     <tfoot>
                                     <tr>
                                         <th>#</th>
+                                        <th>Record Type</th>
                                         <th>Inspection Date</th>
                                         <th>Inspection Time</th>
                                         <th>Tenant Name</th>
@@ -70,6 +72,7 @@ require 'parts/head.php';
                                             ?>
                                             <tr>
                                                 <td><?php echo $row["id"]; ?></td>
+                                                <td><?php echo 'Check '.$row["type"]; ?></td>
                                                 <td><?php echo $row["inspectionDate"]; ?></td>
                                                 <td><?php echo $row["inspectionTime"]; ?></td>
                                                 <td><?php echo $row["tenantName"]; ?></td>

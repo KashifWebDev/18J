@@ -2,7 +2,6 @@
 require 'parts/app.php';
 
 if(isset($_POST['submit'])){
-    print_r($_POST);
     $inspectionDate = $_POST['inspectionDate'];
     $inspectionTime = $_POST['inspectionTime'];
     $tenantName = $_POST['tenantName'];
@@ -11,6 +10,7 @@ if(isset($_POST['submit'])){
     $landLordSign = $_POST['landLordSign'];
     $note = $_POST['note'];
     $roomNumber = $_POST['roomNumber'];
+    $type = $_POST['type'];
 
     $tenantCheckBox = join(",", $_POST['tenantCheckBox']);
     $landlordCheckBox = join(",", $_POST['landlordCheckBox']);
@@ -21,10 +21,10 @@ if(isset($_POST['submit'])){
 
     $sql = "INSERT INTO checkin 
         (inspectionDate, inspectionTime, tenantName, landLordName, tenantSignature, landLordSign, 
-        note, tenantCheckBox, landlordCheckBox, roomNumber)
+        note, tenantCheckBox, landlordCheckBox, roomNumber, type)
         VALUES 
         ('$inspectionDate', '$inspectionTime', '$tenantName', '$landLordName', '$tenantSignature', '$landLordSign', 
-        '$note', '$tenantCheckBox', '$landlordCheckBox', '$roomNumber')";
+        '$note', '$tenantCheckBox', '$landlordCheckBox', '$roomNumber', '$type')";
 
     if ($con->query($sql) === TRUE) {
         js_redirect("admin_checkIn_list.php?success=1");
@@ -40,7 +40,7 @@ if(isset($_POST['submit'])){
 <html lang="en">
 
 <?php
-$title = "Check In List";
+$title = "Check In/Out List";
 require 'parts/head.php';
 ?>
 
@@ -76,6 +76,16 @@ require 'parts/head.php';
 
                     <form action="" method="post">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="sel1">Record Type</label>
+                                    <select class="form-control" name="type" id="sts">
+                                        <option value="">-- SELECT --</option>
+                                        <option value="In">Check In</option>
+                                        <option value="Out">Check Out</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="roomNumber">Room Number</label>
