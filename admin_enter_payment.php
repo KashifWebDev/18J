@@ -149,7 +149,7 @@ require 'parts/head.php';
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="ref">Bank Reference</label>
-                                                    <input type="number" name="bankReference" class="form-control" id="ref" required>
+                                                    <input type="text" name="bankReference" class="form-control" id="ref" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -195,7 +195,7 @@ require 'parts/head.php';
                                                     totalAmount, totalDays, date_time, descr)
                                 VALUES ($userID, '$paymentDate', '$startDate', '$roomType',
                                         '$totalAmountToPay','1', '$timestamp', '$desc')";
-
+                        echo $sql;
 
                         if(mysqli_query($con, $sql)){
                             $last_id = mysqli_insert_id($con);
@@ -215,6 +215,7 @@ require 'parts/head.php';
                             $s = "UPDATE rooms SET $new_bedCol = 1 WHERE id=$roomID";
 //                            echo $s; exit(); die();
                             mysqli_query($con, $s);
+                            exit(); die();
 
                             js_redirect("admin_enter_payment.php?success=1&last_id=$last_id");
                         }else{
