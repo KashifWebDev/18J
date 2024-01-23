@@ -26,8 +26,11 @@ if(isset($_POST['submit'])){
         ('$inspectionDate', '$inspectionTime', '$tenantName', '$landLordName', '$tenantSignature', '$landLordSign', 
         '$note', '$tenantCheckBox', '$landlordCheckBox', '$roomNumber', '$type')";
 
+    echo $sql;
+
+    exit(); die();
+
     if ($con->query($sql) === TRUE) {
-        exit(); die();
         js_redirect("admin_checkIn_list.php?success=1");
     } else {
         echo "Error: " . $sql . "<br>" . $con->error;
