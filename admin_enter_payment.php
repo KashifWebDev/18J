@@ -213,7 +213,7 @@ require 'parts/head.php';
                             if($bed ==4 ) $new_bedCol = "bed4";
 
                             $s = "UPDATE rooms SET $new_bedCol = 1 WHERE id=$roomID";
-//                            echo $s; exit(); die();
+                            echo $s; exit(); die();
                             mysqli_query($con, $s);
                             exit(); die();
 
