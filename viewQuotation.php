@@ -1,5 +1,7 @@
 <?php
 require_once "parts/db.php";
+session_start();
+
 
 //$id = $_GET["id"] ?? null;
 //$s = "SELECT * FROM quotations WHERE id = $id";
@@ -10,7 +12,6 @@ $uid = $id = $_GET["uid"];
 
 $date1 = $_GET["start"];
 $date2 = $_GET["end"];
-$regCharges = $_GET["regCharges"];
 $ts1 = strtotime($date1);
 $ts2 = strtotime($date2);
 $year1 = date('Y', $ts1);
@@ -27,8 +28,6 @@ if($_GET["roomType"]=="Single") $charges = 6000;
 if($_GET["roomType"]=="Double") $charges = 4500;
 if($_GET["roomType"]=="Triple") $charges = 4000;
 
-if($_GET["registration"]) $RegCharges = $regCharges;
-if($_GET["deposit"]) $DepositCharges = 2000;
 
 $s = "SELECT * FROM students WHERE id = $id";
 $qry = mysqli_query($con, $s);
@@ -152,14 +151,24 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
             </td>
         </tr>
         <tr>
-            <td><?php if($_GET["registration"]) echo "Registration"; ?></td>
-            <td><?php if($_GET["registration"]) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
-            <td><?php if($_GET["registration"]) {echo $regCharges;} else{ echo "&nbsp;";} ?></td>
+            <td><?php if(in_array('reg', $_SESSION["payable"])) echo "Registration"; ?></td>
+            <td><?php if(in_array('reg', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
+            <td><?php if(in_array('reg', $_SESSION["payable"])) {echo $_GET['reg'];} else{ echo "&nbsp;";} ?></td>
         </tr>
         <tr>
-            <td><?php if($_GET["deposit"]) echo "Security Deposit"; ?></td>
-            <td><?php if($_GET["deposit"]) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
-            <td><?php if($_GET["deposit"]) { echo "2000";} else{ echo "&nbsp;";} ?></td>
+            <td><?php if(in_array('dep', $_SESSION["payable"])) echo "Deposit"; ?></td>
+            <td><?php if(in_array('dep', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
+            <td><?php if(in_array('dep', $_SESSION["payable"])) {echo $_GET['dep'];} else{ echo "&nbsp;";} ?></td>
+        </tr>
+        <tr>
+            <td><?php if(in_array('rental', $_SESSION["payable"])) echo "Rental"; ?></td>
+            <td><?php if(in_array('rental', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
+            <td><?php if(in_array('rental', $_SESSION["payable"])) {echo $_GET['ren'];} else{ echo "&nbsp;";} ?></td>
+        </tr>
+        <tr>
+            <td><?php if(in_array('topup', $_SESSION["payable"])) echo "Registration"; ?></td>
+            <td><?php if(in_array('topup', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
+            <td><?php if(in_array('topup', $_SESSION["payable"])) {echo $_GET['top'];} else{ echo "&nbsp;";} ?></td>
         </tr>
         <tr>
             <td>Prices include Water, Electricity and Wifi</td>
@@ -180,8 +189,8 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
     <input name="start" type="hidden" value="<?php echo $_GET["start"]; ?>">
     <input name="end" type="hidden" value="<?php echo $_GET["end"]; ?>">
     <input type="hidden" name="roomType" value="<?php echo $_GET["roomType"]; ?>">
-    <input type="hidden" name="registration" value="<?php echo $_GET["registration"]; ?>">
-    <input type="hidden" name="deposit" value="<?php echo $_GET["deposit"]; ?>">
+<!--    <input type="hidden" name="registration" value="--><?php //echo $_GET["registration"]; ?><!--">-->
+<!--    <input type="hidden" name="deposit" value="--><?php //echo $_GET["deposit"]; ?><!--">-->
     <input type="submit" value="Send Quote" name="save_quote" class="btn btn-primary ml-2 mt-3 mb-4">
 </form>
 

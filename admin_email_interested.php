@@ -67,14 +67,19 @@ Let us make your new home away from home a memorable experience.<br><br>
 if(isset($_POST["view_quote"])){
     $uid = $_POST["uid"];
     $roomType = $_POST["roomType"];
-    $regCharges = $_POST["regCharges"];
     $start = $_POST["start"].'-01';
     $end = $_POST["end"].'-01';
-    $registration = isset($_POST["registration"]) ? 1 : 0;
-    $deposit = isset($_POST["deposit"]) ? 1 : 0;
 
 
-    js_redirect("viewQuotation.php?uid=$uid&roomType=$roomType&start=$start&end=$end&registration=$registration&deposit=$deposit&regCharges=$regCharges");
+    $_SESSION["payable"] = $_POST['payable'];
+    $reg = $_POST["reg_input"];
+    $dep = $_POST["dep_input"];
+    $ren = $_POST["rental_input"];
+    $top = $_POST["topup_input"];
+
+    $qry = "viewQuotation.php?uid=$uid&roomType=$roomType&start=$start&end=$end";
+    $qry .= "&payable=$payable&reg=$reg&dep=$dep&ren=$ren&top=$top";
+    js_redirect($qry);
 }
 if(isset($_GET["intro_email"])){
     $uid = $_GET["intro_email"];
@@ -118,6 +123,10 @@ if(isset($_POST["save_quote"])){
     $start = $_POST["start"].'-01';
     $end = $_POST["end"].'-01';
     $payable = json_encode($_POST['payable']);
+    $reg_input = $_POST["reg_input"];
+    $dep_input = $_POST["dep_input"];
+    $rental_input = $_POST["rental_input"];
+    $topup_input = $_POST["topup_input"];
 
 
     $sql = "SELECT * FROM students WHERE id=$uid";
@@ -131,8 +140,8 @@ if(isset($_POST["save_quote"])){
 
     $PDFfilename = "QUOTE_$stdntName"."_".rand().".pdf";
 
-    $s = "INSERT INTO quotations (userID, start_date, end_date, payable, roomType, pdf, date_time) VALUES
-        ($uid, '$start', '$end', '$payable', '$roomType', '$PDFfilename', '$timestamp')";
+    $s = "INSERT INTO quotations (userID, start_date, end_date, payable, roomType, pdf, date_time, reg_input, dep_input, rental_input, topup_input) VALUES
+        ($uid, '$start', '$end', '$payable', '$roomType', '$PDFfilename', '$timestamp', '$reg_input', '$dep_input', '$rental_input', '$topup_input')";
     $qry = mysqli_query($con, $s);
     if(!$qry){
         echo mysqli_error($con); exit(); die();
@@ -386,19 +395,19 @@ require 'parts/head.php';
                                                     <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#quote_<?php echo $rand; ?>">
                                                         Quotation
                                                     </button>
-                                                    <?php
-                                                    $sss = "SELECT * FROM quotations WHERE userID=$uid";
-                                                    $sres = mysqli_query($con, $sss);
-                                                    if(mysqli_num_rows($sres)){
-                                                        while($roo = mysqli_fetch_array($sres)){
-                                                        ?>
-                                                        <a class="mr-1" href="generatedPDFs/<?php echo $roo["pdf"]; ?>" style="text-decoration: none;">
-                                                            <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">
-                                                                <i class="fas fa-file-invoice"></i>
-                                                            </span>
-                                                        </a>
-                                                    <?php }
-                                                    } ?>
+<!--                                                    --><?php
+//                                                    $sss = "SELECT * FROM quotations WHERE userID=$uid";
+//                                                    $sres = mysqli_query($con, $sss);
+//                                                    if(mysqli_num_rows($sres)){
+//                                                        while($roo = mysqli_fetch_array($sres)){
+//                                                        ?>
+<!--                                                        <a class="mr-1" href="generatedPDFs/--><?php //echo $roo["pdf"]; ?><!--" style="text-decoration: none;">-->
+<!--                                                            <span class="bg-success text-white px-2 py-1" style="border-radius: 10px;">-->
+<!--                                                                <i class="fas fa-file-invoice"></i>-->
+<!--                                                            </span>-->
+<!--                                                        </a>-->
+<!--                                                    --><?php //}
+//                                                    } ?>
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-info" href="admin_email_interested.php?intro_email=<?php echo $row["id"]; ?>" style="text-decoration: none;">
@@ -436,10 +445,6 @@ require 'parts/head.php';
                                                                     <label for="exampleInputPassword1_<?php echo $rand; ?>">End</label>
                                                                     <input name="end" type="month" class="form-control" id="exampleInputPassword1_<?php echo $rand; ?>">
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputPassword1_<?php echo $rand; ?>">Registration Charges</label>
-                                                                    <input name="regCharges" type="number" class="form-control" id="exampleInputPassword1_<?php echo $rand; ?>">
-                                                                </div>
                                                                 <p class="m-0 font-weight-bold">Select Room Type</p>
                                                                 <div class="form-check form-check-inline mb-3">
                                                                     <input class="form-check-input" type="radio" name="roomType" id="inlineRadio1" value="Single">
@@ -459,21 +464,43 @@ require 'parts/head.php';
                                                                 </div>
                                                                 <p class="m-0 font-weight-bold">Payable</p>
                                                                 <div class="form-check">
-                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck1_<?php echo $rand; ?>" value="reg">
-                                                                    <label class="form-check-label" for="exampleCheck1_<?php echo $rand; ?>">Registration Charges</label>
+                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck1" value="reg">
+                                                                    <label class="form-check-label" for="exampleCheck1">Registration Charges</label>
+                                                                    <input type="number" name="reg_input" class="form-control additional-input" style="display: none;" placeholder="Additional Information">
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck2_<?php echo $rand; ?>" value="dep">
-                                                                    <label class="form-check-label" for="exampleCheck2_<?php echo $rand; ?>">Deposit Charges</label>
+                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck2" value="dep">
+                                                                    <label class="form-check-label" for="exampleCheck2">Deposit Charges</label>
+                                                                    <input type="number" name="dep_input" class="form-control additional-input" style="display: none;" placeholder="Additional Information">
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck1_<?php echo $rand; ?>" value="rental">
-                                                                    <label class="form-check-label" for="exampleCheck1_<?php echo $rand; ?>">Rental Charges</label>
+                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck3" value="rental">
+                                                                    <label class="form-check-label" for="exampleCheck3">Rental Charges</label>
+                                                                    <input type="number" name="rental_input" class="form-control additional-input" style="display: none;" placeholder="Additional Information">
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck2_<?php echo $rand; ?>" value="topup">
-                                                                    <label class="form-check-label" for="exampleCheck2_<?php echo $rand; ?>">Top up</label>
+                                                                    <input type="checkbox" name="payable[]" class="form-check-input" id="exampleCheck4" value="topup">
+                                                                    <label class="form-check-label" for="exampleCheck4">Top up</label>
+                                                                    <input type="number" name="topup_input" class="form-control additional-input" style="display: none;" placeholder="Additional Information">
                                                                 </div>
+
+                                                                <script>
+                                                                    // Add an event listener to each checkbox
+                                                                    document.querySelectorAll('.form-check-input').forEach(function (checkbox) {
+                                                                        checkbox.addEventListener('change', function () {
+                                                                            // Get the corresponding input box
+                                                                            var inputBox = this.parentElement.querySelector('.additional-input');
+
+                                                                            // Toggle the display property based on the checkbox state
+                                                                            if (this.checked) {
+                                                                                inputBox.style.display = 'block';
+                                                                            } else {
+                                                                                inputBox.style.display = 'none';
+                                                                            }
+                                                                        });
+                                                                    });
+                                                                </script>
+
                                                                 <div class="d-flex justify-content-around mt-4 mb-2">
                                                                     <button type="submit" class="btn btn-primary" name="save_quote">Send</button>
                                                                     <button type="submit" class="btn btn-success" name="view_quote">View</button>

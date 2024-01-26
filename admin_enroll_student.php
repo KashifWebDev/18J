@@ -119,7 +119,7 @@ require 'parts/head.php';
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="email">University Registration Number</label>
+                                            <label for="email">Student Registration Number</label>
                                             <input type="text" class="form-control" name="uniRegistrationNum" >
                                         </div>
                                         <div class="form-group mt-2">
@@ -133,11 +133,7 @@ require 'parts/head.php';
                                         </div>
                                         <div class="form-group mt-2" id="box">
                                             <label for="sel1">Private Bursar Name:</label>
-                                            <select class="form-control" name="privateSponsored" >
-                                                <option value="">-- SELECT --</option>
-                                                <option value="Private">Private</option>
-                                                <option value="Sponsored">Sponsored</option>
-                                            </select>
+                                            <input type="text" class="form-control" name="privateSponsored" >
                                         </div>
                                         <div class="form-group">
                                             <label for="pwd">Home Address:</label>
@@ -188,8 +184,8 @@ require 'parts/head.php';
                         $idNumber = $_POST["idNumber"];
                         $uniName = $_POST["uniName"];
                         $uniRegistrationNum = $_POST["uniRegistrationNum"];
-//                        $privateSponsored = $_POST["privateSponsored"];
-                        $sponsorName = $_POST["sponsorName"];
+                        $privateSponsored = $_POST["privateSponsored"];
+                        //$sponsorName = $_POST["sponsorName"];
                         $address = $_POST["address"];
                         $contact1 = $_POST["contact1"];
                         $contact2 = $_POST["contact2"];
@@ -224,9 +220,9 @@ require 'parts/head.php';
                         }
                         $pic = strtolower($pic);
                         $sql = "INSERT INTO students (name, surename, email, mobile, IDnum,
-                                      linkToLease, uniName, UniRegNum, studentStatus, sponsorName, address, guardian1, guardian2, moveIn, moveOut, leaseDuration) VALUES 
+                                      linkToLease, uniName, UniRegNum, privateSponsored, sponsorName, address, guardian1, guardian2, moveIn, moveOut, leaseDuration) VALUES 
                                 ('$name', '$surname', '$email', '$mob', '$idNumber', '$pic', '$uniName',
-                                 '$uniRegistrationNum', '$studentStatus', '$sponsorName', '$address', '$contact1', '$contact2', '$moveIn', '$moveOut', '$leaseDuration')";
+                                 '$uniRegistrationNum', '$studentStatus', '$privateSponsored', '$address', '$contact1', '$contact2', '$moveIn', '$moveOut', '$leaseDuration')";
 
 
                         if(phpRunSingleQuery($sql)){

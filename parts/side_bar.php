@@ -63,13 +63,13 @@
         <div id="collapse2" class="collapse" aria-labelledby="headingTwo"
              data-parent="#accordionSidebar">
             <div class="bg-gradient-light py-2 collapse-inner rounded">
+                <a class="collapse-item" href="admin_rooms_available.php">
+                    <i class="fas fa-fw fa-exclamation-circle"></i>
+                    <span>Available</span>
+                </a>
                 <a class="collapse-item" href="admin_rooms_occupied.php">
                     <i class="fas fa-fw fa-times-circle"></i>
                     <span>Occupied</span>
-                </a>
-                <a class="collapse-item" href="admin_rooms_reserved.php">
-                    <i class="fas fa-fw fa-exclamation-circle"></i>
-                    <span>Reserved</span>
                 </a>
             </div>
         </div>
@@ -99,10 +99,10 @@
                     <i class="fas fa-fw fa-hospital"></i>
                     <span>Rooms Management</span>
                 </a>
-<!--                <a class="collapse-item" href="">-->
-<!--                    <i class="fas fa-fw fa-hospital"></i>-->
-<!--                    <span>Breach Lease Agreement</span>-->
-<!--                </a>-->
+                <a class="collapse-item" href="admin_breach_lease.php">
+                    <i class="fas fa-fw fa-hospital"></i>
+                    <span>Breach Lease Agreement</span>
+                </a>
                 <a class="collapse-item" href="admin_checkin_list.php">
                     <i class="fas fa-fw fa-check"></i>
                     <span>Check In/Out List</span>
