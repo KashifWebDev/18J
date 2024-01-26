@@ -150,26 +150,34 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
                 ?>
             </td>
         </tr>
-        <tr>
-            <td><?php if(in_array('reg', $_SESSION["payable"])) echo "Registration"; ?></td>
-            <td><?php if(in_array('reg', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
-            <td><?php if(in_array('reg', $_SESSION["payable"])) {echo $_GET['reg'];} else{ echo "&nbsp;";} ?></td>
-        </tr>
-        <tr>
-            <td><?php if(in_array('dep', $_SESSION["payable"])) echo "Deposit"; ?></td>
-            <td><?php if(in_array('dep', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
-            <td><?php if(in_array('dep', $_SESSION["payable"])) {echo $_GET['dep'];} else{ echo "&nbsp;";} ?></td>
-        </tr>
-        <tr>
-            <td><?php if(in_array('rental', $_SESSION["payable"])) echo "Rental"; ?></td>
-            <td><?php if(in_array('rental', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
-            <td><?php if(in_array('rental', $_SESSION["payable"])) {echo $_GET['ren'];} else{ echo "&nbsp;";} ?></td>
-        </tr>
-        <tr>
-            <td><?php if(in_array('topup', $_SESSION["payable"])) echo "Registration"; ?></td>
-            <td><?php if(in_array('topup', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
-            <td><?php if(in_array('topup', $_SESSION["payable"])) {echo $_GET['top'];} else{ echo "&nbsp;";} ?></td>
-        </tr>
+        <?php if(in_array('dep', $_SESSION["payable"])){ ?>
+            <tr>
+                <td><?php if(in_array('dep', $_SESSION["payable"])) echo "Deposit"; ?></td>
+                <td><?php if(in_array('dep', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
+                <td><?php if(in_array('dep', $_SESSION["payable"])) {echo $_GET['dep'];} else{ echo "&nbsp;";} ?></td>
+            </tr>
+        <?php } ?>
+        <?php if(in_array('reg', $_SESSION["payable"])){ ?>
+            <tr>
+                <td><?php if(in_array('reg', $_SESSION["payable"])) echo "Registration"; ?></td>
+                <td><?php if(in_array('reg', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
+                <td><?php if(in_array('reg', $_SESSION["payable"])) {echo $_GET['reg'];} else{ echo "&nbsp;";} ?></td>
+            </tr>
+        <?php } ?>
+        <?php if(in_array('rental', $_SESSION["payable"])){ ?>
+            <tr>
+                <td><?php if(in_array('rental', $_SESSION["payable"])) echo "Rental"; ?></td>
+                <td><?php if(in_array('rental', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
+                <td><?php if(in_array('rental', $_SESSION["payable"])) {echo $_GET['ren'];} else{ echo "&nbsp;";} ?></td>
+            </tr>
+        <?php } ?>
+        <?php if(in_array('topup', $_SESSION["payable"])){ ?>
+            <tr>
+                <td><?php if(in_array('topup', $_SESSION["payable"])) echo "Top up"; ?></td>
+                <td><?php if(in_array('topup', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
+                <td><?php if(in_array('topup', $_SESSION["payable"])) {echo $_GET['top'];} else{ echo "&nbsp;";} ?></td>
+            </tr>
+        <?php } ?>
         <tr>
             <td>Prices include Water, Electricity and Wifi</td>
             <td></td>
