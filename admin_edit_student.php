@@ -152,8 +152,16 @@ require 'parts/head.php';
                                             <input type="text" name="contact2" class="form-control" value="<?php echo $student["guardian2"]; ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="pwd">Move In Date</label>
-                                            <input type="text" name="moveIn" class="form-control" value="<?php echo $student["moveIn"]; ?>">
+                                            <label for="pwd">Move In Date:</label>
+                                            <input type="date" name="moveIn" class="form-control" value="<?php echo $student["moveIn"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd">Move Out Date:</label>
+                                            <input type="date" name="moveOut" class="form-control" value="<?php echo $student["moveOut"]; ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Duration of the Lease</label>
+                                            <input type="text" class="form-control" name="leaseDuration" value="<?php echo $student["leaseDuration"]; ?>" >
                                         </div>
                                     </div>
                                 </div>

@@ -20,7 +20,9 @@ if(isset($_GET["email"])){
             ->	Communal kitchens are spaced throughout the residence <br>
             ->	Modern Bathrooms and kitchens are always spotlessly clean.<br>
             ->	Secure 24/7 fingerprint-access<br>
-            ->	Let us make your new home away from home a memorable experience.<br><br>
+            ->	Let us make your new home away from home a memorable experience. www.18jorissen.co.za<br><br>
+            ->	Double: R5200<br><br>
+            ->	Single: R7000<br><br>
             ";
     $txt .= "Kind Regards,<br>";
     $txt .= "18 Jorissen Street Admin Team";

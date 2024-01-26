@@ -102,7 +102,7 @@ require 'parts/head.php';
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="inspectionTime">Date of Inspection</label>
+                                    <label for="inspectionTime">Time of Inspection</label>
                                     <input type="time" name="inspectionTime" class="form-control" id="inspectionTime">
                                 </div>
                             </div>

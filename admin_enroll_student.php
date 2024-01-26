@@ -157,7 +157,7 @@ require 'parts/head.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Duration of the Lease</label>
-                                            <input type="text" class="form-control" name="uniName" >
+                                            <input type="text" class="form-control" name="leaseDuration" >
                                         </div>
                                     </div>
                                 </div>
