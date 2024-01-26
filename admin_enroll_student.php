@@ -119,7 +119,7 @@ require 'parts/head.php';
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="email">Student Registration Number</label>
+                                            <label for="email">Student Number</label>
                                             <input type="text" class="form-control" name="uniRegistrationNum" >
                                         </div>
                                         <div class="form-group mt-2">
