@@ -121,9 +121,9 @@ if(isset($_GET["intro_email"])){
     }
 
 
-    $sql = "UPDATE students SET intro_email=1 WHERE id=$uid";
-    mysqli_query($con, $sql);
-    exit(); die();
+//    $sql = "UPDATE students SET intro_email=1 WHERE id=$uid";
+//    mysqli_query($con, $sql);
+//    exit(); die();
     js_redirect("admin_email_interested.php?introduction_sent=1");
 }
 if(isset($_POST["save_quote"])){
