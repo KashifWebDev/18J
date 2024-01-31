@@ -116,6 +116,7 @@ require 'parts/head.php';
                                     <tr>
                                         <th>#</th>
                                         <th>Student</th>
+                                        <th>Room Number</th>
                                         <th>Room Type</th>
                                         <th>Total Amount</th>
                                         <th>Action</th>
@@ -125,6 +126,7 @@ require 'parts/head.php';
                                     <tr>
                                         <th>#</th>
                                         <th>Student</th>
+                                        <th>Room Number</th>
                                         <th>Room Type</th>
                                         <th>Total Amount</th>
                                         <th>Action</th>
@@ -140,11 +142,17 @@ require 'parts/head.php';
                                             $s = "SELECT * FROM students WHERE id=$studentID";
                                             $s1 = mysqli_query($con, $s);
                                             $s2 = mysqli_fetch_array($s1);
+
+                                            $roomID = $s2["roomID"];
+                                            $s = "SELECT * FROM rooms WHERE id=$roomID";
+                                            $k1 = mysqli_query($con, $s);
+                                            $k2 = mysqli_fetch_array($k1, MYSQLI_ASSOC);
                                             ?>
                                             <tr>
                                                 <td><?php echo $row["id"]; ?></td>
                                                 <td><?php echo $s2["name"].' '.$s2["surename"]; ?></td>
                                                 <td><?php echo $row["roomType"]; ?></td>
+                                                <td><?php echo isset($k2["room"]) ? $k2["room"] : ''; ?></td>
                                                 <td><?php echo $row["totalAmount"]; ?></td>
                                                 <td>
                                                     <div class="dropdown mb-4">

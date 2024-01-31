@@ -116,6 +116,43 @@ require 'parts/head.php';
                                             <label for="email">University Name</label>
                                             <input type="text" class="form-control" name="leaseDuration" >
                                         </div>
+                                        <div class="form-group mt-2">
+                                            <label for="sel1">Room Number</label>
+                                            <?php
+                                               $roomSQL = "SELECT * FROM rooms";
+                                               $roomQRY = mysqli_query($con, $roomSQL);
+                                            ?>
+                                            <select class="form-control" name="roomID" id="sts">
+                                                <option value="">-- SELECT --</option>
+                                                <?php
+                                                    while($row = mysqli_fetch_array($roomQRY)){
+                                                        ?>
+                                                        <option value="<?=$row["id"]?>"><?=$row["room"]?></option>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label for="sel1">Room Type</label>
+                                            <select class="form-control" name="roomType" id="sts">
+                                                <option value="">-- SELECT --</option>
+                                                <option value="Single">Single Room</option>
+                                                <option value="Double">Double Room</option>
+                                                <option value="Triple">Triple Room</option>
+                                                <option value="Quadruple">Quadruple Room</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label for="sel1">Bed Number</label>
+                                            <select class="form-control" name="bedNum" id="sts">
+                                                <option value="">-- SELECT --</option>
+                                                <option value="1">Bed #1</option>
+                                                <option value="2">Bed #2</option>
+                                                <option value="3">Bed #3</option>
+                                                <option value="4">Bed #4</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -179,8 +216,9 @@ require 'parts/head.php';
                         $surname = $_POST["surname"];
                         $email = $_POST["email"];
                         $mob = $_POST["mob"];
-//                        $roomID = $_POST["roomID"];
-//                        $bed = $_POST["bed"];
+                        $roomID = $_POST["roomID"];
+                        $roomType = $_POST["roomType"];
+                        $bed = $_POST["bedNum"];
                         $idNumber = $_POST["idNumber"];
                         $uniName = $_POST["uniName"];
                         $uniRegistrationNum = $_POST["uniRegistrationNum"];
@@ -220,9 +258,11 @@ require 'parts/head.php';
                         }
                         $pic = strtolower($pic);
                         $sql = "INSERT INTO students (name, surename, email, mobile, IDnum,
-                                      linkToLease, uniName, UniRegNum, privateSponsored, sponsorName, address, guardian1, guardian2, moveIn, moveOut, leaseDuration) VALUES 
+                                      linkToLease, uniName, UniRegNum, privateSponsored, sponsorName, address, guardian1, guardian2, moveIn, moveOut,
+                                leaseDuration, roomID, bedID, roomType) VALUES 
                                 ('$name', '$surname', '$email', '$mob', '$idNumber', '$pic', '$uniName',
-                                 '$uniRegistrationNum', '$studentStatus', '$privateSponsored', '$address', '$contact1', '$contact2', '$moveIn', '$moveOut', '$leaseDuration')";
+                                 '$uniRegistrationNum', '$studentStatus', '$privateSponsored', '$address', '$contact1', '$contact2', '$moveIn', '$moveOut',
+                                 '$leaseDuration', $roomID, $bed, '$roomType')";
 
 
                         if(phpRunSingleQuery($sql)){

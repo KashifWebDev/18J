@@ -121,6 +121,44 @@ require 'parts/head.php';
                                             <label for="email">University Name</label>
                                             <input type="text" class="form-control" name="uniName"  value="<?php echo $student["uniName"]; ?>">
                                         </div>
+                                        <div class="form-group mt-2">
+                                            <label for="sel1">Room Number</label>
+                                            <?php
+                                            $roomID = $student["roomID"];
+                                            $roomSQL = "SELECT * FROM rooms";
+                                            $roomQRY = mysqli_query($con, $roomSQL);
+                                            ?>
+                                            <select class="form-control" name="roomID" id="sts">
+                                                <option value="">-- SELECT --</option>
+                                                <?php
+                                                while($row = mysqli_fetch_array($roomQRY)){
+                                                    ?>
+                                                    <option value="<?=$row["id"]?>" <?=$row["id"] == $roomID ? 'selected' : ''?>><?=$row["room"]?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label for="sel1">Room Type</label>
+                                            <select class="form-control" name="roomType" id="sts">
+                                                <option value="">-- SELECT --</option>
+                                                <option value="Single" <?='Single' == $student['roomType'] ? 'selected' : ''?>>Single Room</option>
+                                                <option value="Double" <?='Double' == $student['roomType'] ? 'selected' : ''?>>Double Room</option>
+                                                <option value="Triple" <?='Triple' == $student['roomType'] ? 'selected' : ''?>>Triple Room</option>
+                                                <option value="Quadruple" <?='Quadruple' == $student['roomType'] ? 'selected' : ''?>>Quadruple Room</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mt-2">
+                                            <label for="sel1">Bed Number</label>
+                                            <select class="form-control" name="bedNum" id="sts">
+                                                <option value="">-- SELECT --</option>
+                                                <option value="1" <?=1 == $student['bedID'] ? 'selected' : ''?>>Bed #1</option>
+                                                <option value="2" <?=2 == $student['bedID'] ? 'selected' : ''?>>Bed #2</option>
+                                                <option value="3" <?=3 == $student['bedID'] ? 'selected' : ''?>>Bed #3</option>
+                                                <option value="4" <?=4 == $student['bedID'] ? 'selected' : ''?>>Bed #4</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -184,8 +222,9 @@ require 'parts/head.php';
                         $surname = $_POST["surname"];
                         $email = $_POST["email"];
                         $mob = $_POST["mob"];
-//                        $roomID = $_POST["roomID"];
-//                        $bed = $_POST["bed"];
+                        $roomID = $_POST["roomID"];
+                        $roomType = $_POST["roomType"];
+                        $bed = $_POST["bedNum"];
                         $idNumber = $_POST["idNumber"];
                         $uniName = $_POST["uniName"];
                         $uniRegistrationNum = $_POST["uniRegistrationNum"];
@@ -231,7 +270,8 @@ require 'parts/head.php';
 
                         $sql = "UPDATE students SET name='$name', surename='$surname', email='$email', mobile='$mob', IDnum='$idNumber', linkToLease='$pic',uniName='$uniName',
                                     UniRegNum='$uniRegistrationNum', privateSponsored='$privateSponsored',sponsorName='$sponsorName', address='$address',
-                    guardian1='$contact1', guardian2='$contact2', moveIn='$moveIn' WHERE  id = $student_ID";
+                    guardian1='$contact1', guardian2='$contact2', moveIn='$moveIn',roomID = $roomID, bedID=$bed, roomType = '$roomType'
+                WHERE  id = $student_ID";
 
 
                         if(phpRunSingleQuery($sql)){
