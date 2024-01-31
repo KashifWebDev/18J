@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
 $url = "https://$_SERVER[HTTP_HOST]";
 require 'parts/app.php';
 $sql = "SELECT * FROM students WHERE bedID=6969 AND roomID=6969 AND intrestedDeleted = 0";
