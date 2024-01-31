@@ -151,8 +151,8 @@ require 'parts/head.php';
                                             <tr>
                                                 <td><?php echo $row["id"]; ?></td>
                                                 <td><?php echo $s2["name"].' '.$s2["surename"]; ?></td>
-                                                <td><?php echo $row["roomType"]; ?></td>
                                                 <td><?php echo isset($k2["room"]) ? $k2["room"] : ''; ?></td>
+                                                <td><?php echo $row["roomType"]; ?></td>
                                                 <td><?php echo $row["totalAmount"]; ?></td>
                                                 <td>
                                                     <div class="dropdown mb-4">

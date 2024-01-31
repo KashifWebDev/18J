@@ -162,19 +162,23 @@ require 'parts/head.php';
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="email">University Registration Number</label>
+                                            <label for="email">Student Number</label>
                                             <input type="text" class="form-control" name="uniRegistrationNum"  value="<?php echo $student["UniRegNum"]; ?>">
                                         </div>
                                         <div class="form-group mt-2">
-                                            <label for="sel1">Private/Sponsored:</label>
+                                            <label for="sel1">Student Status:</label>
                                             <select class="form-control" name="privateSponsored" >
                                                 <option value="">-- SELECT --</option>
-                                                <option value="Private" <?php if($student["privateSponsored"]=="Private") echo "selected"; ?>>Private</option>
-                                                <option value="Sponsored" <?php if($student["privateSponsored"]=="Sponsored") echo "selected"; ?>>Sponsored</option>
+<!--                                                <option value="Private" --><?php //if($student["privateSponsored"]=="Private") echo "selected"; ?><!-->Private</option>-->
+<!--                                                <option value="Sponsored" --><?php //if($student["privateSponsored"]=="Sponsored") echo "selected"; ?><!-->Sponsored</option>-->
+
+                                                <option value="Self-Funded" <?php if($student["privateSponsored"] == "Self-Funded") echo "selected"; ?>>Self-Funded</option>
+                                                <option value="NSFAS" <?php if($student["privateSponsored"] == "NSFAS") echo "selected"; ?>>NSFAS</option>
+                                                <option value="Private Bursar" <?php if($student["privateSponsored"] == "Private Bursar") echo "selected"; ?>>Private Bursar</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="pwd">Sponsored Name:</label>
+                                            <label for="pwd">Private Bursar Name:</label>
                                             <input type="text" name="sponsorName" class="form-control" value="<?php echo $student["sponsorName"]; ?>">
                                         </div>
                                         <div class="form-group">

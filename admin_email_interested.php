@@ -90,7 +90,7 @@ if(isset($_GET["intro_email"])){
     $sql1 = mysqli_query($con, $sql);
     $row = mysqli_fetch_array($sql1);
     $stdntName = $row["name"];
-    $stdntemail = $row["email"];
+    $stdntemail = isset($row["email"]) ? $row["email"] : 'test@gmail.com';
 
 //    print_r($row);exit();die();
 
@@ -117,6 +117,7 @@ if(isset($_GET["intro_email"])){
 
     $sql = "UPDATE students SET intro_email=1 WHERE id=$uid";
     mysqli_query($con, $sql);
+    exit(); die();
     js_redirect("admin_email_interested.php?introduction_sent=1");
 }
 if(isset($_POST["save_quote"])){
