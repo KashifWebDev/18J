@@ -250,8 +250,8 @@ if(isset($_GET["la_mail"])){
 
     mail($row["email"],"Lease Agreement for 18 Jorissen Street Student Residence",$body,$headers);
 
-    $sql = "UPDATE students SET la_email=1 WHERE id=$uid";
-    mysqli_query($con, $sql);
+//    $sql = "UPDATE students SET la_email=1 WHERE id=$uid";
+//    mysqli_query($con, $sql);
     js_redirect("admin_email_interested.php?quotation=1");
 }
 if(isset($_GET["rp_mail"])){
@@ -273,8 +273,8 @@ if(isset($_GET["rp_mail"])){
 
     mail($row["email"],"Lease Agreement for 18 Jorissen Street Student Residence",$body,$headers);
 
-    $sql = "UPDATE students SET rp_email=1 WHERE id=$uid";
-    mysqli_query($con, $sql);
+//    $sql = "UPDATE students SET rp_email=1 WHERE id=$uid";
+//    mysqli_query($con, $sql);
     js_redirect("admin_email_interested.php?quotation=1");
 }
 if(isset($_GET['del'])){

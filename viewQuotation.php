@@ -32,6 +32,8 @@ if($_GET["roomType"]=="Triple") $charges = 4000;
 $s = "SELECT * FROM students WHERE id = $id";
 $qry = mysqli_query($con, $s);
 $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
+
+$total = 0;
 ?>
 <!doctype html>
 <html lang="en">
@@ -118,60 +120,60 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
 <!--            <td>--><?php //echo date("M Y", strtotime($_GET["start"])); ?><!-- - --><?php //echo date("M Y", strtotime($_GET["end"])); ?><!--</td>-->
 <!--            <td>R--><?php //echo $charges?><!-- x --><?php //echo $diff; ?><!--</td>-->
 <!--        </tr>-->
-        <tr>
-            <td class="roomTypes"><?php echo '1x '.$_GET["roomType"].' Room'; ?></td>
-            <td>
-                <?php
-                $start    = (new DateTime($_GET["start"]))->modify('first day of this month');
-                $end      = (new DateTime($_GET["end"]))->modify('first day of next month');
-                $interval = DateInterval::createFromDateString('1 month');
-                $period   = new DatePeriod($start, $interval, $end);
-                $countMustOne = 1;
-                foreach ($period as $dt) {
-                    ?>
-                    <p style="border-bottom: 1px solid black; margin: 0px;">
-                        <span></span>
-                        <span style="font-weight: normal"><?php echo $dt->format("M, Y"); ?></span>
-                    </p>
-                    <?php
-                }
-                ?>
-            </td>
-            <td>
-                <?php
-                $perMonth = intval($charges/$diff);
-                foreach ($period as $dt) {
-                    ?>
-                    <p style="border-bottom: 1px solid black; margin: 0px;font-weight: normal">
-                        R<?php echo $perMonth; ?>
-                    </p>
-                    <?php
-                }
-                ?>
-            </td>
-        </tr>
-        <?php if(in_array('dep', $_SESSION["payable"])){ ?>
+<!--        <tr>-->
+<!--            <td class="roomTypes">--><?php //echo '1x '.$_GET["roomType"].' Room'; ?><!--</td>-->
+<!--            <td>-->
+<!--                --><?php
+//                $start    = (new DateTime($_GET["start"]))->modify('first day of this month');
+//                $end      = (new DateTime($_GET["end"]))->modify('first day of next month');
+//                $interval = DateInterval::createFromDateString('1 month');
+//                $period   = new DatePeriod($start, $interval, $end);
+//                $countMustOne = 1;
+//                foreach ($period as $dt) {
+//                    ?>
+<!--                    <p style="border-bottom: 1px solid black; margin: 0px;">-->
+<!--                        <span></span>-->
+<!--                        <span style="font-weight: normal">--><?php //echo $dt->format("M, Y"); ?><!--</span>-->
+<!--                    </p>-->
+<!--                    --><?php
+//                }
+//                ?>
+<!--            </td>-->
+<!--            <td>-->
+<!--                --><?php
+//                $perMonth = intval($charges/$diff);
+//                foreach ($period as $dt) {
+//                    ?>
+<!--                    <p style="border-bottom: 1px solid black; margin: 0px;font-weight: normal">-->
+<!--                        R--><?php //echo $perMonth; ?>
+<!--                    </p>-->
+<!--                    --><?php
+//                }
+//                ?>
+<!--            </td>-->
+<!--        </tr>-->
+        <?php if(in_array('dep', $_SESSION["payable"])){ $total = $total + $_GET['dep']; ?>
             <tr>
-                <td><?php if(in_array('dep', $_SESSION["payable"])) echo "Deposit"; ?></td>
+                <td><?php if(in_array('dep', $_SESSION["payable"])) echo "Deposit "; ?><?php echo '1x '.$_GET["roomType"].' Room'; ?></td>
                 <td><?php if(in_array('dep', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
                 <td><?php if(in_array('dep', $_SESSION["payable"])) {echo $_GET['dep'];} else{ echo "&nbsp;";} ?></td>
             </tr>
         <?php } ?>
-        <?php if(in_array('reg', $_SESSION["payable"])){ ?>
+        <?php if(in_array('reg', $_SESSION["payable"])){ $total = $total + $_GET['reg']; ?>
             <tr>
                 <td><?php if(in_array('reg', $_SESSION["payable"])) echo "Registration"; ?></td>
                 <td><?php if(in_array('reg', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
                 <td><?php if(in_array('reg', $_SESSION["payable"])) {echo $_GET['reg'];} else{ echo "&nbsp;";} ?></td>
             </tr>
         <?php } ?>
-        <?php if(in_array('rental', $_SESSION["payable"])){ ?>
+        <?php if(in_array('rental', $_SESSION["payable"])){ $total = $total + $_GET['ren']; ?>
             <tr>
                 <td><?php if(in_array('rental', $_SESSION["payable"])) echo "Rental"; ?></td>
                 <td><?php if(in_array('rental', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
                 <td><?php if(in_array('rental', $_SESSION["payable"])) {echo $_GET['ren'];} else{ echo "&nbsp;";} ?></td>
             </tr>
         <?php } ?>
-        <?php if(in_array('topup', $_SESSION["payable"])){ ?>
+        <?php if(in_array('topup', $_SESSION["payable"])){ $total = $total + $_GET['top']; ?>
             <tr>
                 <td><?php if(in_array('topup', $_SESSION["payable"])) echo "Top up"; ?></td>
                 <td><?php if(in_array('topup', $_SESSION["payable"])) { echo date("M Y", strtotime($_GET["start"])); ?> - <?php echo date("M Y", strtotime($_GET["end"])); } else{ echo "&nbsp;";} ?></td>
@@ -185,7 +187,7 @@ $student = mysqli_num_rows($qry) ? mysqli_fetch_array($qry) : array();
         </tr>
         <tr>
             <td colspan="2"><p class="quoteTotal">Total</p></td>
-            <td><p class="m-0">R<?php echo ($charges*$diff)+$RegCharges+$DepositCharges; ?></p></td>
+            <td><p class="m-0">R<?php echo $total ?></p></td>
         </tr>
         </tbody>
     </table>
