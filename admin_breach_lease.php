@@ -109,6 +109,7 @@ require 'parts/head.php';
                                     <tr>
                                         <th>Student ID</th>
                                         <th>Full Name</th>
+                                        <th>Room #</th>
                                         <th>LeaseAgr.</th>
                                         <th>Actions</th>
                                     </tr>
@@ -117,6 +118,7 @@ require 'parts/head.php';
                                     <tr>
                                         <th>Student ID</th>
                                         <th>Full Name</th>
+                                        <th>Room #</th>
                                         <th>LeaseAgr.</th>
                                         <th>Actions</th>
                                     </tr>
@@ -131,10 +133,19 @@ require 'parts/head.php';
                                             $s = "SELECT * FROM students where id=$id";
                                             $q = mysqli_query($con, $s);
                                             $ro = mysqli_fetch_array($q);
+                                            $roomNum = $ro["roomID"];
+
+                                            if($roomNum != 6969){
+                                                $a = "SELECT * FROM rooms where id=$roomNum";
+                                                $b = mysqli_query($con, $a);
+                                                $c = mysqli_fetch_array($b);
+                                            }
+
                                             ?>
                                             <tr>
                                                 <td><?php echo $row["id"]; ?></td>
                                                 <td><?php echo $ro["name"].' '.$ro["surename"]; ?></td>
+                                                <td><?php echo $roomNum !=6969 ? $c["room"] : ''; ?></td>
                                                 <td><a target="_blank" href="leaseAgreement/<?php echo $ro["linkToLease"]; ?>">View/Download</a></td>
                                                 <td><a class="btn btn-danger" href="admin_breach_lease.php?del=<?php echo $row["id"]; ?>">Delete</a></td>
                                             </tr>

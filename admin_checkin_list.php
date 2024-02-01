@@ -1,5 +1,11 @@
 <?php
 require 'parts/app.php';
+if(isset($_GET['del'])){
+    $id = $_GET['del'];
+    $s = "DELETE FROM checkin WHERE id = $id";
+    $qry = mysqli_query($con, $s);
+    js_redirect("admin_checkin_list.php?delDone=1");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +32,17 @@ require 'parts/head.php';
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <?php
+                    if(isset($_GET["delDone"]) && $_GET["delDone"]){
+                    ?>
+                    <div class="card mb-4 py-3 border-left-success">
+                        <div class="card-body text-success">
+                            <strong>Success! </strong> Record was removed.
+                        </div>
+                    </div>
+                    <?php
+                    }
+                    ?>
 
                     <button class="btn btn-primary mb-4">
                         <a href="admin_checkIn_enter.php" class="text-white">Add New Entry</a>
@@ -42,24 +59,24 @@ require 'parts/head.php';
                                     <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Tenant Name</th>
+                                        <th>Room #</th>
                                         <th>Record Type</th>
                                         <th>Inspection Date</th>
                                         <th>Inspection Time</th>
-                                        <th>Tenant Name</th>
                                         <th>Landlord Name</th>
-                                        <th>Room #</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
                                     <tr>
                                         <th>#</th>
+                                        <th>Tenant Name</th>
+                                        <th>Room #</th>
                                         <th>Record Type</th>
                                         <th>Inspection Date</th>
                                         <th>Inspection Time</th>
-                                        <th>Tenant Name</th>
                                         <th>Landlord Name</th>
-                                        <th>Room #</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
@@ -72,15 +89,18 @@ require 'parts/head.php';
                                             ?>
                                             <tr>
                                                 <td><?php echo $row["id"]; ?></td>
+                                                <td><?php echo $row["tenantName"]; ?></td>
+                                                <td><?php echo $row["roomNumber"]; ?></td>
                                                 <td><?php echo 'Check '.$row["type"]; ?></td>
                                                 <td><?php echo $row["inspectionDate"]; ?></td>
                                                 <td><?php echo $row["inspectionTime"]; ?></td>
-                                                <td><?php echo $row["tenantName"]; ?></td>
                                                 <td><?php echo $row["landLordName"]; ?></td>
-                                                <td><?php echo $row["roomNumber"]; ?></td>
                                                 <td>
                                                     <a class="btn btn-primary" href="admin_checkIn_view.php?id=<?=$row['id']?>">
                                                         View Report
+                                                    </a>
+                                                    <a class="btn btn-danger" href="admin_checkin_list.php?del=<?php echo $row["id"]; ?>" style="text-decoration: none;">
+                                                        Delete
                                                     </a>
                                                 </td>
                                             </tr>
