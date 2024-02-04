@@ -264,8 +264,15 @@ require 'parts/head.php';
                                  '$uniRegistrationNum', '$studentStatus', '$privateSponsored', '$address', '$contact1', '$contact2', '$moveIn', '$moveOut',
                                  '$leaseDuration', $roomID, $bed, '$roomType')";
 
+                        $new_bedCol = "";
+                        if($bed ==1 ) $new_bedCol = "bed1";
+                        if($bed ==2 ) $new_bedCol = "bed2";
+                        if($bed ==3 ) $new_bedCol = "bed3";
+                        if($bed ==4 ) $new_bedCol = "bed4";
 
-                        if(phpRunSingleQuery($sql)){
+                        $s = "UPDATE rooms SET $new_bedCol = 1 WHERE id=$roomID";
+
+                        if(phpRunSingleQuery($sql) && phpRunSingleQuery($s)){
                             js_redirect("admin_enroll_student.php?success=1");
                         }else{
                             echo mysqli_error($con); exit(); die();

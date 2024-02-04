@@ -11,6 +11,12 @@
     $s1 = $test =  mysqli_query($con, $s);
     $s2 = mysqli_fetch_array($s1);
 
+    $roomID = $s2["roomID"];
+    $s = "SELECT * FROM rooms WHERE id=$roomID";
+    $r1 =  mysqli_query($con, $s);
+    $r2 = mysqli_fetch_array($r1);
+    $roomNum = $r2["room"];
+
     $studentID = $row["userID"];
     $s = "SELECT * FROM invoice WHERE userID=$studentID";
     $s1  =  mysqli_query($con, $s);
@@ -73,7 +79,7 @@
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">Room #</td>
-                                <td class="w-50"><?php if($s2["roomID"]!="6969") echo $s2["roomID"]; ?></td>
+                                <td class="w-50"><?php if($s2["roomID"]!="6969") echo $roomNum; ?></td>
                             </tr>
                             <tr class="w-100">
                                 <td class="w-50">Months Paid</td>
