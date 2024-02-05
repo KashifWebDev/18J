@@ -15,7 +15,7 @@ if(isset($_GET["mail"])){
 //    $s = "SELECT * FROM invoice SET pdf='$PDFfilename' WHERE id=$invoice";
 //    $res = mysqli_query($con, $s);
 
-    require 'invoiceGeneratePDF.php';
+//    require 'invoiceGeneratePDF.php';
 
 
     $appAddress = $GLOBALS["appAddress"];
@@ -46,22 +46,23 @@ if(isset($_GET["mail"])){
     $headers .= 'X-Mailer: PHP/' . phpversion();
 
     //plain text
-    $path = "generatedPDFs/".$PDFfilename;
-    $msg = "--$boundary\r\n";
-    $msg .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    $msg .= "Content-Transfer-Encoding: base64\r\n\r\n";
-    $msg .= chunk_split(base64_encode($txt));
-    $msg .= "--$boundary\r\n";
-    $msg .="Content-Type: application/octet-stream; name=$path\r\n";
-    $msg .="Content-Disposition: attachment; filename=$path\r\n";
-    $msg .="Content-Transfer-Encoding: base64\r\n";
-    $msg .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
-    $handle = fopen($path, "r");
-    $content = fread($handle, filesize($path));
-    fclose($handle);
-    $encoded_content = chunk_split(base64_encode($content));
-    $msg .= $encoded_content;
+//    $path = "generatedPDFs/".$PDFfilename;
+//    $msg = "--$boundary\r\n";
+//    $msg .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+//    $msg .= "Content-Transfer-Encoding: base64\r\n\r\n";
+//    $msg .= chunk_split(base64_encode($txt));
+//    $msg .= "--$boundary\r\n";
+//    $msg .="Content-Type: application/octet-stream; name=$path\r\n";
+//    $msg .="Content-Disposition: attachment; filename=$path\r\n";
+//    $msg .="Content-Transfer-Encoding: base64\r\n";
+//    $msg .="X-Attachment-Id: ".rand(1000, 99999)."\r\n\r\n";
+//    $handle = fopen($path, "r");
+//    $content = fread($handle, filesize($path));
+//    fclose($handle);
+//    $encoded_content = chunk_split(base64_encode($content));
+//    $msg .= $encoded_content;
 
+//    echo $txt; exit(); die();
 
     if(mail($to,$subject,$msg,$headers)){
         js_redirect("admin_all_invoices.php?mailSent=1");

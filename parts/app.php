@@ -4,7 +4,7 @@ session_start();
 require 'db.php';
 //checkIfUserLoggedIn();
 
-$GLOBALS["appAddress"] = "https://www.18jorissen.co.za/app/";
+$GLOBALS["appAddress"] = "https://18j.kashifali.me";
 
 //error_reporting(0);
 

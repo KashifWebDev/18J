@@ -68,7 +68,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 $pdf->AddPage();
 
 $html = file_get_contents('http://localhost:8080/18J/getInvoiceHtml.php?id=6');
-$html = file_get_contents('https://18jorissen.co.za/app/getInvoiceHtml.php?id='.$invoice);
+//$html = file_get_contents('https://18jorissen.co.za/app/getInvoiceHtml.php?id='.$invoice);
 
 // output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');
